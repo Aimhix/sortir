@@ -52,9 +52,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'organizer', targetEntity: Activity::class, orphanRemoval: true)]
     private $activitiesOrganized;
 
+    #[ORM\ManyToMany(targetEntity: Activity::class, inversedBy: 'users')]
+    private $activities;
+
     public function __construct()
     {
         $this->activitiesOrganized = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -256,6 +260,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $activitiesOrganized->setOrganizer(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        $this->activities->removeElement($activity);
 
         return $this;
     }
