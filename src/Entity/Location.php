@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
@@ -24,6 +26,18 @@ class Location
 
     #[ORM\Column(type: 'float')]
     private $longitude;
+
+    #[ORM\ManyToOne(targetEntity: City::class, inversedBy: 'locations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $cities;
+
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Activity::class, orphanRemoval: true)]
+    private $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +88,48 @@ class Location
     public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getCities(): ?City
+    {
+        return $this->cities;
+    }
+
+    public function setCities(?City $cities): self
+    {
+        $this->cities = $cities;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->removeElement($activity)) {
+            // set the owning side to null (unless already changed)
+            if ($activity->getLocation() === $this) {
+                $activity->setLocation(null);
+            }
+        }
 
         return $this;
     }
