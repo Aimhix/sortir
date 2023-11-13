@@ -34,6 +34,22 @@ class Activity
     #[ORM\Column(type: 'boolean')]
     private $isPublished;
 
+    #[ORM\ManyToOne(targetEntity: Status::class, inversedBy: 'activities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $status;
+
+    #[ORM\ManyToOne(targetEntity: Location::class, inversedBy: 'activities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $location;
+
+    #[ORM\ManyToOne(targetEntity: Campus::class, inversedBy: 'activities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $campus;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'activitiesOrganized')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $organizer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +135,54 @@ class Activity
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?User
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?User $organizer): self
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }

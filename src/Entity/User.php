@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -42,6 +44,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     private $profilePicture;
+
+    #[ORM\ManyToOne(targetEntity: Campus::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $campus;
+
+    #[ORM\OneToMany(mappedBy: 'organizer', targetEntity: Activity::class, orphanRemoval: true)]
+    private $activitiesOrganized;
+
+    public function __construct()
+    {
+        $this->activitiesOrganized = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -200,6 +214,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePicture(string $profilePicture): self
     {
         $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivitiesOrganized(): Collection
+    {
+        return $this->activitiesOrganized;
+    }
+
+    public function addActivitiesOrganized(Activity $activitiesOrganized): self
+    {
+        if (!$this->activitiesOrganized->contains($activitiesOrganized)) {
+            $this->activitiesOrganized[] = $activitiesOrganized;
+            $activitiesOrganized->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivitiesOrganized(Activity $activitiesOrganized): self
+    {
+        if ($this->activitiesOrganized->removeElement($activitiesOrganized)) {
+            // set the owning side to null (unless already changed)
+            if ($activitiesOrganized->getOrganizer() === $this) {
+                $activitiesOrganized->setOrganizer(null);
+            }
+        }
 
         return $this;
     }
