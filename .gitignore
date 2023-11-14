@@ -95,6 +95,7 @@ fabric.properties
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+/app/vendor/composer.lock
 
 # Email spool folder
 /app/spool/*
