@@ -10,9 +10,18 @@ use App\Entity\Status;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
 
@@ -182,6 +191,8 @@ class AppFixtures extends Fixture
         //        Fixtures des Users
 
 
+
+
         $user1 = new User();
         $user1->setPseudo('Boby');
         $user1->setEmail('bob@gmail.com');
@@ -191,7 +202,7 @@ class AppFixtures extends Fixture
         $user1->setPhone('0682929200');
         $user1->setCampus($campus1);
         $user1->setProfilePicture("../../public/images/Olaf.jpg");
-        $user1->setPassword("0000");
+        $user1->setPassword($this->hasher->hashPassword($user1, '0000'));
 
         $manager->persist($user1);
         $manager->flush();
@@ -205,7 +216,7 @@ class AppFixtures extends Fixture
         $user2->setPhone('0682929200');
         $user2->setCampus($campus2);
         $user2->setProfilePicture("../../public/images/Olaf.jpg");
-        $user2->setPassword("0000");
+        $user2->setPassword($this->hasher->hashPassword($user2, '0000'));
 
         $manager->persist($user2);
         $manager->flush();
@@ -219,7 +230,7 @@ class AppFixtures extends Fixture
         $user3->setPhone('0682929200');
         $user3->setCampus($campus3);
         $user3->setProfilePicture("../../public/images/Olaf.jpg");
-        $user3->setPassword("0000");
+        $user3->setPassword($this->hasher->hashPassword($user3, '0000'));
 
         $manager->persist($user3);
         $manager->flush();
@@ -233,7 +244,7 @@ class AppFixtures extends Fixture
         $user4->setPhone('0682929200');
         $user4->setCampus($campus4);
         $user4->setProfilePicture("../../public/images/Olaf.jpg");
-        $user4->setPassword("0000");
+        $user4->setPassword($this->hasher->hashPassword($user4, '0000'));
 
         $manager->persist($user4);
         $manager->flush();
