@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <h1>Votre profil</h1>
+
+    {# Mettre une photo de profil #}
+    <img src="{{ asset('{# chemin vers le dosssier #}' ~ app.user.profileImage) }}" alt="Profile Pic">
+
+    <form method="post">
+        <h2>Pseudo : {{ app.user.pseudo }}</h2>
+
+        <p>Prénom : {{ app.user.prenom }}</p>
+        <p>Nom : {{ app.user.nom }}</p>
+        <p>Téléphone : {{ app.user.telephone }}</p>
+        <p>Email : {{ app.user.email }}</p>
+        <p>Ville de rattachement : {{ app.user.city }}</p>
+
+
+        {# mettre le lien de la page d'accueil #}
+        <a href="{{ path('') }}" class="btn btn-secondary">Retour</a>
+
+    </form>
+
+{% endblock %}
