@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    {{ form_start(activityForm) }}
+    {{ form_widget(activityForm) }}
+    {{ form_end(activityForm) }}
+
+{% endblock %}
+
+
