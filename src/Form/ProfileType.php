@@ -19,7 +19,7 @@ class ProfileType extends AbstractType
             ->add('nom', TextType::class)
             ->add('telephone', TelType::class)
             ->add('email', EmailType::class)
-            ->add('ville');
+            ->add('city');
 
 
     }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\EditProfileType;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,10 @@ class ProfileController extends AbstractController
     {
 
         $user = $this->getUser();
+
+        if (!$user) {
+            throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page');
+        }
 
         // Formulaire ProfileType
         $form = $this->createForm(EditProfileType::class, $user);

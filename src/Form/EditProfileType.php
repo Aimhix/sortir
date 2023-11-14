@@ -16,17 +16,17 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('pseudo', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('nom', TextType::class)
-            ->add('telephone', TelType::class)
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('phone', TelType::class)
             ->add('email', EmailType::class)
-            ->add('password', PasswordType::class, )
+            ->add('password', PasswordType::class,)
             ->add('confirmpassword', PasswordType::class, [
                 'label' => 'Confirmer mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password']])
-            ->add('ville')
-            ->add('picture');
+            ->add('campus')
+            ->add('profilePicture');
 
     }
 
