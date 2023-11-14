@@ -1,10 +1,10 @@
 <header>
-<div>
-    <h1>
+<div id="container">
+    <h1 id="title">
         Bucket-List
     </h1>
 
-        <nav>
+        <nav id="nav" >
             <ul>
                 {% if app.user %}
                     {% if is_granted('ROLE_USER') %}

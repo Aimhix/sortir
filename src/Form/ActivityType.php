@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Activity;
+use App\Entity\Campus;
+use App\Entity\City;
 use App\Entity\Location;
 use App\Entity\Status;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,21 +25,25 @@ class ActivityType extends AbstractType
             ->add('subMax')
             ->add('infoActivity')
             ->add('isPublished')
-            ->add('status',EntityType::class, [
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'name'
+            ])
+            ->add('status', EntityType::class, [
                 'class' => Status::class,
                 'choice_label' => 'wording',
             ])
-//           ->add('location', EntityType::class, [
-//               'class' => Location::class,
-//               '' => 'name',
-//               'label' => 'streetName',
-//               'label' => 'latitude',
-//               'label' => 'longitude',
-//               'choice_label' => 'cities',
-//           ])
-        //    ->add('campus')
-       //     ->add('organizer')
-        //    ->add('users')
+            ->add('location', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Quel ville ?'
+            ])
+//            ->add('organizer')
+//            ->add('users', EntityType::class,
+//                [
+//                'class' => User::class,
+//            ]
+//            );
         ;
     }
 
