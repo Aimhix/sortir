@@ -18,7 +18,7 @@
     <h1 >Connexion</h1>
 
     <label for="inputEmail">Identifiant : </label>
-    <input type="email" value="{{ email_user }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
     <label for="inputPassword">Mot de passe : </label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
@@ -46,6 +46,6 @@
 
 </form>
 
-    <!--<a href="{{ path('app_forgot_password') }}">Mot de passe oublié </a>-->
+{#    <!--<a href="{{ path('app_forgot_password') }}">Mot de passe oublié </a>-->#}
 
 {% endblock %}
