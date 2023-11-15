@@ -51,16 +51,14 @@ class ActivityController extends AbstractController
 
 
 
-    private $activityService;
+    private ActivityService $activityService;
 
     public function __construct(ActivityService $activityService)
     {
         $this->activityService = $activityService;
     }
 
-    /**
-     * @Route("/activity/subscribe/{activityId}", name="activity_subscribe")
-     */
+    #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
     public function subscribeAction(int $activityId, UserInterface $user, Request $request): Response
     {
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($activityId);
