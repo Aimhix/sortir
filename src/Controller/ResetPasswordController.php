@@ -34,11 +34,12 @@ class ResetPasswordController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * Display & process form to request a password reset.
-     */
+
     #[Route('', name: 'app_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
+    //TranslatorInterface $translator est une interface utilisée pour la traduction des messages. Elle permet de traduire des messages dans
+        // différentes langues en fonction de la langue configurée dans l'application Symfony. Le traducteur peut être
+        // utilisé pour rendre l'application multilingue, en fournissant des versions localisées des textes.
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -160,7 +161,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('mail@sortir-test.com', 'Sortir Bot'))
+            ->from(new Address('no-reply@sortir.com', 'Sortir Bot'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
