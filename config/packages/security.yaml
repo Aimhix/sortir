@@ -16,7 +16,15 @@ security:
       security: false
     main:
       lazy: true
-      provider: users_in_memory
+      provider: app_user_provider
+      logout:
+        path: app_logout
+      remember_me:
+        secret: '%kernel.secret%'
+        lifetime: 604800 # temps de vie du cookie (en secondes), par exemple, 604800 secondes = 7 jours
+        path: /
+        domain: ~ # autorisez le cookie à être envoyé à n'importe quel domaine
+
 
       #      provider: app_user_provider
       #      form_login:
