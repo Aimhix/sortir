@@ -20,8 +20,10 @@ class ActivityController extends AbstractController
     #[Route('/create', name: 'app_activity_create')]
     public function createActivity(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
 
         $activity = new Activity();
+        $activity->setOrganizer($user);
         $activityForm = $this->createForm(ActivityType::class, $activity);
 
         $activityForm->handleRequest($request);
@@ -37,7 +39,7 @@ class ActivityController extends AbstractController
         }
 
         return $this->render('activity/create.html.twig', [
-            'activityForm' => $activityForm ->createView()
+            'activityForm' => $activityForm ->createView(),
         ]);
     }
 
@@ -45,6 +47,7 @@ class ActivityController extends AbstractController
     #[Route('/create_location', name: 'app_activity_create_location')]
     public function createLocation(Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $location = new Location();
         $locationForm = $this->createForm(LocationType::class, $location);
 

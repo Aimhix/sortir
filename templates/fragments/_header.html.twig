@@ -9,7 +9,7 @@
                 {% if app.user %}
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                            <button onclick="window.location.href='{{ path('app_activity_create') }}';">Proposer une sortie</button>
                         </li>
                         <li>
                             <a href="{{ path('app_activity_create') }}">
@@ -32,12 +32,11 @@
 
                 {% else %}
                 <li>
-                    <a href="{{ path('app_login') }}">Login</a>
+                    <button onclick="window.location.href='{{ path('app_login') }}';">Login</button>
                 </li>
                 {% endif %}
 
-{#                bouton pour proposer une sortie a changer quand on aura le User#}
-                <button onclick="window.location.href='{{ path('app_activity_create') }}';">Proposer une sortie</button>
+
 
             </ul>
         </nav>
