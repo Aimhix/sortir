@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ActivityService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

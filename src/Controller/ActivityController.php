@@ -85,7 +85,7 @@ class ActivityController extends AbstractController
             $this->addFlash('error', $e->getMessage());
         }
 
-        return $this->redirectToRoute('activity_list'); // Redirigez l'utilisateur comme vous le jugez approprié
+        return $this->redirectToRoute('activity_list');
     }
 
 }
