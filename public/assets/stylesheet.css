@@ -14,9 +14,40 @@
     padding-bottom: 30px;
 }
 
-
 nav ul li{
     display: inline-block;
     padding: 30px;
     margin: auto;
+}
+
+/*Card Sorties */
+section{
+    width: 1200px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.activity-card{
+    border-radius: 15px;
+    background-color: #DDDDDD;
+    padding:20px;
+}
+
+.top {
+    min-height: 200px;
+    background-image: url("/public/images/olaf.jpg");
+    background-size: cover;
+}
+.tps{
+  display:block;
+}
+
+.bottom{
+}
+
+
+.bottom a {
+position:relative;
+    margin-top:-30px;
 }

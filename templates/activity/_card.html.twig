@@ -1,6 +1,17 @@
 <article class="activity-card">
-    <a href="{{ path('activity_show', {'id': activity.id}) }}">
-        {{ activity.name }}
+    <div class="top">
+        <div class="tps">{{ activity.subLimitDate | date }}
+        </div>
+    </div>
+    <div class="bottom">
+        <a href="{{ path('activity_show', {'id': activity.id}) }}">
+        {{ activity.name }}</a>
+        <br>
+
+        {{ activity.dateStart | date("m/d") }} à {{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}
+        à {{ activity.campus.name }}
     </a>
-    ({{ activity.campus.name }})
+<br><br>
+    Encore {{ activity.subMax }} places
+    </div>
 </article>
