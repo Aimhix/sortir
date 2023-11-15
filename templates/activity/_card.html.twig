@@ -1,6 +1,11 @@
 <article class="activity-card">
+    <div class="total-card">
     <div class="top">
-        <div class="tps">{{ activity.subLimitDate | date }}
+        <div class="tps">
+            <div class="inner-tps">
+                Clos le <span class="fontweight">{{ activity.subLimitDate | date("m/d") }}</span>
+                à <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+            </div>
         </div>
     </div>
     <div class="bottom">
@@ -8,10 +13,12 @@
         {{ activity.name }}</a>
         <br>
 
-        {{ activity.dateStart | date("m/d") }} à {{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}
-        à {{ activity.campus.name }}
+        <span class="fontweight">{{ activity.dateStart | date("m/d") }}</span>
+        à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
+        à <span class="fontweight">{{ activity.campus.name }}</span>
     </a>
 <br><br>
-    Encore {{ activity.subMax }} places
+        Encore <span class="fontweight">{{ activity.subMax }}</span> places
+    </div>
     </div>
 </article>

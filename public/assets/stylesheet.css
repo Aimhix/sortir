@@ -1,3 +1,6 @@
+body{
+    font-family: Arial, serif;
+}
 
 #nav{
 }
@@ -28,26 +31,71 @@ section{
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
+
+@media screen and (max-width: 900px) {
+
+    .section {
+        width: 600px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .section {
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 .activity-card{
-    border-radius: 15px;
-    background-color: #DDDDDD;
-    padding:20px;
+}
+
+.total-card{
+    border: 15px solid rgba(100, 100, 100, 0.05);
+    border-radius: 40px;
 }
 
 .top {
     min-height: 200px;
-    background-image: url("/public/images/olaf.jpg");
+    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
     background-size: cover;
-}
-.tps{
-  display:block;
+    background-color:#ddd;
+    border-radius: 24px 24px 0 0;
 }
 
 .bottom{
+    padding:20px;
+    background-color:#DEE3E6;
+    border-radius: 0 0 24px 24px;
 }
 
+.tps{
+    display:block;
+    float:right;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin:20px;
+    background-color:#fff;
+}
+.inner-tps{
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    color:transparent;
+    background-clip: text;
+}
 
-.bottom a {
-position:relative;
-    margin-top:-30px;
+.fontweight{
+    font-weight: 700;
+}
+
+.bottom a  {
+    position: relative;
+    top: -30px;
+    padding: 15px 25px;
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
 }
