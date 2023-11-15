@@ -1,29 +1,28 @@
 security:
-  enable_authenticator_manager: true
-  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-  password_hashers:
-    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-  # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
-  providers:
-    users_in_memory: { memory: null }
-    app_user_provider:
-      entity:
-        class: App\Entity\User
-        property: email
-  firewalls:
-    dev:
-      pattern: ^/(_(profiler|wdt)|css|images|js)/
-      security: false
-    main:
-      lazy: true
-      provider: app_user_provider
-      logout:
-        path: app_logout
-      remember_me:
-        secret: '%kernel.secret%'
-        lifetime: 604800 # temps de vie du cookie (en secondes), par exemple, 604800 secondes = 7 jours
-        path: /
-        domain: ~ # autorisez le cookie à être envoyé à n'importe quel domaine
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        #users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\AppAuthenticator
+            logout:
+                path: app_logout
+                target : app_login
+                invalidate_session: true
+
 
 
       #      provider: app_user_provider

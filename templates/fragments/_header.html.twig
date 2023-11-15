@@ -1,8 +1,8 @@
 <header>
-<div>
-    <h1>
-        Bucket-List
-    </h1>
+    <div>
+        <h1>
+            Bucket-List
+        </h1>
 
         <nav>
             <ul>
@@ -13,31 +13,33 @@
                         </li>
                         <li>
                             <a href="{{ path('app_activity_create') }}">
-                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />
-                                <img src="{{ profilePicture }}" alt="Photo">
+{#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
+{#                                <img src="{{ profilePicture }}" alt="Photo">#}
                                 {{ app.user.fullName }}</a>
                         </li>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a href="{{ path('app_villes') }}">Villes</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_sites') }}">Sites</a>
-                            </li>
-                {% endif %}
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <li>
-                            <a href="{{ path('app_logout') }}">Logout</a>
+                            <a href="{{ path('app_villes') }}">Villes</a>
                         </li>
+                        <li>
+                            <a href="{{ path('app_sites') }}">Sites</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                    </li>
 
                 {% else %}
-                <li>
-                    <a href="{{ path('app_login') }}">Login</a>
-                </li>
+                    <li>
+                        <a href="{{ path('app_login') }}">Login</a>
+                    </li>
+
+
                 {% endif %}
 
             </ul>
         </nav>
 
-</div>
+    </div>
 </header>
