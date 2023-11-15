@@ -8,14 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ActivityService
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function subscribeToActivity(User $user, Activity $activity)
+    public function subscribeToActivity(\App\Entity\User $user, Activity $activity)
     {
         $currentDate = new \DateTime();
         if ($currentDate > $activity->getSubLimitDate()) {
@@ -31,7 +31,7 @@ class ActivityService
         $this->entityManager->flush();
     }
 
-    public function unsubscribeFromActivity(User $user, Activity $activity)
+    public function unsubscribeFromActivity(\App\Entity\User $user, Activity $activity)
     {
         if (!$activity->getUsers()->contains($user)) {
             throw new \Exception("Vous n'êtes plus inscrit à cette sortie.");
