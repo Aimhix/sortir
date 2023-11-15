@@ -3,12 +3,21 @@
 {% block title %}Accueil {{ parent() }} {% endblock %}
 
 {% block body %}
+    <div class="container">
+    {% if app.user %}
+        <div>
+            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+
+    {% endif %}
+
     <div>
+        Accueil
         <a href="">
 
         </a>
     </div>
 
     <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
-
+    </div>
 {% endblock %}
