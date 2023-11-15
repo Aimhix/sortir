@@ -1,0 +1,22 @@
+
+#nav{
+}
+
+#container{
+    height: 300px;
+    background-image: url("https://thumbs.dreamstime.com/z/bon-retour-%C3%A0-la-banni%C3%A8re-d-%C3%A9cole-ou-l-en-t%C3%AAte-de-site-web-avec-feuille-d%C3%A9chir%C3%A9e-sortie-papier-et-barre-mise-valeur-r%C3%A9aliste-194649680.jpg?w=992");
+    background-size: cover;
+}
+
+#title{
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+nav ul li{
+    display: inline-block;
+    padding: 30px;
+    margin: auto;
+}

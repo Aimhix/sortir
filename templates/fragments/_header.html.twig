@@ -1,45 +1,45 @@
 <header>
-    <div>
-        <h1>
-            Bucket-List
-        </h1>
+<div>
+    <h1>
+        Bucket-List
+    </h1>
 
         <nav>
             <ul>
                 {% if app.user %}
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                            <button onclick="window.location.href='{{ path('app_activity_create') }}';">Proposer une sortie</button>
                         </li>
                         <li>
-                            <a href="{{ path('app_activity_create') }}">
+                            <a href="{{ path('app_profile') }}">
 {#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
 {#                                <img src="{{ profilePicture }}" alt="Photo">#}
                                 {{ app.user.fullName }}</a>
                         </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a href="{{ path('app_villes') }}">Villes</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_sites') }}">Sites</a>
+                            </li>
+                {% endif %}
                         <li>
-                            <a href="{{ path('app_villes') }}">Villes</a>
+                            <a href="{{ path('app_logout') }}">Logout</a>
                         </li>
-                        <li>
-                            <a href="{{ path('app_sites') }}">Sites</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="{{ path('app_logout') }}">Logout</a>
-                    </li>
 
                 {% else %}
-                    <li>
-                        <a href="{{ path('app_login') }}">Login</a>
-                    </li>
-
-
+                <li>
+                    <button onclick="window.location.href='{{ path('app_login') }}';">Login</button>
+                </li>
                 {% endif %}
+
+
 
             </ul>
         </nav>
 
-    </div>
+</div>
 </header>
