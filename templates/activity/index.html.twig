@@ -11,15 +11,18 @@
 
     {% endif %}
 
-    <div>
-        Accueil
-        <a href="">
+        <div>
 
-        </a>
+{#    <section>#}
+{#        {% for activity in activities %}#}
+{#            {% include 'activity/_card.html.twig' %}#}
+{#        {% endfor %}#}
+{#    </section>#}
+
+        Accueil
+
     </div>
     
     <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
-
-
     </div>
 {% endblock %}
