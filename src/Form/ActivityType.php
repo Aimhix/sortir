@@ -34,9 +34,9 @@ class ActivityType extends AbstractType
                 'choice_label' => 'wording',
             ])
             ->add('location', EntityType::class, [
-                'class' => City::class,
+                'class' => Location::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Quel ville ?'
+                'placeholder' => 'Quel lieu ?'
             ])
 //            ->add('organizer')
 //            ->add('users', EntityType::class,
