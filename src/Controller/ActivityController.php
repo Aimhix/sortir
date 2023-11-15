@@ -66,7 +66,6 @@ class ActivityController extends AbstractController
             'locationForm' => $locationForm ->createView()
         ]);
     }
-
 }
 
 
