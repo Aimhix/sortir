@@ -19,25 +19,32 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('dateStart')
-            ->add('duration')
-            ->add('subLimitDate')
-            ->add('subMax')
-            ->add('infoActivity')
-            ->add('isPublished')
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
-                'choice_label' => 'name'
+            ->add('name',null,  [
+                'label' => 'Nature de la sortie : ',
             ])
-            ->add('status', EntityType::class, [
-                'class' => Status::class,
-                'choice_label' => 'wording',
+            ->add('dateStart',null,  [
+        'label' => 'Date et heure de début de la sortie : ',
+            ])
+            ->add('duration',null,  [
+                'label' => 'Durée de la sortie : ',
+            ])
+            ->add('subLimitDate',null,  [
+                'label' => 'Date et heure limite d\'inscription : ',
+            ])
+            ->add('subMax',null,  [
+                'label' => 'Nombre maximum de participant : ',
+            ])
+            ->add('infoActivity',null,  [
+                'label' => 'Infos suplémentaire : ',
+            ])
+            ->add('isPublished',null,  [
+                'label' => 'Publier la sortie : ',
             ])
             ->add('location', EntityType::class, [
                 'class' => Location::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Quel lieu ?'
+                'label'=> 'Lieu de la sortie',
+                'placeholder' => 'Selectionnez un lieu  '
             ])
             ->add("save",SubmitType::class,["label"=>"Valider"])
         ;

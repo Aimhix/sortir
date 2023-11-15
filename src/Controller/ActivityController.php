@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\ActivityType;
 use App\Form\LocationType;
 use App\Services\ActivityService;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,18 +20,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ActivityController extends AbstractController
 {
     #[Route('/create', name: 'app_activity_create')]
-    public function createActivity(Request $request, EntityManagerInterface $entityManager): Response
+    public function createActivity(StatusRepository $statusRepository ,Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
         $activity = new Activity();
         $activity->setOrganizer($user);
+        $activity->setCampus($user->getCampus());
+        $activity->setStatus($statusRepository->findOneByWording('Créée'));
         $activityForm = $this->createForm(ActivityType::class, $activity);
 
         $activityForm->handleRequest($request);
 
 
         if ($activityForm->isSubmitted() && $activityForm->isValid()){
+
             $entityManager->persist($activity);
             $entityManager->flush();
 
@@ -40,7 +44,7 @@ class ActivityController extends AbstractController
         }
 
         return $this->render('activity/create.html.twig', [
-            'activityForm' => $activityForm ->createView(),
+            'activityForm' => $activityForm ->createView(), 'user' => $user
         ]);
     }
 
@@ -67,6 +71,8 @@ class ActivityController extends AbstractController
             'locationForm' => $locationForm ->createView()
         ]);
     }
+
+
 
 
 
