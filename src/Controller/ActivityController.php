@@ -102,4 +102,11 @@ class ActivityController extends AbstractController
         return $this->redirectToRoute('activity_show');
     }
 
+
+    #[Route('/activity/{id}', name: 'activity_show')]
+    public function show(int $id, Activity $activity): Response
+    {
+        return $this->render('activity/show.html.twig', ['activity' => $activity]);
+    }
+
 }
