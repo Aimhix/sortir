@@ -1,0 +1,75 @@
+{# templates/profile/editProfile.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer le profil{{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Editer votre profil</h1>
+
+    {# Afficher les messages flash s'il y en a #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {# Afficher le formulaire #}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div>
+        {{ form_label(form.pseudo) }}
+        {{ form_widget(form.pseudo) }}
+    </div>
+
+    <div>
+        {{ form_label(form.firstname) }}
+        {{ form_widget(form.firstname) }}
+    </div>
+
+    <div>
+        {{ form_label(form.lastname) }}
+        {{ form_widget(form.lastname) }}
+    </div>
+
+    <div>
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone) }}
+    </div>
+
+    <div>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+    </div>
+
+    <div>
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password) }}
+    </div>
+
+    <div>
+        {{ form_label(form.confirmpassword) }}
+        {{ form_widget(form.confirmpassword) }}
+    </div>
+
+    <div>
+        {{ form_label(form.campus) }}
+        {{ form_widget(form.campus) }}
+    </div>
+
+    <div>
+        {{ form_label(form.profilePicture) }}
+        {{ form_widget(form.profilePicture) }}
+    </div>
+
+    <button type="submit">Enregistrer</button>
+    <button>
+        <a href="{{ path('app_editprofile') }}">Annuler</a>
+    </button>
+
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

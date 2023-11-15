@@ -1,12 +1,11 @@
 <header>
-<div id="container">
-    <h1 id="title">
-        Sortir.com
+<div>
+    <h1>
+        Bucket-List
     </h1>
 
-        <nav id="nav" >
+        <nav>
             <ul>
-
                 {% if app.user %}
                     {% if is_granted('ROLE_USER') %}
                         <li>
@@ -14,12 +13,11 @@
                         </li>
                         <li>
                             <a href="{{ path('app_activity_create') }}">
-                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />
-                                <img src="{{ profilePicture }}" alt="Photo">
+{#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
+{#                                <img src="{{ profilePicture }}" alt="Photo">#}
                                 {{ app.user.fullName }}</a>
                         </li>
                 {% endif %}
-
                 {% if is_granted('ROLE_ADMIN') %}
                             <li>
                                 <a href="{{ path('app_villes') }}">Villes</a>
@@ -34,7 +32,7 @@
 
                 {% else %}
                 <li>
-                    <button onclick="window.location.href={{ path('app_login') }}">Login</button>
+                    <a href="{{ path('app_login') }}">Login</a>
                 </li>
                 {% endif %}
 
