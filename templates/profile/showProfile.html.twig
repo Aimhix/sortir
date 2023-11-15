@@ -8,7 +8,7 @@
 
     {% if app.user  %}
         {# Mettre une photo de profil #}
-        <img src="{{ asset('../../public/images/Olaf.jpg' ~ app.user.profileImage) }}" alt="Photo de profil">
+         <img src="{{ asset('../../public/images/Olaf.jpg' ~ app.user.profilePicture) }}" alt="Photo de profil">
 
         <form method="post">
             <h2>Pseudo : {{ app.user.pseudo }}</h2>
@@ -20,7 +20,7 @@
             <p>Ville de rattachement : {{ app.user.campus }}</p>
 
             {# Mettre le lien de la page d'accueil #}
-            <a href="{{ path('') }}" class="btn btn-secondary">Retour</a>
+            <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
         </form>
     {% else %}
         <p>Utilisateur non connecté</p>
