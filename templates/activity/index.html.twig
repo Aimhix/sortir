@@ -3,27 +3,26 @@
 {% block title %}Accueil {{ parent() }} {% endblock %}
 
 {% block body %}
-
     <div class="container">
-        {% if app.user %}
-            <div>
-                Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-            </div>
+    {% if app.user %}
+        <div>
+            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
 
-        {% endif %}
+    {% endif %}
 
         <div>
 
-    <section>
-        {% for activity in activities %}
-            {% include 'activity/_card.html.twig' %}
-        {% endfor %}
-    </section>
+{#    <section>#}
+{#        {% for activity in activities %}#}
+{#            {% include 'activity/_card.html.twig' %}#}
+{#        {% endfor %}#}
+{#    </section>#}
 
         Accueil
-        <a href="">
 
-        </a>
     </div>
+    
+    <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
     </div>
 {% endblock %}
