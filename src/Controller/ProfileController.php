@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\EditProfileType;
+use App\Services\FileUploader;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/editprofile', name: 'app_editprofile')]
-    public function edit(Request $request): Response
+    public function edit(Request $request, FileUploader $fileUploader): Response
     {
 
         $user = $this->getUser();
@@ -43,6 +44,14 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imageFile = $form['profilePicture']->getData();
+
+            if ($imageFile) {
+                $newFilename = $fileUploader->upload($imageFile, $this->getParameter('kernel.project_dir') . '/public/images');
+                $user->setProfilePicture($newFilename);
+            }
+
             // Vérifier pseudo
             $pseudo = $form->get('pseudo')->getData();
             $existingUser = $this->getDoctrine()->getRepository(User::class)->findOneBy(['pseudo' => $pseudo]);
@@ -50,8 +59,9 @@ class ProfileController extends AbstractController
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('error', 'Le pseudo est déjà pris');
 
-                return $this->redirectToRoute('app_profile_editer');
+                return $this->redirectToRoute('app_editprofile');
             }
+
             //Enregistrer les modifications dans la BDD
             $profileManager = $this->getDoctrine()->getManager();
             $profileManager->flush();
@@ -67,3 +77,4 @@ class ProfileController extends AbstractController
     }
 
 }
+

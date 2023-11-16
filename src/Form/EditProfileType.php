@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -26,7 +27,10 @@ class EditProfileType extends AbstractType
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password']])
             ->add('campus')
-            ->add('profilePicture');
+            ->add('profilePicture', FileType::class, [
+                'label' => 'Profile Picture',
+                'mapped' => false,
+                'required' => false]);
 
     }
 

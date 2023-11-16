@@ -4,6 +4,12 @@
 {% endblock %}
 {% block body %}
 
+    {% if app.session.getFlashBag().has('error') %}
+        <div class="alert alert-danger">
+            {{ app.session.getFlashBag().get('error')|first }}
+        </div>
+    {% endif %}
+
     <form method="post">
 
         {% if error %}
@@ -12,11 +18,11 @@
 
         {% if app.user %}
             <div class="mb-3">
-                Vous êtes connecté en tant que  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
         {% endif %}
 
-        <h1 >Connexion</h1>
+        <h1>Connexion</h1>
 
         <label for="inputEmail">Email : </label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
@@ -35,6 +41,6 @@
         <button type="submit">Connexion</button>
     </form>
 
-   <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
+    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
 
 {% endblock %}
