@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackOfficeLieux {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    {% for location in locations %}
+        <p>Nom :{{ location.name }}</p>
+        <p>Adresse :{{ location.streetName }}</p>
+        <br>
+    {% endfor %}
+
+{% endblock %}
+
+
+
