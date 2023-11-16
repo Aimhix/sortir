@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
@@ -29,7 +30,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/editprofile', name: 'app_editprofile')]
-    public function edit(Request $request, FileUploader $fileUploader): Response
+    public function edit(Request $request, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
         $user = $this->getUser();
@@ -40,6 +41,7 @@ class ProfileController extends AbstractController
 
         // Formulaire ProfileType
         $form = $this->createForm(EditProfileType::class, $user);
+
         // Soumission formulaire
         $form->handleRequest($request);
 
@@ -59,6 +61,10 @@ class ProfileController extends AbstractController
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('error', 'Le pseudo est déjà pris');
             } else {
+
+                $newPlainPassword = $form->get('password')->getData();
+                $encodedPassword = $passwordEncoder->encodePassword($user, $newPlainPassword);
+                $user->setPassword($encodedPassword);
 
                 //Enregistrer les modifications dans la BDD
                 $profileManager = $this->getDoctrine()->getManager();
