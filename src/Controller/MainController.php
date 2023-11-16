@@ -2,19 +2,59 @@
 
 namespace App\Controller;
 
+use App\DTO\ActivitySearchDTO;
+use App\Entity\User;
+use App\Form\ActivitySearchType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MainController extends AbstractController
 {
+//    #[Route('/', name: 'app_activity_index')]
+//    public function index(ActivityRepository $activityRepository): Response
+//    {
+//        $activities = $activityRepository->findAll();
+//
+//        return $this->render('activity/index.html.twig', [
+//            'activities' => $activities,
+//        ]);
+//    }
+
     #[Route('/', name: 'app_activity_index')]
-    public function index(ActivityRepository $activityRepository): Response
+    public function index(Request $request, ActivityRepository $activityRepository): Response
     {
-        $activities = $activityRepository->findAll();
+        $user = $this->getUser();
+        // recours à un DTO, j'suis pas sûr de mon coup mais c'est stylé
+
+        if ($user instanceof User) {
+        $searchDTO = new ActivitySearchDTO();
+        $form = $this->createForm(ActivitySearchType::class, $searchDTO);
+        $form->handleRequest($request);
+
+        $activities = $activityRepository->findLatestActivities(9); // Je récupére les 9 dernières sorties
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Recherche basée sur les critères fournis
+            $activities = $activityRepository->findBySearchCriteria($searchDTO, $user);
+
+            // si requête AJAX
+            if ($request->isXmlHttpRequest()) {
+                return $this->render('activity/_searchResults.html.twig', [
+                    'activities' => $activities,
+                ]);
+            }
+
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+        }
 
         return $this->render('activity/index.html.twig', [
+            'form' => $form->createView(),
             'activities' => $activities,
         ]);
     }

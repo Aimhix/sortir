@@ -1,47 +1,56 @@
 <header>
 <div>
-    <h1>
-        Bucket-List
-    </h1>
+    <nav>
+        <ul>
+            <li class="logo-nav">
+                <a href="/">SORTIR<span class="com">.COM</span></a>
+            </li>
 
-        <nav>
-            <ul>
-                {% if app.user %}
-                    {% if is_granted('ROLE_USER') %}
-                        <li>
-                            <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('app_profile') }}">
-{#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
-{#                                <img src="{{ profilePicture }}" alt="Photo">#}
-                                {{ app.user.fullName }}</a>
-                        </li>
+            {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_profile') }}">
+                            {#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
+                            {#                                <img src="{{ profilePicture }}" alt="Photo">#}
+                            {{ app.user.fullName }}</a>
+                    </li>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a href="{{ path('app_villes') }}">Villes</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_sites') }}">Sites</a>
-                            </li>
-                {% endif %}
-                        <li>
-                            <a href="{{ path('app_logout') }}">Logout</a>
-                        </li>
-
-                {% else %}
                     <li>
-                        <a href="{{ path('app_login') }}">Login</a>
+                        <a href="{{ path('app_villes') }}">Villes</a>
                     </li>
-
-
+                    <li>
+                        <a href="{{ path('app_sites') }}">Sites</a>
+                    </li>
                 {% endif %}
+                <li>
+                    <a href="{{ path('app_logout') }}">Logout</a>
+                </li>
+
+            {% else %}
+                <li>
+                    <a href="{{ path('app_login') }}">Login</a>
+                </li>
+
+
+            {% endif %}
 
 
 
-            </ul>
-        </nav>
+        </ul>
+    </nav>
+
+    <div class="header-content">
+    <h1 class="site-title">
+        SORTIR<span class="com">.COM</span>
+    </h1>
+        <br>
+        <h2>    <span class="sub-title">Sorties entre étudiants</span></h2>
+    </div>
+
 
     </div>
 </header>

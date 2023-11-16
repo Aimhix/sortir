@@ -1,25 +1,16 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello MainController!{% endblock %}
-
-{% block search %}
-{% endblock %}
-
-{% block body %}
-
 
 {{ form_start(form, {'attr': {'class': 'activity-search-form'}}) }}
 
 {# recherche par campus #}
 <div class="form-group">
-    <label for="{{ form.site.vars.id }}">{{ 'Site'|trans }}</label>
-    {{ form_errors(form.site) }}
-    {{ form_widget(form.site, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du site'}}) }}
+    <label for="{{ form.campus.vars.id }}">{{ 'Site'|trans }}</label>
+    {{ form_errors(form.campus) }}
+    {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du site'}}) }}
 </div>
 
 {# recherche par nom #}
 <div class="form-group">
-    <label for="{{ form.search.vars.id }}">{{ 'Bonjour'|trans }}</label>
+    <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label>
     {{ form_errors(form.search) }}
     {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Nature de la sortie'}}) }}
 </div>
@@ -35,8 +26,8 @@
 
 {# date de fin #}
 <div class="form-group date-picker">
-    {{ form_label(form.dateEnd) }}
-    {{ form_widget(form.dateEnd) }}
+    {{ form_label(form.subLimitDate) }}
+    {{ form_widget(form.subLimitDate) }}
     <span class="date-icon-end">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
@@ -73,27 +64,3 @@
 </div>
 
 {{ form_end(form) }}
-
-
-{# J'insére les résultats ici #}
-<div id="search-results">
-    {% include 'default/_activitiesList.html.twig' with {'activities': activities} %}
-</div>
-
-{# J'exécute le script AJAX :') #}
-<script>
-    document.getElementById('activity-search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var data = new FormData(this);
-
-        fetch('{{ path('activity_search') }}', {
-            method: 'POST',
-            body: data
-        })
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('search-results').innerHTML = html;
-            });
-    });
-
-{% endblock %}

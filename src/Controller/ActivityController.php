@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Entity\Location;
 use App\Entity\User;
+use App\DTO\ActivitySearchDTO;
+use App\Form\ActivitySearchType;
 use App\Form\ActivityType;
 use App\Form\LocationType;
+use App\Repository\ActivityRepository;
 use App\Services\ActivityService;
 use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -109,6 +112,35 @@ class ActivityController extends AbstractController
     public function show(Activity $activity): Response
     {
         return $this->render('activity/show.html.twig', ['activity' => $activity]);
+    }
+
+    #[Route('/search', name: 'activity_search')]
+    public function search(Request $request, ActivityRepository $activityRepository): Response
+    {
+        $searchDTO = new ActivitySearchDTO();
+        $form = $this->createForm(ActivitySearchType::class, $searchDTO);
+        $form->handleRequest($request);
+
+        $activities = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $activities = $activityRepository->findBySearchCriteria($searchDTO, $user);
+        }
+
+        // Gestion du piti AJAX
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('fragments/_searchResults.html.twig', [
+                'activities' => $activities,
+            ]);
+        }
+
+        // Other requêtes
+        // remplacé search par main pour test
+        return $this->render('main/index.html.twig', [
+            'form' => $form->createView(),
+            'activities' => $activities,
+        ]);
     }
 
 }
