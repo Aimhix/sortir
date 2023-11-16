@@ -1,4 +1,11 @@
-
+body{
+    font-family: Arial, serif;
+}
+h2{
+    font-size:2em;
+    font-weight: 400;
+    text-align: center;
+}
 #nav{
 }
 
@@ -14,9 +21,131 @@
     padding-bottom: 30px;
 }
 
-
 nav ul li{
     display: inline-block;
     padding: 30px;
     margin: auto;
 }
+
+/*Card Sorties */
+section{
+    width: 1100px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+
+    .section {
+        width: 600px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .section {
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.total-card{
+    border: 15px solid rgba(100, 100, 100, 0.05);
+    border-radius: 40px;
+}
+
+.top {
+    min-height: 200px;
+    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
+    background-size: cover;
+    background-color:#ddd;
+    border-radius: 24px 24px 0 0;
+}
+
+.bottom{
+    padding:20px;
+    background-color:#DEE3E6;
+    border-radius: 0 0 24px 24px;
+}
+
+.tps{
+    display:block;
+    float:right;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin:20px;
+    background-color:#fff;
+}
+.color-gradient{
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    color:transparent;
+    background-clip: text;
+}
+
+.fontweight{
+    font-weight: 700;
+}
+
+.bottom a  {
+    position: relative;
+    top: -30px;
+    padding: 15px 25px;
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.total-card-back-inner{
+    padding:40px;
+}
+
+/*3D card activity*/
+.activity-card {
+    background-color: transparent;
+    perspective: 1100px; /* Remove this if you don't want the 3D effect */
+}
+.activity-card-inner {
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.activity-card:hover .activity-card-inner{
+    transform: rotateY(180deg) translateZ(-30);;
+}
+.total-card, .total-card-back{
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.total-card-back{
+    transform: rotateY(180deg) translateZ(0);
+    background-color:#DEE3E6;
+    position:absolute;
+    top:0;
+    right:0;
+    border-radius: 40px;
+    min-height:100%;
+    width:100%;
+}
+
+/* ... autres styles ... */
+
+/* Style pour .bottom et .tps avec effet 3D */
+.activity-card:hover .bottom, .activity-card:hover .tps {
+    transform: translateZ(10px);
+    z-index: 1;
+}
+
+/* Adjustements pour l'effet 3D lors du hover */
+.activity-card:hover .activity-card-inner{
+    transform: rotateY(180deg) translateZ(-30px); /* Ajustez cette valeur si nécessaire */
+}
+
+
+

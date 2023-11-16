@@ -3,19 +3,27 @@
 {% block title %}Accueil {{ parent() }} {% endblock %}
 
 {% block body %}
+
     <div class="container">
-    {% if app.user %}
+        {% if app.user %}
+            <div>
+                Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
+
+        {% endif %}
+
         <div>
-            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
-    {% endif %}
-        <div>
+            <h2 class="color-gradient">Sorties à venir</h2>
     <section>
         {% for activity in activities %}
             {% include 'activity/_card.html.twig' %}
         {% endfor %}
     </section>
+
+        Accueil
+        <a href="">
+
+        </a>
     </div>
-    <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
     </div>
 {% endblock %}
