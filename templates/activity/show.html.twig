@@ -19,6 +19,7 @@
     <h4>Longitude : {{ activity.location.longitude}}</h4>
 
     <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">S'incrire à la sortie</a>
+    <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire la sortie</a>
 
 {% endblock %}
 
