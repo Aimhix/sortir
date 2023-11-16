@@ -14,6 +14,12 @@
         </div>
     {% endfor %}
 
+    {% for message in app.flashes('error') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {# Afficher le formulaire #}
     {{ form_start(form) }}
     {{ form_errors(form) }}
@@ -65,7 +71,7 @@
 
     <button type="submit">Enregistrer</button>
     <button>
-        <a href="{{ path('app_editprofile') }}">Annuler</a>
+        <a href="{{ path('app_profile') }}">Annuler</a>
     </button>
 
     {{ form_end(form) }}
