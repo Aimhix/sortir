@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\CityRepository;
+use App\Repository\LocationRepository;
 use App\Repository\UserRepository;
 use App\Services\BackOfficeServices;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,6 +72,21 @@ class BackOfficeController extends AbstractController
         $backOfficeServices->deleteCity($city, $cityRepository);
         return $this->redirectToRoute('app_city_management');
     }
+
+
+
+    #[Route('/back_office/location_management', name: 'app_location_management')]
+    public function locationBackOffice( LocationRepository $locationRepository): Response
+    {
+        $locations = $locationRepository->findAll();
+
+        return $this->render('backoffice/back_office_location.html.twig', [
+            'locations' => $locations
+        ]);
+    }
+
+
+
 
 
 
