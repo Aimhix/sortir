@@ -1,7 +1,11 @@
 body{
     font-family: Arial, serif;
 }
-
+h2{
+    font-size:2em;
+    font-weight: 400;
+    text-align: center;
+}
 #nav{
 }
 
@@ -25,7 +29,7 @@ nav ul li{
 
 /*Card Sorties */
 section{
-    width: 1200px;
+    width: 1100px;
     margin:auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -46,9 +50,6 @@ section{
         width: 100%;
         grid-template-columns: repeat(1, 1fr);
     }
-}
-
-.activity-card{
 }
 
 .total-card{
@@ -78,7 +79,7 @@ section{
     margin:20px;
     background-color:#fff;
 }
-.inner-tps{
+.color-gradient{
     background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
     color:transparent;
     background-clip: text;
@@ -99,3 +100,52 @@ section{
     font-size: 1.2em;
     font-weight: 700;
 }
+
+.total-card-back-inner{
+    padding:40px;
+}
+
+/*3D card activity*/
+.activity-card {
+    background-color: transparent;
+    perspective: 1100px; /* Remove this if you don't want the 3D effect */
+}
+.activity-card-inner {
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.activity-card:hover .activity-card-inner{
+    transform: rotateY(180deg) translateZ(-30);;
+}
+.total-card, .total-card-back{
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.total-card-back{
+    transform: rotateY(180deg) translateZ(0);
+    background-color:#DEE3E6;
+    position:absolute;
+    top:0;
+    right:0;
+    border-radius: 40px;
+    min-height:100%;
+    width:100%;
+}
+
+/* ... autres styles ... */
+
+/* Style pour .bottom et .tps avec effet 3D */
+.activity-card:hover .bottom, .activity-card:hover .tps {
+    transform: translateZ(10px);
+    z-index: 1;
+}
+
+/* Adjustements pour l'effet 3D lors du hover */
+.activity-card:hover .activity-card-inner{
+    transform: rotateY(180deg) translateZ(-30px); /* Ajustez cette valeur si nécessaire */
+}
+
+
+
