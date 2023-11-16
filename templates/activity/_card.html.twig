@@ -28,9 +28,9 @@
             <div class="total-card-back-inner">
                 <span class="color-gradient">{{ activity.name }}</span><br>
                 {{ activity.infoActivity }}<br><br>
-                
-                Organisateur: <a href="{{ path('app_profile', {'pseudo': activity.organizer.pseudo}) }}"
-                                 class="fontweight">{{ activity.organizer.pseudo }}</a>
+
+                Organisateur: <a href="{{ path('app_profile', {'id': activity.organizer.getId()}) }}"
+                                 class="fontweight">{{ activity.organizer.getpseudo }}</a>
             </div>
         </div>
     </div>
