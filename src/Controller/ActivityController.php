@@ -72,10 +72,6 @@ class ActivityController extends AbstractController
         ]);
     }
 
-
-
-
-
     #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
     public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, UserInterface $user, Request $request): Response
     {
@@ -110,7 +106,7 @@ class ActivityController extends AbstractController
 
 
     #[Route('/activity/{id}', name: 'activity_show')]
-    public function show(int $id, Activity $activity): Response
+    public function show(Activity $activity): Response
     {
         return $this->render('activity/show.html.twig', ['activity' => $activity]);
     }
