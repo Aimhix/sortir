@@ -1,6 +1,32 @@
 <article class="activity-card">
-    <a href="{{ path('activity_show', {'id': activity.id}) }}">
-        {{ activity.name }}
-    </a>
-    ({{ activity.campus.name }})
+    <div class="activity-card-inner">
+        <div class="total-card">
+            <div class="top">
+                <div class="tps">
+                    <div class="color-gradient">
+                        Clos le <span class="fontweight">{{ activity.subLimitDate | date("m/d") }}</span>
+                        à <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <a href="{{ path('activity_show', {'id': activity.id}) }}">
+                    {{ activity.name }}</a>
+                <br>
+
+                <span class="fontweight">{{ activity.dateStart | date("m/d") }}</span>
+                à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
+                à <span class="fontweight">{{ activity.campus.name }}</span>
+<br><br>
+        Encore <span class="fontweight">{{ activity.subMax }}</span> places
+    </div>
+    </div>
+    <div class="total-card-back">
+        <div class="total-card-back-inner">
+        <span class="color-gradient">{{ activity.name }}</span><br>
+        {{ activity.infoActivity }}<br><br>
+{#        {{ activity.organizer }}#}
+        </div>
+        </div>
+    </div>
 </article>

@@ -59,6 +59,7 @@ class ActivityController extends AbstractController
         $locationForm->handleRequest($request);
 
         if ($locationForm->isSubmitted() && $locationForm->isValid()){
+
             $entityManager->persist($location);
             $entityManager->flush();
 
@@ -73,9 +74,8 @@ class ActivityController extends AbstractController
     }
 
     #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
-    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, UserInterface $user, Request $request): Response
+    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, Request $request): Response
     {
-        /** @var User $user */
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw new \LogicException('L\'utilisateur actuel n\'est pas une instance de \App\Entity\User');
@@ -86,7 +86,7 @@ class ActivityController extends AbstractController
         if (!$activity) {
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
-//tenter de regarder si l'utilisateur peut s'inscrire ?
+        //tenter de regarder si l'utilisateur peut s'inscrire ?
 
         try {
             if ($request->query->get('action') == 'subscribe') {
@@ -101,7 +101,7 @@ class ActivityController extends AbstractController
         } catch (\Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-        return $this->redirectToRoute('activity_show');
+        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
     }
 
 

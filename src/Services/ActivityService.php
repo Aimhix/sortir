@@ -28,6 +28,7 @@ class ActivityService
 
         $activity->addUser($user);
         $this->entityManager->persist($activity);
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 

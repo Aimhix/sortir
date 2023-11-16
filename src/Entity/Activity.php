@@ -52,7 +52,7 @@ class Activity
     #[ORM\JoinColumn(nullable: false)]
     private $organizer;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities', cascade: ['persist', 'remove'])]
     private $users;
 
     public function __construct()
