@@ -8,21 +8,14 @@
         <div>
             Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
-
     {% endif %}
-
         <div>
-
-{#    <section>#}
-{#        {% for activity in activities %}#}
-{#            {% include 'activity/_card.html.twig' %}#}
-{#        {% endfor %}#}
-{#    </section>#}
-
-        Accueil
-
+    <section>
+        {% for activity in activities %}
+            {% include 'activity/_card.html.twig' %}
+        {% endfor %}
+    </section>
     </div>
-    
     <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
     </div>
 {% endblock %}

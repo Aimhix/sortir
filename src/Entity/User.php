@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'organizer', targetEntity: Activity::class, orphanRemoval: true)]
     private $activitiesOrganized;
 
-    #[ORM\ManyToMany(targetEntity: Activity::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Activity::class, inversedBy: 'users', cascade: ['persist', 'remove'])]
     private $activities;
 
     public function __construct()

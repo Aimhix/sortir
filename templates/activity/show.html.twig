@@ -18,6 +18,8 @@
     <h4>Latitude : {{ activity.location.latitude}}</h4>
     <h4>Longitude : {{ activity.location.longitude}}</h4>
 
+    <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">S'incrire à la sortie</a>
+
 {% endblock %}
 
 
