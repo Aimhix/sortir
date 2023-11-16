@@ -6,6 +6,9 @@
 
         <nav>
             <ul>
+                <li>
+                    <a href="{{ path('app_activity_index') }}">Page d'accueil</a>
+                </li>
                 {% if app.user %}
                     {% if is_granted('ROLE_USER') %}
                         <li>

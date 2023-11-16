@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Entity\Location;
+use App\Entity\Status;
 use App\Entity\User;
 use App\Form\ActivityType;
 use App\Form\LocationType;
+use App\Repository\ActivityRepository;
 use App\Services\ActivityService;
 use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -75,7 +77,7 @@ class ActivityController extends AbstractController
 
 
     #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
-    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, Request $request): Response
+    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId): Response
     {
         $user = $this->getUser();
 
@@ -92,7 +94,7 @@ class ActivityController extends AbstractController
     }
 
     #[Route('/activity/unsubscribe/{activityId}', name: 'activity_unsubscribe')]
-    public function unsubscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, Request $request): Response
+    public function unsubscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId ): Response
     {
         $user = $this->getUser();
 
@@ -109,10 +111,37 @@ class ActivityController extends AbstractController
     }
 
 
+    #[Route('/activity/cancel/{activityId}', name: 'activity_cancel')]
+    public function cancelActivity(EntityManagerInterface $entityManager, int $activityId, ActivityRepository $activityRepository, StatusRepository $statusRepository ): Response
+    {
+        $user = $this->getUser();
+
+        $activity = $activityRepository->find($activityId);
+        if (!$activity) {
+            throw $this->createNotFoundException('Cette sortie est introuvable.');
+        }
+
+
+            if ($activity->getOrganizer()->getId() == $user->getId()){
+                $activity->setStatus($statusRepository->findOneByWording('Annulée'));
+                $entityManager->persist($activity);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+
+                return $this->redirectToRoute('app_activity_index');
+            }
+        return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties' );
+    }
+
+
     #[Route('/activity/{id}', name: 'activity_show')]
     public function show(Activity $activity): Response
     {
-        return $this->render('activity/show.html.twig', ['activity' => $activity]);
+        $user = $this->getUser();
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'user' => $user
+        ]);
     }
 
 
