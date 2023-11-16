@@ -22,6 +22,8 @@
     </div>
     </div>
     <div class="total-card-back">
+        <a href="{{ path('activity_show', {'id': activity.id}) }}">
+            {{ activity.name }}</a>
         <div class="total-card-back-inner">
         <span class="color-gradient">{{ activity.name }}</span><br>
         {{ activity.infoActivity }}<br><br>
