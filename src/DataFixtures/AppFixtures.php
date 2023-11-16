@@ -100,6 +100,12 @@ class AppFixtures extends Fixture
         $manager->persist($status6);
         $manager->flush();
 
+        $status7 = new Status();
+        $status7->setWording('Archivée');
+
+        $manager->persist($status7);
+        $manager->flush();
+
 
 
         //        Fixtures de lieu
