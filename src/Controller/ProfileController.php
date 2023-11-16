@@ -58,18 +58,16 @@ class ProfileController extends AbstractController
 
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('error', 'Le pseudo est déjà pris');
+            } else {
 
-                return $this->redirectToRoute('app_editprofile');
+                //Enregistrer les modifications dans la BDD
+                $profileManager = $this->getDoctrine()->getManager();
+                $profileManager->flush();
+
+                $this->addFlash('success', 'Profil mis à jour');
+
+                return $this->redirectToRoute('app_profile');
             }
-
-            //Enregistrer les modifications dans la BDD
-            $profileManager = $this->getDoctrine()->getManager();
-            $profileManager->flush();
-
-            $this->addFlash('success', 'Profil mis à jour');
-
-            return $this->redirectToRoute('app_profile');
-
         }
 
         return $this->render('profile/editProfile.html.twig',
