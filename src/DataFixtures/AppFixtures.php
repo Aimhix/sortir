@@ -25,10 +25,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-
-
-
-
         //        Fixtures de ville
 
         $city1 = new City();
@@ -62,7 +58,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($city4);
         $manager->flush();
-
 
 
 
@@ -107,9 +102,6 @@ class AppFixtures extends Fixture
 
 
 
-
-
-
         //        Fixtures de lieu
 
         $location1 = new Location();
@@ -151,10 +143,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($location4);
         $manager->flush();
-
-
-
-
 
 
 
@@ -208,9 +196,9 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $user2 = new User();
-        $user2->setPseudo('Max');
+        $user2->setPseudo('Max le banni( false en Active status )');
         $user2->setEmail('max@gmail.com');
-        $user2->setActiveStatus(true);
+        $user2->setActiveStatus(false);
         $user2->setFirstname('Maxime');
         $user2->setLastname('Roche');
         $user2->setPhone('0682929200');
@@ -258,85 +246,86 @@ class AppFixtures extends Fixture
         $subLimitDate = new \DateTime('2005-08-15T15:52:01+00:00');
 
         $activities1 = new Activity();
-        $activities1->setName('Char à voile');
+        $activities1->setName('Char à voile (Acti passée) ');
         $activities1->setCampus($campus1);
         $activities1->setLocation($location1);
         $activities1->setOrganizer($user1);
         $activities1->setIsPublished(true);
-        $activities1->setStatus($status1);
+        $activities1->setStatus($status5);
         $activities1->setDuration(30);
-        $activities1->setSubMax(10);
-        $activities1->setDateStart($dateStart);
-        $activities1->setSubLimitDate($subLimitDate);
-        $activities1->setInfoActivity('blabla');
+        $activities1->setSubMax(3);
+        $activities1->setDateStart(new \DateTime('2023-11-16T12:30:01+00:00'));
+        $activities1->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
+        $activities1->setInfoActivity('Activité début le 16/11 et donc status : passée // sub limite à 3');
+
 
         $manager->persist($activities1);
         $manager->flush();
 
 
         $activities2 = new Activity();
-        $activities2->setName('Escalade');
+        $activities2->setName('Escalade (acti en cours)');
         $activities2->setCampus($campus2);
         $activities2->setLocation($location2);
         $activities2->setOrganizer($user2);
         $activities2->setIsPublished(true);
-        $activities2->setStatus($status2);
-        $activities2->setDuration(30);
+        $activities2->setStatus($status4);
+        $activities2->setDuration(20160);
         $activities2->setSubMax(10);
-        $activities2->setDateStart($dateStart);
+        $activities2->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities2->setSubLimitDate($subLimitDate);
-        $activities2->setInfoActivity('blabla');
+        $activities2->setInfoActivity('Activité en cours');
 
         $manager->persist($activities2);
         $manager->flush();
 
 
         $activities3 = new Activity();
-        $activities3->setName('Piscine');
+        $activities3->setName('Piscine (Activitée créée mais non publiée) ');
         $activities3->setCampus($campus3);
         $activities3->setLocation($location3);
         $activities3->setOrganizer($user3);
-        $activities3->setIsPublished(true);
-        $activities3->setStatus($status3);
+        $activities3->setIsPublished(false);
+        $activities3->setStatus($status1);
         $activities3->setDuration(30);
         $activities3->setSubMax(10);
-        $activities3->setDateStart($dateStart);
-        $activities3->setSubLimitDate($subLimitDate);
-        $activities3->setInfoActivity('blabla');
+        $activities3->setDateStart(new \DateTime('2023-12-10T08:30:01+00:00'));
+        $activities3->setSubLimitDate(new \DateTime('2023-12-05T08:30:01+00:00'));
+        $activities3->setInfoActivity('Activité juste créée');
 
         $manager->persist($activities3);
         $manager->flush();
 
 
         $activities4 = new Activity();
-        $activities4->setName('Boire des coups');
+        $activities4->setName('Boire des coups( activitée annulée)');
         $activities4->setCampus($campus4);
         $activities4->setLocation($location4);
         $activities4->setOrganizer($user4);
         $activities4->setIsPublished(true);
-        $activities4->setStatus($status4);
+        $activities4->setStatus($status6);
         $activities4->setDuration(30);
         $activities4->setSubMax(10);
-        $activities4->setDateStart($dateStart);
-        $activities4->setSubLimitDate($subLimitDate);
-        $activities4->setInfoActivity('blabla');
+        $activities4->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
+        $activities4->setSubLimitDate(new \DateTime('2023-11-10T08:30:01+00:00'));
+        $activities4->setInfoActivity('L\'acti est annulée');
 
         $manager->persist($activities4);
         $manager->flush();
 
 
         $activities5 = new Activity();
-        $activities5->setName('Karaoke');
+        $activities5->setName('Karaoke (sortie créée inscription fermée)');
         $activities5->setCampus($campus3);
         $activities5->setLocation($location3);
         $activities5->setOrganizer($user1);
         $activities5->setIsPublished(true);
-        $activities5->setStatus($status5);
+        $activities5->setStatus($status3);
         $activities5->setDuration(30);
         $activities5->setSubMax(10);
-        $activities5->setDateStart($dateStart);
-        $activities5->setSubLimitDate($subLimitDate);
-        $activities5->setInfoActivity('blabla');
+        $activities5->setDateStart(new \DateTime('2023-12-16T08:30:01+00:00'));
+        $activities5->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
+        $activities5->setInfoActivity('Acti clotuée');
 
         $manager->persist($activities5);
         $manager->flush();
@@ -344,22 +333,20 @@ class AppFixtures extends Fixture
 
 
         $activities6 = new Activity();
-        $activities6->setName('Coder ensemble');
+        $activities6->setName('Coder ensemble(activitée ouverte)');
         $activities6->setCampus($campus2);
         $activities6->setLocation($location1);
         $activities6->setOrganizer($user3);
         $activities6->setIsPublished(true);
-        $activities6->setStatus($status6);
+        $activities6->setStatus($status2);
         $activities6->setDuration(30);
         $activities6->setSubMax(10);
-        $activities6->setDateStart($dateStart);
-        $activities6->setSubLimitDate($subLimitDate);
-        $activities6->setInfoActivity('blabla');
+        $activities6->setDateStart(new \DateTime('2023-11-28T08:30:01+00:00'));
+        $activities6->setSubLimitDate(new \DateTime('2023-11-15T08:30:01+00:00'));
+        $activities6->setInfoActivity('acti ouverte');
 
         $manager->persist($activities6);
         $manager->flush();
-
-
 
     }
 }

@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Entity\Location;
-use App\Entity\Status;
-use App\Entity\User;
 use App\Form\ActivityType;
 use App\Form\LocationType;
 use App\Repository\ActivityRepository;
@@ -17,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -164,10 +161,6 @@ class ActivityController extends AbstractController
 //            throw $this->createNotFoundException('Cette sortie est introuvable.');
 //        }
 //        //tenter de regarder si l'utilisateur peut s'inscrire ?
-//
-//
-//
-//
 //
 //
 //           if ($request->query->get('action') == 'subscribe') {
