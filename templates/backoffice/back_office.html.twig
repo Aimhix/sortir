@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackOffice {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_users_management') }}">Gestion Users</a>
+    <br>
+    <a href="{{ path('app_city_management') }}">Gestion des Villes</a>
+    <br>
+    <a href="{{ path('app_location_management') }}">Gestion des Lieux</a>
+
+
+{% endblock %}
+
+
+

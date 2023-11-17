@@ -62,6 +62,7 @@ class ProfileController extends AbstractController
                 $this->addFlash('error', 'Le pseudo est déjà pris');
             } else {
 
+                // Hashage MDP
                 $newPlainPassword = $form->get('password')->getData();
                 $encodedPassword = $passwordEncoder->encodePassword($user, $newPlainPassword);
                 $user->setPassword($encodedPassword);
