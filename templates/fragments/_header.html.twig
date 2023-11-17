@@ -11,12 +11,6 @@
                     <li>
                         <a id="add-an-activity" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
-{#                    <li>#}
-{#                        <a href="{{ path('app_profile') }}">#}
-{#                            #}{#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
-{#                            #}{#                                <img src="{{ profilePicture }}" alt="Photo">#}
-{#                            {{ app.user.fullName }}</a>#}
-{#                    </li>#}
                     <li class="dropdown">
                         <a href="#">{{ app.user.fullName }}</a>
                         <ul class="dropdown-menu">
@@ -28,28 +22,28 @@
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
-                        <a href="{{ path('app_villes') }}">Villes</a>
+                        <a href="{{ path('app_villes') }}">Add Villes</a>
                     </li>
                     <li>
-                        <a href="{{ path('app_sites') }}">Sites</a>
+                        <a href="{{ path('app_sites') }}">Add Sites</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_new_user') }}">Add Users</a>
                     </li>
                 {% endif %}
-{#                <li>#}
-{#                    <a href="{{ path('app_logout') }}">Logout</a>#}
-{#                </li>#}
 
-            {% else %}
-                <li>
-                    <a href="{{ path('app_login') }}">Login</a>
-                </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('app_login') }}">Login</a>
+                    </li>
 
 
-            {% endif %}
+                {% endif %}
 
 
 
-        </ul>
-    </nav>
+            </ul>
+        </nav>
 
     <div class="header-content">
     <h1 class="site-title">

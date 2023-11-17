@@ -91,27 +91,61 @@ class ActivityController extends AbstractController
         }
 //tenter de regarder si l'utilisateur peut s'inscrire ?
 
-        try {
-            if ($request->query->get('action') == 'subscribe') {
-                $activityService->subscribeToActivity($user, $activity);
-                $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
-            } elseif ($request->query->get('action') == 'unsubscribe') {
-                $activityService->unsubscribeFromActivity($user, $activity);
-                $this->addFlash('success', 'Vous avez quitté cette sortie.');
-            } else {
-                throw new \InvalidArgumentException('Action impossible.');
-            }
-        } catch (\Exception $e) {
-            $this->addFlash('error', $e->getMessage());
+        $activityService->subscribeToActivity($user, $activity);
+        $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+
+        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
+    }
+
+    #[Route('/activity/unsubscribe/{activityId}', name: 'activity_unsubscribe')]
+    public function unsubscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId ): Response
+    {
+        $user = $this->getUser();
+
+        $activityService = new ActivityService($entityManager);
+        $activity = $managerRegistry->getRepository(Activity::class)->find($activityId);
+        if (!$activity) {
+            throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
-        return $this->redirectToRoute('activity_show');
+
+        $activityService->unsubscribeFromActivity($user, $activity);
+        $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+
+        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
+    }
+
+
+    #[Route('/activity/cancel/{activityId}', name: 'activity_cancel')]
+    public function cancelActivity(EntityManagerInterface $entityManager, int $activityId, ActivityRepository $activityRepository, StatusRepository $statusRepository ): Response
+    {
+        $user = $this->getUser();
+
+        $activity = $activityRepository->find($activityId);
+        if (!$activity) {
+            throw $this->createNotFoundException('Cette sortie est introuvable.');
+        }
+
+
+            if ($activity->getOrganizer()->getId() == $user->getId()){
+                $activity->setStatus($statusRepository->findOneByWording('Annulée'));
+                $entityManager->persist($activity);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+
+                return $this->redirectToRoute('app_activity_index');
+            }
+        return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties' );
     }
 
 
     #[Route('/activity/{id}', name: 'activity_show')]
     public function show(Activity $activity): Response
     {
-        return $this->render('activity/show.html.twig', ['activity' => $activity]);
+        $user = $this->getUser();
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'user' => $user
+        ]);
     }
 
     #[Route('/search', name: 'activity_search')]

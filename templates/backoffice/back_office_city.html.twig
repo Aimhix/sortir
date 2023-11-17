@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BackOfficeCity {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% for city in cities %}
+        <br>
+        <p>{{ city.name }}</p>
+        <a href="{{ path('app_cities_management_delete', {'id': city.id}) }}">Supprimer</a>
+
+    {% endfor %}
+
+{% endblock %}
+
+
+

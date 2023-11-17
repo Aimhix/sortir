@@ -26,6 +26,8 @@ security:
         secret: '%kernel.secret%'
         lifetime: 604800
 
+
+
     # activate different ways to authenticate
     # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -37,6 +39,7 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
   #-{ path: ^/profile, roles: ROLE_USER }
+
 
 when@test:
   security:

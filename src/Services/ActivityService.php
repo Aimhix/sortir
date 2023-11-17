@@ -17,6 +17,7 @@ class ActivityService
 
     public function subscribeToActivity(\App\Entity\User $user, Activity $activity)
     {
+
         $currentDate = new \DateTime();
         if ($currentDate > $activity->getSubLimitDate()) {
             throw new \Exception("La date d'inscription est dépassée.");

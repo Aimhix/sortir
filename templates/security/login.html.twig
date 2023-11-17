@@ -6,17 +6,20 @@
 
     <form method="post">
 
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+        {% for message in app.flashes('error') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+
 
         {% if app.user %}
             <div class="mb-3">
-                Vous êtes connecté en tant que  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
             </div>
         {% endif %}
 
-        <h1 >Connexion</h1>
+        <h1>Connexion</h1>
 
         <label for="inputEmail">Email : </label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
@@ -35,6 +38,6 @@
         <button type="submit">Connexion</button>
     </form>
 
-   <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
+    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
 
 {% endblock %}

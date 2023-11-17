@@ -4,11 +4,14 @@
 
 {% block body %}
 
-    <h1>Votre profil</h1>
+    <h1>Profil</h1>
 
-    {% if app.user  %}
-        {# Mettre une photo de profil #}
-         <img src="{{ asset('../../public/images/Olaf.jpg' ~ app.user.profilePicture) }}" alt="Photo de profil">
+    {% if app.user %}
+        {% if app.user.profilePicture %}
+            <img src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="Photo de profil">
+        {% else %}
+            <p>Aucune photo de profil disponible</p>
+        {% endif %}
 
         <form method="post">
             <h2>Pseudo : {{ app.user.pseudo }}</h2>
@@ -21,8 +24,6 @@
 
             {# Mettre le lien de la page d'accueil #}
             <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
-
-
             <a href="{{ path('app_editprofile') }}" class="btn btn-primary">Modifier</a>
 
 

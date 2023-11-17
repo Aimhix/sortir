@@ -6,6 +6,9 @@ use App\DTO\ActivitySearchDTO;
 use App\Entity\User;
 use App\Form\ActivitySearchType;
 use App\Repository\ActivityRepository;
+use App\Repository\StatusRepository;
+use App\Services\ActivityUpdateService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +18,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_activity_index')]
-    public function index(Request $request, ActivityRepository $activityRepository): Response
+    public function index(Request $request, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, StatusRepository $statusRepository): Response
     {
         $user = $this->getUser();
-        $activities = []; // Initialisez $activities ici
+        $activities = $activityRepository->findAll();
+
+        $activityUpdate = new ActivityUpdateService();
+        $activityUpdate->activityUpdate($activityRepository,$entityManager,$statusRepository);
 
         if ($user instanceof User) {
             $searchDTO = new ActivitySearchDTO();
