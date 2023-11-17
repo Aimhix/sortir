@@ -22,16 +22,16 @@
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a href="{{ path('app_villes') }}">Villes</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('app_sites') }}">Sites</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_new_user') }}">Sites</a>
-                        </li>
+{#                        <li>#}
+{#                            <a href="{{ path('app_villes') }}">Villes</a>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('app_sites') }}">Sites</a>#}
+{#                        </li>#}
 
+                        <li>
+                            <a href="{{ path('admin_new_user') }}">Admin</a>
+                        </li>
                     {% endif %}
                     <li>
                         <a href="{{ path('app_logout') }}">Logout</a>
