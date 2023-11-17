@@ -86,6 +86,8 @@
             <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
             {{ form_errors(form.isPast) }}
         </div>
+
+
     </div>
 
     {{ form_end(form) }}
@@ -123,7 +125,7 @@
         });
     </script>
     <script>document.addEventListener("DOMContentLoaded", function () {
-            const checkbox = document.getElementById("registration_form_agreeTerms");
+            const checkbox = document.getElementById("checkbox-form-search");
             const customCheckbox = document.querySelector(".add-checkbox");
 
             customCheckbox.addEventListener("click", function () {

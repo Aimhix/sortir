@@ -19,9 +19,6 @@ h2{
     border-radius: 35px;
 }
 
-#nav{
-}
-
 #container{
     height: 300px;
     background-image: url("https://thumbs.dreamstime.com/z/bon-retour-%C3%A0-la-banni%C3%A8re-d-%C3%A9cole-ou-l-en-t%C3%AAte-de-site-web-avec-feuille-d%C3%A9chir%C3%A9e-sortie-papier-et-barre-mise-valeur-r%C3%A9aliste-194649680.jpg?w=992");
@@ -41,13 +38,13 @@ h2{
 nav{
     text-align: right;
 }
-nav ul li{
+#header-nav li:not(.dropdown li){
     display: inline-block;
     padding: 20px;
     margin: auto;
 }
 
-nav a {text-decoration: none;
+#header-nav a:not(#add-an-activity) {text-decoration: none;
 font-weight: 700;
 color:#000;}
 
@@ -107,8 +104,10 @@ section{
 }
 .color-gradient{
     background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    -webkit-background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
     color:transparent;
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .fontweight{
@@ -196,13 +195,15 @@ section{
 }
 
 .form-group select{
-    padding: 15px;
+    padding: 15px 5px 15px 15px;
     border-radius: 8px;
     border: none;
-background-color:#ddd}
+    background-color: #ddd;
+    border-right: 15px solid #ddd;
+}
 
 .submit-button{
-    background-image:url("https://cdn-icons-png.flaticon.com/512/54/54481.png"), linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    background-image:url('../images/search-logo.png'), linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
     background-size:20px,100%;
     background-position:50% 50%, 0 0;
     background-repeat: no-repeat, repeat;
@@ -210,7 +211,7 @@ background-color:#ddd}
     border-radius: 8px;
     border: none;
     width:45px;
-    margin-left:10px;
+    margin-left:8px;
     cursor:pointer;
 }
 
@@ -244,6 +245,40 @@ background-color:#ddd}
 }
 .form-check{display:inline-block;}
 
+input:focus{border:none;}
+
+
+/*personnaliser checkbox*/
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    cursor:pointer;
+}
+
+input[type=checkbox] {
+    border-radius: 10px;
+    height: 25px;
+    width: 25px;
+    background: #cccccc59;
+    border: 0px solid #cccccc59;
+    margin-bottom: -6px;
+}
+input[type="checkbox"]:checked {
+    background: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    position: relative;
+}
+
+.checkbox-group label{
+    cursor:pointer;
+}
+
+#activity_search_campus, input{cursor:pointer;}
+input:focus, #activity_search_campus:focus {
+    outline: none;
+    cursor:default;
+}
+
 
 /*Titre header*/
 
@@ -252,3 +287,40 @@ h1{color:#fff;font-size:5em;margin:0}
 .com{color:#ff3c66}
 
  .sub-title{color:#fff;font-size: 1.8em;font-weight:700;margin:0}
+
+
+
+/* menu deroulant */
+.dropdown-menu {
+    display: none; /* Masque le menu déroulant par défaut */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Affiche le menu déroulant lorsqu'on survole l'élément parent */
+    position:relative;
+}
+
+.dropdown-menu:hover .dropdown-menu li {
+    padding: 10px;
+    display: block;
+    margin:0;
+}
+
+/* Styles pour le survol de l'élément parent */
+.dropdown:hover a {
+    background-color: #eee;
+}
+
+#add-an-activity{
+background-image:linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    padding:15px;
+    color:#fff;
+    border-radius:15px;
+    text-decoration: none;
+    font-weight: 700;
+}

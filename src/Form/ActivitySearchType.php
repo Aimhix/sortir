@@ -28,18 +28,20 @@ class ActivitySearchType extends AbstractType
             ])
             ->add('dateStart', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
                 // 'format' => 'yyyy-MM-dd', // format par défaut, à rétablir si ça foire
-                'data' => new \DateTime(),
+//                'data' => new \DateTime(),
                 'attr' => [
                     'class' => 'form-control',
-                    'min' => (new \DateTime())->format('Y-m-d'), // J'empêche la sélection de dates antérieures à aujourd'hui
+//                    'min' => (new \DateTime())->format('Y-m-d'), // J'empêche la sélection de dates antérieures à aujourd'hui
                     'placeholder' => 'Date de début', // Si c'est possible, on affiche un placeholder (pas compatible avec tous les navigateurs)
                 ],
             ])
             ->add('subLimitDate', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
                 // 'format' => 'yyyy-MM-dd',
-                'data' => (new \DateTime())->modify('+7 days'), // Je prend la date d'aujourd'hui et je lui ajoute 7 jours
+//                'data' => (new \DateTime())->modify('+7 days'), // Je prend la date d'aujourd'hui et je lui ajoute 7 jours
                 'attr' => [
                     'class' => 'form-control',
                     'min' => (new \DateTime())->format('Y-m-d'),

@@ -125,6 +125,10 @@ class ActivityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
+            $organizer = $searchDTO->organizer;
+            $isRegistered = $searchDTO->isRegistered;
+            $isNotRegistered = $searchDTO->isNotRegistered;
+            $isPast = $searchDTO->isPast;
             $activities = $activityRepository->findBySearchCriteria($searchDTO, $user);
         }
 

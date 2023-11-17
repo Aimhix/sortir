@@ -26,9 +26,6 @@ class AppFixtures extends Fixture
     {
 
 
-
-
-
         //        Fixtures de ville
 
         $city1 = new City();
@@ -62,9 +59,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($city4);
         $manager->flush();
-
-
-
 
 
         //        Fixtures d'etat d'activités
@@ -104,10 +98,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($status6);
         $manager->flush();
-
-
-
-
 
 
         //        Fixtures de lieu
@@ -153,11 +143,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
-
-
-
         //        Fixtures des campus
 
         $campus1 = new Campus();
@@ -185,12 +170,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
-
         //        Fixtures des Users
-
-
 
 
         $user1 = new User();
@@ -250,12 +230,14 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
         //        Fixtures des Activitées
 
-        $dateStart = new \DateTime('2005-08-15T15:52:01+00:00');
-        $subLimitDate = new \DateTime('2005-08-15T15:52:01+00:00');
+        $dateStart1 = new \DateTime('2023-11-16T15:52:01+00:00');
+        $subLimitDate1 = new \DateTime('2023-11-17T15:52:01+00:00');
+        $dateStart2 = new \DateTime('2023-11-10T15:52:01+00:00');
+        $subLimitDate2 = new \DateTime('2023-11-12T15:52:01+00:00');
+        $dateStart3 = new \DateTime('2023-12-01T15:52:01+00:00');
+        $subLimitDate3 = new \DateTime('2024-01-19T15:52:01+00:00');
 
         $activities1 = new Activity();
         $activities1->setName('Char à voile');
@@ -266,8 +248,8 @@ class AppFixtures extends Fixture
         $activities1->setStatus($status1);
         $activities1->setDuration(30);
         $activities1->setSubMax(10);
-        $activities1->setDateStart($dateStart);
-        $activities1->setSubLimitDate($subLimitDate);
+        $activities1->setDateStart($dateStart1);
+        $activities1->setSubLimitDate($subLimitDate1);
         $activities1->setInfoActivity('blabla');
 
         $manager->persist($activities1);
@@ -283,8 +265,8 @@ class AppFixtures extends Fixture
         $activities2->setStatus($status2);
         $activities2->setDuration(30);
         $activities2->setSubMax(10);
-        $activities2->setDateStart($dateStart);
-        $activities2->setSubLimitDate($subLimitDate);
+        $activities2->setDateStart($dateStart2);
+        $activities2->setSubLimitDate($subLimitDate2);
         $activities2->setInfoActivity('blabla');
 
         $manager->persist($activities2);
@@ -300,8 +282,8 @@ class AppFixtures extends Fixture
         $activities3->setStatus($status3);
         $activities3->setDuration(30);
         $activities3->setSubMax(10);
-        $activities3->setDateStart($dateStart);
-        $activities3->setSubLimitDate($subLimitDate);
+        $activities3->setDateStart($dateStart3);
+        $activities3->setSubLimitDate($subLimitDate3);
         $activities3->setInfoActivity('blabla');
 
         $manager->persist($activities3);
@@ -317,8 +299,8 @@ class AppFixtures extends Fixture
         $activities4->setStatus($status4);
         $activities4->setDuration(30);
         $activities4->setSubMax(10);
-        $activities4->setDateStart($dateStart);
-        $activities4->setSubLimitDate($subLimitDate);
+        $activities4->setDateStart($dateStart1);
+        $activities4->setSubLimitDate($subLimitDate1);
         $activities4->setInfoActivity('blabla');
 
         $manager->persist($activities4);
@@ -334,13 +316,12 @@ class AppFixtures extends Fixture
         $activities5->setStatus($status5);
         $activities5->setDuration(30);
         $activities5->setSubMax(10);
-        $activities5->setDateStart($dateStart);
-        $activities5->setSubLimitDate($subLimitDate);
+        $activities5->setDateStart($dateStart2);
+        $activities5->setSubLimitDate($subLimitDate2);
         $activities5->setInfoActivity('blabla');
 
         $manager->persist($activities5);
         $manager->flush();
-
 
 
         $activities6 = new Activity();
@@ -352,14 +333,12 @@ class AppFixtures extends Fixture
         $activities6->setStatus($status6);
         $activities6->setDuration(30);
         $activities6->setSubMax(10);
-        $activities6->setDateStart($dateStart);
-        $activities6->setSubLimitDate($subLimitDate);
+        $activities6->setDateStart($dateStart3);
+        $activities6->setSubLimitDate($subLimitDate3);
         $activities6->setInfoActivity('blabla');
 
         $manager->persist($activities6);
         $manager->flush();
-
-
 
     }
 }

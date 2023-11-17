@@ -1,7 +1,7 @@
 <header>
 <div>
-    <nav>
-        <ul>
+    <nav id="header-nav">
+        <ul class="header-nav-inner">
             <li class="logo-nav">
                 <a href="/">SORTIR<span class="com">.COM</span></a>
             </li>
@@ -9,13 +9,21 @@
             {% if app.user %}
                 {% if is_granted('ROLE_USER') %}
                     <li>
-                        <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                        <a id="add-an-activity" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
-                    <li>
-                        <a href="{{ path('app_profile') }}">
-                            {#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
-                            {#                                <img src="{{ profilePicture }}" alt="Photo">#}
-                            {{ app.user.fullName }}</a>
+{#                    <li>#}
+{#                        <a href="{{ path('app_profile') }}">#}
+{#                            #}{#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} />#}
+{#                            #}{#                                <img src="{{ profilePicture }}" alt="Photo">#}
+{#                            {{ app.user.fullName }}</a>#}
+{#                    </li>#}
+                    <li class="dropdown">
+                        <a href="#">{{ app.user.fullName }}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mes Sorties</a></li>
+                            <li><a href="{{ path('app_profile') }}">Mon profil</a></li>
+                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        </ul>
                     </li>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
@@ -26,9 +34,9 @@
                         <a href="{{ path('app_sites') }}">Sites</a>
                     </li>
                 {% endif %}
-                <li>
-                    <a href="{{ path('app_logout') }}">Logout</a>
-                </li>
+{#                <li>#}
+{#                    <a href="{{ path('app_logout') }}">Logout</a>#}
+{#                </li>#}
 
             {% else %}
                 <li>
