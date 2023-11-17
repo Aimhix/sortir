@@ -142,7 +142,7 @@ section{
 }
 
 .activity-card:hover .activity-card-inner{
-    transform: rotateY(180deg) translateZ(-30);;
+    transform: rotateY(180deg) translateZ(-30px);;
 }
 .total-card, .total-card-back{
     -webkit-backface-visibility: hidden;
