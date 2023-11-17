@@ -42,6 +42,18 @@ class ProfileController extends AbstractController
     }
 
 
+    #[Route('/participant/profile/{id}', name: 'app_participant_profile')]
+    public function showParticipantsProfile($id): Response
+    {
+        $participant = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        if (!$participant) {
+            throw $this->createNotFoundException('Participant non trouvé');
+        }
+
+        return $this->render('profile/showParticipantsProfile.html.twig', ['participant' => $participant]);
+    }
+
     #[Route('/profile/editprofile', name: 'app_editprofile')]
     public function edit(Request $request, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder): Response
     {

@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -33,6 +34,7 @@ class ActivityController extends AbstractController
         $activityForm = $this->createForm(ActivityType::class, $activity);
 
         $activityForm->handleRequest($request);
+
 
         if ($activityForm->isSubmitted() && $activityForm->isValid()){
 
