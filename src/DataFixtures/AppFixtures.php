@@ -189,6 +189,7 @@ class AppFixtures extends Fixture
 
         $user1 = new User();
         $user1->setPseudo('Boby');
+        $user1->setRoles(['ROLE_ADMIN']);
         $user1->setEmail('bob@gmail.com');
         $user1->setActiveStatus(true);
         $user1->setFirstname('Bob');
