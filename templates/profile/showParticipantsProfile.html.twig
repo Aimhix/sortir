@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <h1>Profil {{ participant.pseudo }}</h1>
+
+    {% if participant %}
+        {% if participant.profilePicture %}
+            <img src="{{ asset('/images/' ~ participant.profilePicture) }}" alt="Photo de profil">
+        {% else %}
+            <p>Aucune photo de profil disponible</p>
+        {% endif %}
+
+        <h2>Pseudo : {{ participant.pseudo }}</h2>
+        <p>Prénom : {{ participant.firstname }}</p>
+        <p>Nom : {{ participant.lastname }}</p>
+        <p>Téléphone : {{ participant.phone }}</p>
+        <p>Email : {{ participant.email }}</p>
+        <p>Ville de rattachement : {{ participant.campus }}</p>
+
+        {# Mettre le lien de la page d'accueil #}
+        <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
+        {# Ajouter le lien vers la page d'édition du profil de l'organisateur #}
+
+    {% else %}
+        <p>Participant non trouvé</p>
+    {% endif %}
+
+{% endblock %}
