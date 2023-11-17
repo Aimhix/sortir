@@ -1,0 +1,24 @@
+{# templates/participant/listParticipants.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des participants{% endblock %}
+
+{% block body %}
+    <h1>Liste des participants pour l'activité "{{ activity.name }}"</h1>
+
+    {% if participants is not empty %}
+        <ul>
+            {% for participant in participants %}
+                <li>
+                    <a href="{{ path('app_participant_profile', {'id': participant.id}) }}">
+                        {{ participant.pseudo }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun participant pour cette activité.</p>
+    {% endif %}
+
+    <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
+{% endblock %}
