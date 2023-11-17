@@ -211,7 +211,6 @@ class Activity
             $this->users[] = $user;
             $user->addActivity($this);
         }
-
         return $this;
     }
 
@@ -223,5 +222,6 @@ class Activity
 
         return $this;
     }
+
 }
 

@@ -18,18 +18,31 @@
     <h4>Latitude : {{ activity.location.latitude}}</h4>
     <h4>Longitude : {{ activity.location.longitude}}</h4>
 
-    <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">S'incrire à la sortie</a>
+
+
+
+    {% if activity.users|length < activity.subMax %}
+        <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+    {% endif %}
+
     <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire la sortie</a>
 
-
+    {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+        <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+    {% endif %}
 
     {% if activity.organizer.id  ==  app.user.id  %}
 
-        <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler la sortie</a>
+        <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
     {% endif%}
 
 
 {% endblock %}
+
+
+
+
+
 
 
