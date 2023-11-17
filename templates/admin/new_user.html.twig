@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
-</body>
-</html>
+{% block title %}Page Admin inscription{% endblock %}
+
+{% block body %}
+
+    <h1>Page Admin inscription</h1>
+
+
+{# Afficher les messages flash s'il y en a #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {# Afficher le formulaire #}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.pseudo) }}
+    {{ form_widget(form.pseudo) }}
+</div>
+
+<div>
+    {{ form_label(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+</div>
+
+<div>
+    {{ form_label(form.lastname) }}
+    {{ form_widget(form.lastname) }}
+</div>
+
+<div>
+    {{ form_label(form.phone) }}
+    {{ form_widget(form.phone) }}
+</div>
+
+<div>
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+</div>
+
+<div>
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+</div>
+
+<div>
+    {{ form_label(form.confirmpassword) }}
+    {{ form_widget(form.confirmpassword) }}
+</div>
+
+<div>
+    {{ form_label(form.campus) }}
+    {{ form_widget(form.campus) }}
+</div>
+
+<div>
+    {{ form_label(form.profilePicture) }}
+    {{ form_widget(form.profilePicture) }}
+</div>
+
+<button type="submit">Enregistrer</button>
+<button>
+    <a href="{{ path('app_profile') }}">Annuler</a>
+</button>
+
+{{ form_end(form) }}
+
+{% endblock %}
