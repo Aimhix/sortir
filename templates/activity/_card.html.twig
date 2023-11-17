@@ -5,7 +5,8 @@
                 <div class="tps">
                     <div class="color-gradient">
                         Clos le <span class="fontweight">{{ activity.subLimitDate | date("m/d") }}</span>
-                        à <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+                        à
+                        <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
                     </div>
                 </div>
             </div>
@@ -17,18 +18,20 @@
                 <span class="fontweight">{{ activity.dateStart | date("m/d") }}</span>
                 à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
                 à <span class="fontweight">{{ activity.campus.name }}</span>
-<br><br>
-        Encore <span class="fontweight">{{ activity.subMax }}</span> places
-    </div>
-    </div>
-    <div class="total-card-back">
-        <a href="{{ path('activity_show', {'id': activity.id}) }}">
-            {{ activity.name }}</a>
-        <div class="total-card-back-inner">
-        <span class="color-gradient">{{ activity.name }}</span><br>
-        {{ activity.infoActivity }}<br><br>
-{#        {{ activity.organizer }}#}
+                <br><br>
+                Encore <span class="fontweight">{{ activity.subMax }}</span> places
+            </div>
         </div>
+        <div class="total-card-back">
+            <a href="{{ path('activity_show', {'id': activity.id}) }}">
+                {{ activity.name }}</a>
+            <div class="total-card-back-inner">
+                <span class="color-gradient">{{ activity.name }}</span><br>
+                {{ activity.infoActivity }}<br><br>
+
+                Organisateur: <a href="{{ path('app_profile', {'id': activity.organizer.getId()}) }}"
+                                 class="fontweight">{{ activity.organizer.getpseudo }}</a>
+            </div>
         </div>
     </div>
 </article>
