@@ -29,6 +29,19 @@ class ProfileController extends AbstractController
         return $this->render('profile/showProfile.html.twig');
     }
 
+    #[Route('/organizer/profile/{id}', name: 'app_organizer_profile')]
+    public function showOrganizerProfile($id): Response
+    {
+        $organizer = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+        if (!$organizer) {
+            throw $this->createNotFoundException('Organisateur non trouvé');
+        }
+
+        return $this->render('profile/showOrganizerProfile.html.twig', ['organizer' => $organizer]);
+    }
+
+
     #[Route('/profile/editprofile', name: 'app_editprofile')]
     public function edit(Request $request, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder): Response
     {
