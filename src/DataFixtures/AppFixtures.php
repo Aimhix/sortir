@@ -25,6 +25,10 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
+
+
+
+
         //        Fixtures de ville
 
         $city1 = new City();
@@ -58,6 +62,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($city4);
         $manager->flush();
+
 
 
 
@@ -149,6 +154,10 @@ class AppFixtures extends Fixture
 
         $manager->persist($location4);
         $manager->flush();
+
+
+
+
 
 
 
@@ -249,8 +258,12 @@ class AppFixtures extends Fixture
 
         //        Fixtures des Activitées
 
-        $dateStart = new \DateTime('2005-08-15T15:52:01+00:00');
-        $subLimitDate = new \DateTime('2005-08-15T15:52:01+00:00');
+        $dateStart1 = new \DateTime('2023-11-16T15:52:01+00:00');
+        $subLimitDate1 = new \DateTime('2023-11-17T15:52:01+00:00');
+        $dateStart2 = new \DateTime('2023-11-10T15:52:01+00:00');
+        $subLimitDate2 = new \DateTime('2023-11-12T15:52:01+00:00');
+        $dateStart3 = new \DateTime('2023-12-01T15:52:01+00:00');
+        $subLimitDate3 = new \DateTime('2024-01-19T15:52:01+00:00');
 
         $activities1 = new Activity();
         $activities1->setName('Char à voile (Acti passée) ');
@@ -280,7 +293,7 @@ class AppFixtures extends Fixture
         $activities2->setDuration(20160);
         $activities2->setSubMax(10);
         $activities2->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
-        $activities2->setSubLimitDate($subLimitDate);
+        $activities2->setSubLimitDate($subLimitDate1);
         $activities2->setInfoActivity('Activité en cours');
 
         $manager->persist($activities2);
@@ -354,6 +367,8 @@ class AppFixtures extends Fixture
 
         $manager->persist($activities6);
         $manager->flush();
+
+
 
     }
 }

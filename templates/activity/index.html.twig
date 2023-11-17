@@ -2,15 +2,96 @@
 
 {% block title %}Accueil {{ parent() }} {% endblock %}
 
+{% block nav %}
+    <div class="container">
+    {% if app.user %}
+        <div>
+            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+
+    {% endif %}
+    </div>
+{% endblock %}
+
 {% block body %}
 
-    <div class="container">
-        {% if app.user %}
-            <div>
-                Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-            </div>
+    {{ form_start(form, {'attr': {'class': 'activity-search-form'}}) }}
 
-        {% endif %}
+    <div id="container-search">
+        <div id="container-form">
+
+    {# recherche par nom #}
+    <div class="form-group">
+{#        <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label>#}
+        {{ form_errors(form.search) }}
+        {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Que cherches-tu ?'}}) }}
+    </div>
+
+    {# date de début avec icône, à voir si je suis faible et je met fontAwesome #}
+    <div class="form-group date-picker">Du
+{#        {{ form_label(form.dateStart) }}#}
+        {{ form_widget(form.dateStart) }}
+        <span class="date-icon">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+    </span>
+    </div>
+
+    {# date de fin #}
+    <div class="form-group date-picker">Au
+{#        {{ form_label(form.subLimitDate) }}#}
+        {{ form_widget(form.subLimitDate) }}
+        <span class="date-icon-end">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+    </span>
+    </div>
+
+        {# recherche par campus #}
+        <div class="form-group">
+            <label for="{{ form.campus.vars.id }}"></label>
+            {{ form_errors(form.campus) }}
+            {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Campus'}}) }}
+        </div>
+
+        {# Bouton de soumission du formulaire #}
+        <div class="form-submit">
+            <input type="submit" value="{{ ' '|trans }}" class="submit-button">
+        </div>
+
+        </div>
+    </div>
+
+    {# Cases à cocher détaillées avec placeholders #}
+    <div class="checkbox-group">
+        <div class="form-check">
+            <label class="add-checkbox">
+            {{ form_widget(form.organizer) }}
+            <span class="checkmark"></span>
+
+            <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
+            </label>
+            {{ form_errors(form.organizer) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.isRegistered) }}
+            <label for="{{ form.isRegistered.vars.id }}">{{ 'Mes inscriptions'|trans }}</label>
+            {{ form_errors(form.isRegistered) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.isNotRegistered) }}
+            <label for="{{ form.isNotRegistered.vars.id }}">{{ 'Sans inscription'|trans }}</label>
+            {{ form_errors(form.isNotRegistered) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.isPast) }}
+            <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
+            {{ form_errors(form.isPast) }}
+        </div>
+
+
+    </div>
+
+    {{ form_end(form) }}
+
 
         <div>
             <h2 class="color-gradient">Sorties à venir</h2>
@@ -25,5 +106,36 @@
 
         </a>
     </div>
-    </div>
+
+
+    {# J'exécute le script AJAX :') #}
+    <script>
+        document.getElementById('activity-search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var data = new FormData(this);
+
+            fetch('{{ path('activity_search') }}', {
+                method: 'POST',
+                body: data
+            })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        });
+    </script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            const checkbox = document.getElementById("checkbox-form-search");
+            const customCheckbox = document.querySelector(".add-checkbox");
+
+            customCheckbox.addEventListener("click", function () {
+                if (checkbox.checked) {
+                    checkbox.checked = false;
+                    customCheckbox.classList.remove("checked");
+                } else {
+                    checkbox.checked = true;
+                    customCheckbox.classList.add("checked");
+                }
+            });
+        });</script>
 {% endblock %}

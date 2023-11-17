@@ -1,41 +1,36 @@
 <header>
-    <div>
-        <h1>
-            Bucket-List
-        </h1>
+<div>
+    <nav id="header-nav">
+        <ul class="header-nav-inner">
+            <li class="logo-nav">
+                <a href="/">SORTIR<span class="com">.COM</span></a>
+            </li>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ path('app_activity_index') }}">Page d'accueil</a>
-                </li>
-                {% if app.user %}
-                    {% if is_granted('ROLE_USER') %}
-                        <li>
-                            <a href="{{ path('app_activity_create') }}">Proposer une sortie</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('app_profile') }}">
-                                {#                                <im src="{{ asset('bundles/demoimage/images' ~ logo) }} /> #}
-                                {#                                <img src="{{ profilePicture }}" alt="Photo"> #}
-                                {{ app.user.fullName }}</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-{#                        <li>#}
-{#                            <a href="{{ path('app_villes') }}">Villes</a>#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <a href="{{ path('app_sites') }}">Sites</a>#}
-{#                        </li>#}
-                        <li>
-                            <a href="{{ path('admin_new_user') }}">Sites</a>
-                        </li>
-
-                    {% endif %}
+            {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
                     <li>
-                        <a href="{{ path('app_logout') }}">Logout</a>
+                        <a id="add-an-activity" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="#">{{ app.user.fullName }}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mes Sorties</a></li>
+                            <li><a href="{{ path('app_profile') }}">Mon profil</a></li>
+                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+{#                        <a href="{{ path('app_villes') }}">Add Villes</a>#}
+                    </li>
+                    <li>
+{#                        <a href="{{ path('app_sites') }}">Add Sites</a>#}
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_new_user') }}">Add Users</a>
+                    </li>
+                {% endif %}
 
                 {% else %}
                     <li>
@@ -46,8 +41,18 @@
                 {% endif %}
 
 
+
             </ul>
         </nav>
+
+    <div class="header-content">
+    <h1 class="site-title">
+        SORTIR<span class="com">.COM</span>
+    </h1>
+        <br>
+        <h2>    <span class="sub-title">Sorties entre étudiants</span></h2>
+    </div>
+
 
     </div>
 </header>

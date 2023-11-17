@@ -5,8 +5,18 @@ h2{
     font-size:2em;
     font-weight: 400;
     text-align: center;
+    margin:0;
 }
-#nav{
+
+.header-content{
+    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 0 -114px;
+    padding: 120px 50px 80px;
+    text-align: center;
+    border: 15px outset rgba(100, 100, 100, 0.2);
+    border-radius: 35px;
 }
 
 #container{
@@ -21,11 +31,24 @@ h2{
     padding-bottom: 30px;
 }
 
-nav ul li{
+.logo-nav{
+    float:left;
+}
+
+nav{
+    text-align: right;
+}
+#header-nav li:not(.dropdown li){
     display: inline-block;
-    padding: 30px;
+    padding: 20px;
     margin: auto;
 }
+
+#header-nav a:not(#add-an-activity) {text-decoration: none;
+font-weight: 700;
+color:#000;}
+
+nav a:hover{color:#FD2A7C;}
 
 /*Card Sorties */
 section{
@@ -81,8 +104,10 @@ section{
 }
 .color-gradient{
     background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    -webkit-background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
     color:transparent;
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .fontweight{
@@ -117,7 +142,7 @@ section{
 }
 
 .activity-card:hover .activity-card-inner{
-    transform: rotateY(180deg) translateZ(-30);;
+    transform: rotateY(180deg) translateZ(-30px);;
 }
 .total-card, .total-card-back{
     -webkit-backface-visibility: hidden;
@@ -134,18 +159,168 @@ section{
     width:100%;
 }
 
-/* ... autres styles ... */
 
-/* Style pour .bottom et .tps avec effet 3D */
 .activity-card:hover .bottom, .activity-card:hover .tps {
     transform: translateZ(10px);
     z-index: 1;
 }
 
-/* Adjustements pour l'effet 3D lors du hover */
 .activity-card:hover .activity-card-inner{
-    transform: rotateY(180deg) translateZ(-30px); /* Ajustez cette valeur si nécessaire */
+    transform: rotateY(180deg) translateZ(-30px);
+}
+
+/*Barre de recherche*/
+
+.form-group {
+    display:inline-block;
 }
 
 
+.form-group, .date-picker{
+    border:none;
+}
 
+
+#activity_search_dateStart, #activity_search_subLimitDate{
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-color: #000;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 0 0 4px;
+    border-radius: 0;
+    font-size: 1.1em;
+    margin: 0 10px;
+}
+
+.form-group select{
+    padding: 15px 5px 15px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ddd;
+    border-right: 15px solid #ddd;
+}
+
+.submit-button{
+    background-image:url('../images/search-logo.png'), linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    background-size:20px,100%;
+    background-position:50% 50%, 0 0;
+    background-repeat: no-repeat, repeat;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    width:45px;
+    margin-left:8px;
+    cursor:pointer;
+}
+
+.form-submit{display:inline-block}
+
+#container-form{
+    background-color:#fff;
+    padding:10px;
+    border-radius: 20px;
+}
+
+#container-search{
+    padding: 15px;
+    background-color: rgba(100, 100, 100, 0.05);
+    width: 765px;
+    margin: -50px auto 0;
+    border-radius: 36px;
+}
+
+#activity_search_search{
+    width:240px;
+    padding: 14px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size:1.1em;
+}
+
+.checkbox-group{
+    width: 600px;
+    margin: 20px auto 20px;
+}
+.form-check{display:inline-block;}
+
+input:focus{border:none;}
+
+
+/*personnaliser checkbox*/
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    cursor:pointer;
+}
+
+input[type=checkbox] {
+    border-radius: 10px;
+    height: 25px;
+    width: 25px;
+    background: #cccccc59;
+    border: 0px solid #cccccc59;
+    margin-bottom: -6px;
+}
+input[type="checkbox"]:checked {
+    background: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    position: relative;
+}
+
+.checkbox-group label{
+    cursor:pointer;
+}
+
+#activity_search_campus, input{cursor:pointer;}
+input:focus, #activity_search_campus:focus {
+    outline: none;
+    cursor:default;
+}
+
+
+/*Titre header*/
+
+h1{color:#fff;font-size:5em;margin:0}
+
+.com{color:#ff3c66}
+
+ .sub-title{color:#fff;font-size: 1.8em;font-weight:700;margin:0}
+
+
+
+/* menu deroulant */
+.dropdown-menu {
+    display: none; /* Masque le menu déroulant par défaut */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Affiche le menu déroulant lorsqu'on survole l'élément parent */
+    position:relative;
+}
+
+.dropdown-menu:hover .dropdown-menu li {
+    padding: 10px;
+    display: block;
+    margin:0;
+}
+
+/* Styles pour le survol de l'élément parent */
+.dropdown:hover a {
+    background-color: #eee;
+}
+
+#add-an-activity{
+background-image:linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    padding:15px;
+    color:#fff;
+    border-radius:15px;
+    text-decoration: none;
+    font-weight: 700;
+}

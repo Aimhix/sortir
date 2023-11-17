@@ -4,9 +4,8 @@
             <div class="top">
                 <div class="tps">
                     <div class="color-gradient">
-                        Clos le <span class="fontweight">{{ activity.subLimitDate | date("m/d") }}</span>
-                        à
-                        <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+                        Clos le <span class="fontweight">{{ activity.subLimitDate | date("d/m") }}</span>
+                        à <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
                     </div>
                 </div>
             </div>
@@ -15,7 +14,7 @@
                     {{ activity.name }}</a>
                 <br>
 
-                <span class="fontweight">{{ activity.dateStart | date("m/d") }}</span>
+                <span class="fontweight">{{ activity.dateStart | date("d/m") }}</span>
                 à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
                 à <span class="fontweight">{{ activity.campus.name }}</span>
                 <br><br>
@@ -27,7 +26,7 @@
                 {{ activity.name }}</a>
             <div class="total-card-back-inner">
                 <span class="color-gradient">{{ activity.name }}</span><br>
-                {{ activity.infoActivity }}<br><br>
+                {{ activity.infoActivity|slice(0, 250) }}<br><br>
 
                 Organisateur: <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
                                  class="fontweight">{{ activity.organizer.pseudo }}</a>

@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Entity\Location;
+use App\Entity\User;
+use App\DTO\ActivitySearchDTO;
+use App\Form\ActivitySearchType;
 use App\Form\ActivityType;
 use App\Form\LocationType;
 use App\Repository\ActivityRepository;
@@ -15,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -58,7 +62,6 @@ class ActivityController extends AbstractController
         $locationForm->handleRequest($request);
 
         if ($locationForm->isSubmitted() && $locationForm->isValid()){
-
             $entityManager->persist($location);
             $entityManager->flush();
 
@@ -72,17 +75,21 @@ class ActivityController extends AbstractController
         ]);
     }
 
-
     #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
-    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId): Response
+    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, UserInterface $user, Request $request): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw new \LogicException('L\'utilisateur actuel n\'est pas une instance de \App\Entity\User');
+    }
 
         $activityService = new ActivityService($entityManager);
         $activity = $managerRegistry->getRepository(Activity::class)->find($activityId);
         if (!$activity) {
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
+//tenter de regarder si l'utilisateur peut s'inscrire ?
 
         $activityService->subscribeToActivity($user, $activity);
         $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
@@ -141,39 +148,37 @@ class ActivityController extends AbstractController
         ]);
     }
 
+    #[Route('/search', name: 'activity_search')]
+    public function search(Request $request, ActivityRepository $activityRepository): Response
+    {
+        $searchDTO = new ActivitySearchDTO();
+        $form = $this->createForm(ActivitySearchType::class, $searchDTO);
+        $form->handleRequest($request);
 
-    /**
-     * TODO A voir la méthode de max , pour s'inscrire et se désinscrire, ça marche de mon coté mais 0 check !
-     */
+        $activities = [];
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $organizer = $searchDTO->organizer;
+            $isRegistered = $searchDTO->isRegistered;
+            $isNotRegistered = $searchDTO->isNotRegistered;
+            $isPast = $searchDTO->isPast;
+            $activities = $activityRepository->findBySearchCriteria($searchDTO, $user);
+        }
 
-    //    #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
-//    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, Request $request): Response
-//    {
-//        $user = $this->getUser();
-//        if (!$user instanceof User) {
-//            throw new \LogicException('L\'utilisateur actuel n\'est pas une instance de \App\Entity\User');
-//    }
-//
-//        $activityService = new ActivityService($entityManager);
-//        $activity = $managerRegistry->getRepository(Activity::class)->find($activityId);
-//        if (!$activity) {
-//            throw $this->createNotFoundException('Cette sortie est introuvable.');
-//        }
-//        //tenter de regarder si l'utilisateur peut s'inscrire ?
-//
-//
-//           if ($request->query->get('action') == 'subscribe') {
-//                $activityService->subscribeToActivity($user, $activity);
-//                $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
-//          } elseif ($request->query->get('action') == 'unsubscribe') {
-//               $activityService->unsubscribeFromActivity($user, $activity);
-//               $this->addFlash('success', 'Vous avez quitté cette sortie.');
-//           } else {
-//               throw new \InvalidArgumentException('Action impossible.');
-//           }
-//
-//        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
-//    }
+        // Gestion du piti AJAX
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('fragments/_searchResults.html.twig', [
+                'activities' => $activities,
+            ]);
+        }
+
+        // Other requêtes
+        // remplacé search par main pour test
+        return $this->render('main/index.html.twig', [
+            'form' => $form->createView(),
+            'activities' => $activities,
+        ]);
+    }
 
 }
