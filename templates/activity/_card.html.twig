@@ -29,8 +29,8 @@
                 <span class="color-gradient">{{ activity.name }}</span><br>
                 {{ activity.infoActivity }}<br><br>
 
-                Organisateur: <a href="{{ path('app_profile', {'id': activity.organizer.getId()}) }}"
-                                 class="fontweight">{{ activity.organizer.getpseudo }}</a>
+                Organisateur: <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
+                                 class="fontweight">{{ activity.organizer.pseudo }}</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de l'organisateur{{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <h1>Profil {{ organizer.pseudo }}</h1>
+
+    {% if organizer %}
+        {% if organizer.profilePicture %}
+            <img src="{{ asset('/images/' ~ organizer.profilePicture) }}" alt="Photo de profil">
+        {% else %}
+            <p>Aucune photo de profil disponible</p>
+        {% endif %}
+
+        <h2>Pseudo : {{ organizer.pseudo }}</h2>
+        <p>Prénom : {{ organizer.firstname }}</p>
+        <p>Nom : {{ organizer.lastname }}</p>
+        <p>Téléphone : {{ organizer.phone }}</p>
+        <p>Email : {{ organizer.email }}</p>
+        <p>Ville de rattachement : {{ organizer.campus }}</p>
+
+        {# Mettre le lien de la page d'accueil #}
+        <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
+        {# Ajouter le lien vers la page d'édition du profil de l'organisateur #}
+
+    {% else %}
+        <p>Organisateur non trouvé</p>
+    {% endif %}
+
+{% endblock %}
