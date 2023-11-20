@@ -19,6 +19,23 @@ class ActivityUpdateService
             $dateStart = $activity->getDateStart();
             $dateDifference = $dateStart->diff($currentDate)->days;
 
+
+            if ($activity->isIsPublished()){
+                $activity->setStatus($statusRepository->findOneByWording('Ouverte'));
+            }
+
+            if ($activity->getSubLimitDate() < $currentDate && $activity->getStatus()->getId() != 6){
+                $activity->setStatus($statusRepository->findOneByWording('Clôturée'));
+            }
+
+            if ($activity->getDateStart() < $currentDate && $activity->getStatus()->getId() != 6){
+                $activity->setStatus($statusRepository->findOneByWording('Activité en cours'));
+            }
+
+            if ($activity->getDateStart()->modify('+' . $activity->getDuration() . ' minutes') < $currentDate && $activity->getStatus()->getId() != 6) {
+                $activity->setStatus($statusRepository->findOneByWording('Passée'));
+            }
+
             if ($dateDifference > 30 && $dateStart < $currentDate)
 
                 $activity->setStatus($statusRepository->findOneByWording('Archivée'));

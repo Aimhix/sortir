@@ -91,7 +91,7 @@ class ActivityController extends AbstractController
         if (!$activity) {
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
-//tenter de regarder si l'utilisateur peut s'inscrire ?
+        //tenter de regarder si l'utilisateur peut s'inscrire ?
 
         $activityService->subscribeToActivity($user, $activity);
         $this->addFlash('success', 'Vous êtes inscris à cette sortie.');

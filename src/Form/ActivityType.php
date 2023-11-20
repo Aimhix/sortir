@@ -36,6 +36,7 @@ class ActivityType extends AbstractType
                 'label' => 'Infos suplémentaire : ',
             ])
             ->add('isPublished',null,  [
+                'required' => false,
                 'label' => 'Publier la sortie : ',
             ])
             ->add('location', EntityType::class, [
