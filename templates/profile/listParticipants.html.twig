@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participants de l'activité {{ activity.name }}{% endblock %}
+
+{% block body %}
+    <h2>Participants de l'activité "{{ activity.name }}"</h2>
+
+    <ul>
+        {% for participant in participants %}
+            <li><a href="{{ path('app_participant_profile', {'id': participant.id}) }}">{{ participant.pseudo }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

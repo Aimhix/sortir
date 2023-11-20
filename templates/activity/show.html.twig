@@ -9,14 +9,19 @@
     <h4>Date et heure : {{ activity.dateStart | date }}</h4>
     <h4>Date limite d'inscription : {{ activity.subLimitDate | date }}</h4>
     <h4>Maximum de participants : {{ activity.subMax }}</h4>
+
+    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a>
+
+
+
     <h4>Duréer de la sortie : {{ activity.duration }} min</h4>
-    <h4>Description et infos : {{ activity.infoActivity}}</h4>
-    <h4>Ville organisatrice : {{ activity.campus}}</h4>
-    <h4>Lieu : {{ activity.location.name}}</h4>
-    <h4>Rue : {{ activity.location.streetName}}</h4>
-    <h4>Code postal : {{ activity.location.cities.postcode}}</h4>
-    <h4>Latitude : {{ activity.location.latitude}}</h4>
-    <h4>Longitude : {{ activity.location.longitude}}</h4>
+    <h4>Description et infos : {{ activity.infoActivity }}</h4>
+    <h4>Ville organisatrice : {{ activity.campus }}</h4>
+    <h4>Lieu : {{ activity.location.name }}</h4>
+    <h4>Rue : {{ activity.location.streetName }}</h4>
+    <h4>Code postal : {{ activity.location.cities.postcode }}</h4>
+    <h4>Latitude : {{ activity.location.latitude }}</h4>
+    <h4>Longitude : {{ activity.location.longitude }}</h4>
 
 
 
@@ -31,11 +36,11 @@
         <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
     {% endif %}
 
-    {% if activity.organizer.id  ==  app.user.id  %}
+    {% if activity.organizer.id  ==  app.user.id %}
 
         <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
-    {% endif%}
+    {% endif %}
 
 
 {% endblock %}

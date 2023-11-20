@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Repository\CityRepository;
 use App\Repository\LocationRepository;
 use App\Repository\UserRepository;

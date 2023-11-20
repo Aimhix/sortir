@@ -76,9 +76,9 @@ class ActivityController extends AbstractController
     }
 
     #[Route('/activity/subscribe/{activityId}', name: 'activity_subscribe')]
-    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId, UserInterface $user, Request $request): Response
+    public function subscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId): Response
     {
-        /** @var User $user */
+
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw new \LogicException('L\'utilisateur actuel n\'est pas une instance de \App\Entity\User');

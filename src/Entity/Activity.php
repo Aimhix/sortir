@@ -6,6 +6,8 @@ use App\Repository\ActivityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
@@ -211,6 +213,7 @@ class Activity
             $this->users[] = $user;
             $user->addActivity($this);
         }
+
         return $this;
     }
 
@@ -222,6 +225,130 @@ class Activity
 
         return $this;
     }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateName(ExecutionContextInterface $context)
+    {
+
+        if ($this->name = null) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre null.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+    }
+
+
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateDateStart(ExecutionContextInterface $context)
+    {
+        // Ensure that $dateStart is in the future compared to now
+        if ($this->dateStart <= new \DateTime()) {
+            $context
+                ->buildViolation('La date de début doit etre posterieur a la date d\'aujourd\'hui.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+
+        if ($this->dateStart = null) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre null.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+    }
+
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateDuration(ExecutionContextInterface $context)
+    {
+
+        if ($this->duration = null) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre null.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+        // Ensure that $duration is not negative
+        if ($this->duration < 0) {
+            $context
+                ->buildViolation('La durée ne peu pas etre négative.')
+                ->atPath('duration')
+                ->addViolation();
+        }
+
+        // Ensure that $duration is not negative
+        if ($this->duration > 10080) {
+            $context
+                ->buildViolation('La durée ne peu pas etre supérieur à une semaine.')
+                ->atPath('duration')
+                ->addViolation();
+        }
+    }
+
+
+
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateSubLimitDate(ExecutionContextInterface $context)
+    {
+        $now = new \DateTime();
+
+        if ($this->subLimitDate = null) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre null.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+
+        // Ensure that $subLimitDate is after today's date
+        if ($this->subLimitDate <= $now) {
+            $context
+                ->buildViolation('La date de début d\'inscription doit etre après la date d\'ajourd\'hui.')
+                ->atPath('subLimitDate')
+                ->addViolation();
+        }
+
+        // Ensure that $subLimitDate is before $dateStart
+        if ($this->subLimitDate >= $this->dateStart) {
+            $context
+                ->buildViolation('La date d\'inscription doit etre avant la date du début de l\'activité.')
+                ->atPath('subLimitDate')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateSubMax(ExecutionContextInterface $context)
+    {
+
+        if ($this->subMax = null) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre null.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+
+        if ($this->subMax < 0) {
+            $context
+                ->buildViolation('Ce champ ne peut pas etre négatif.')
+                ->atPath('dateStart')
+                ->addViolation();
+        }
+    }
+
+
 
 }
 
