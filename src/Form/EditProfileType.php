@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -10,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EditProfileType extends AbstractType
 {
@@ -20,7 +23,8 @@ class EditProfileType extends AbstractType
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
             ->add('phone', TelType::class)
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'attr' => ['readonly' => true],])
             ->add('password', PasswordType::class,)
             ->add('confirmpassword', PasswordType::class, [
                 'label' => 'Confirmer mot de passe',
@@ -34,10 +38,10 @@ class EditProfileType extends AbstractType
 
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'App\Entity\User',
+            'data_class' => User::class,
         ]);
     }
 }

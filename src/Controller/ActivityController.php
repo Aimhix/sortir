@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -91,7 +92,7 @@ class ActivityController extends AbstractController
         if (!$activity) {
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
-        //tenter de regarder si l'utilisateur peut s'inscrire ?
+//tenter de regarder si l'utilisateur peut s'inscrire ?
 
         $activityService->subscribeToActivity($user, $activity);
         $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
@@ -127,6 +128,7 @@ class ActivityController extends AbstractController
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
 
+
             if ($activity->getOrganizer()->getId() == $user->getId()){
                 $activity->setStatus($statusRepository->findOneByWording('Annulée'));
                 $entityManager->persist($activity);
@@ -146,6 +148,17 @@ class ActivityController extends AbstractController
         return $this->render('activity/show.html.twig', [
             'activity' => $activity,
             'user' => $user
+        ]);
+    }
+
+    #[Route('/activity/{id}', name: 'activity_show')]
+    public function showList(Activity $activity): Response
+    {
+        $participant = $activity->getUsers();
+
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'participant' => $participant,
         ]);
     }
 

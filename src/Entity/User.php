@@ -6,9 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use http\Message;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -29,16 +33,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        max: 30,
+        maxMessage: "Le pseudo ne peut pas dépasser {{ limit }} caractères.")]
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        max: 30,
+        maxMessage: "Le nom de famille ne peut pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\NotBlank(message: "Le nom de famille ne peut pas être vide.")]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        max: 30,
+        maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\NotBlank(message: "Le prénom ne peut pas être vide.")]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^0[1-9]\d{8}$/',
+        message: "Le numéro de téléphone doit être au format (0X XX XX XX XX)."
+    )]
     private $phone;
+
 
     #[ORM\Column(type: 'boolean')]
     private $activeStatus;
@@ -298,5 +320,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->getPseudo();
     }
+
 
 }

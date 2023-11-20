@@ -21,60 +21,87 @@
     {% endfor %}
 
     {# Afficher le formulaire #}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
+    <div class="edit-form form-profile">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+{#        {{ app.user.profilePicture }}#}
+        <div class="group-edit-zero">
+            <div class="edit-actual-picture form_champ">
+{#                <img src="{{ absolute_url(asset('/public/images/app.user.profilePiecture')) }}" alt="Photo de profil"/>#}
+{#                <img src="{{ absolute_url(asset(app.user.profilePicture)) }}" alt="Photo de profil"/>#}
 
-    <div>
-        {{ form_label(form.pseudo) }}
-        {{ form_widget(form.pseudo) }}
+            </div>
+            <div class="edit-picture form_champ">
+                Changer votre photo<br>
+                {{ form_widget(form.profilePicture) }}
+                {{ form_errors(form.profilePicture) }}
+            </div>
+        </div>
+
+        <div class="group-edit-first">
+            <div class="edit-pseudo form_champ">
+                {{ form_label(form.pseudo) }}<br>
+                {{ form_widget(form.pseudo) }}
+                {{ form_errors(form.pseudo) }}
+            </div>
+
+            <div class="edit-firstname form_champ">
+                {{ form_label(form.firstname) }}<br>
+                {{ form_widget(form.firstname) }}
+                {{ form_errors(form.firstname) }}
+            </div>
+
+            <div class="edit-lastname form_champ">
+                {{ form_label(form.lastname) }}<br>
+                {{ form_widget(form.lastname) }}
+                {{ form_errors(form.lastname) }}
+            </div>
+        </div>
+
+        <div class="group-edit-first">
+
+            <div class="edit-campus form_champ">
+                {{ form_label(form.campus) }}<br>
+                {{ form_widget(form.campus) }}
+                {{ form_errors(form.campus) }}
+            </div>
+
+            <div class="edit-phone form_champ">
+                {{ form_label(form.phone) }}<br>
+                {{ form_widget(form.phone) }}
+                {{ form_errors(form.phone) }}
+
+            </div>
+
+            <div class="edit-email form_champ">
+                {{ form_label(form.email) }}<br>
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+        <div class="group-edit-second">
+            <div class="edit-password form_champ">
+                {{ form_label(form.password) }}<br>
+                {{ form_widget(form.password) }}
+                {{ form_errors(form.password) }}
+            </div>
+
+            <div class="edit-confirm-password form_champ">
+                {{ form_label(form.confirmpassword) }}<br>
+                {{ form_widget(form.confirmpassword) }}
+                {{ form_errors(form.confirmpassword) }}
+            </div>
+        </div>
+
+        <div class="btn-end-form">
+            <a class="stop-action-btn" href="{{ path('app_profile') }}">Annuler</a>
+
+            <button type="submit" class="call-action-btn">Enregistrer</button>
+        </div>
+
+        {{ form_end(form) }}
     </div>
-
-    <div>
-        {{ form_label(form.firstname) }}
-        {{ form_widget(form.firstname) }}
-    </div>
-
-    <div>
-        {{ form_label(form.lastname) }}
-        {{ form_widget(form.lastname) }}
-    </div>
-
-    <div>
-        {{ form_label(form.phone) }}
-        {{ form_widget(form.phone) }}
-    </div>
-
-    <div>
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-    </div>
-
-    <div>
-        {{ form_label(form.password) }}
-        {{ form_widget(form.password) }}
-    </div>
-
-    <div>
-        {{ form_label(form.confirmpassword) }}
-        {{ form_widget(form.confirmpassword) }}
-    </div>
-
-    <div>
-        {{ form_label(form.campus) }}
-        {{ form_widget(form.campus) }}
-    </div>
-
-    <div>
-        {{ form_label(form.profilePicture) }}
-        {{ form_widget(form.profilePicture) }}
-    </div>
-
-    <button type="submit">Enregistrer</button>
-    <button>
-        <a href="{{ path('app_profile') }}">Annuler</a>
-    </button>
-
-    {{ form_end(form) }}
 
 
 

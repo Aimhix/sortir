@@ -9,13 +9,13 @@
             {% if app.user %}
                 {% if is_granted('ROLE_USER') %}
                     <li>
-                        <a id="add-an-activity" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                        <a class="call-action-btn" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
                     <li class="dropdown">
                         <a href="#">{{ app.user.fullName }}</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Mes Sorties</a></li>
-                            <li><a href="{{ path('app_profile') }}">Mon profil</a></li>
+{#                            <li><a href="#">Mes Sorties</a></li>#}
+                            <li><a href="{{ path('app_editprofile') }}">Mon profil</a></li>
                             <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                         </ul>
                     </li>
