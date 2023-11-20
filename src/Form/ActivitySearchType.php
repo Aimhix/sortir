@@ -57,11 +57,11 @@ class ActivitySearchType extends AbstractType
                     'class' => 'form-control'
                 ],
             ])
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ],
-            ])
+//            ->add('submit', SubmitType::class, [
+//                'attr' => [
+//                    'class' => 'btn btn-primary'
+//                ],
+//            ])
             ->add('organizer', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Sorties que j\'organise',

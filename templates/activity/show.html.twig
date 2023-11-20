@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail activité {{ parent() }}{% endblock %}
+{% block title %}Détail activitée {{ parent() }}{% endblock %}
 
 {% block body %}
 
@@ -10,8 +10,11 @@
     <h4>Date limite d'inscription : {{ activity.subLimitDate | date }}</h4>
     <h4>Maximum de participants : {{ activity.subMax }}</h4>
 
+    {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
 
-    <h4>Durée de la sortie : {{ activity.duration }} min</h4>
+
+
+    <h4>Duréer de la sortie : {{ activity.duration }} min</h4>
     <h4>Description et infos : {{ activity.infoActivity }}</h4>
     <h4>Ville organisatrice : {{ activity.campus }}</h4>
     <h4>Lieu : {{ activity.location.name }}</h4>
@@ -25,9 +28,31 @@
 
 
 
-    {% if activity.organizer.id  ==  app.user.id %}
+        {% if activity.organizer.id  ==  app.user.id %}
 
-        <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler la sortie</a>
+            <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
+
+        {% else %}
+
+{#  Le if vérifie si l'acti est ouverte (ID 2 en database)#}
+    {% if activity.status.id == 2 %}
+
+            {% if activity.users|length < activity.subMax %}
+
+                <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+            {% else %}
+
+                <p>Complet</p>
+
+            {% endif %}
+
+            {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+
+                <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+
+            {% endif %}
+
+        {% endif %}
 
     {% endif %}
 
@@ -35,5 +60,10 @@
 
 
 {% endblock %}
+
+
+
+
+
 
 
