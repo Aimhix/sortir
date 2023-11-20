@@ -26,7 +26,7 @@
 
         {% if activity.organizer.id  ==  app.user.id %}
 
-            <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
+            <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
         {% else %}
 
@@ -35,7 +35,7 @@
 
             {% if activity.users|length < activity.subMax %}
 
-                <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
             {% else %}
 
                 <p>Complet</p>
@@ -44,7 +44,7 @@
 
             {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
 
-                <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+                <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
 
             {% endif %}
 

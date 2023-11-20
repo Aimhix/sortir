@@ -8,6 +8,15 @@ h2{
     margin:0;
 }
 
+footer{
+    margin: 0;
+    padding: 20px 0 50px;
+    text-align: center;
+    background-color: #DEE3E6;
+    border-radius: 25px;
+
+}
+
 .header-content{
     background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
     background-size: cover;
