@@ -9,6 +9,7 @@ use Symfony\Component\Form\Test\FormInterface;
 
 class ActivityService
 {
+
     private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -43,5 +44,6 @@ class ActivityService
         $this->entityManager->persist($activity);
         $this->entityManager->flush();
     }
+
 
 }

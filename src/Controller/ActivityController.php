@@ -18,13 +18,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
+
     #[Route('/create', name: 'app_activity_create')]
     public function createActivity(StatusRepository $statusRepository ,Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $user = $this->getUser();
 
         $activity = new Activity();
@@ -62,6 +63,7 @@ class ActivityController extends AbstractController
         $locationForm->handleRequest($request);
 
         if ($locationForm->isSubmitted() && $locationForm->isValid()){
+
             $entityManager->persist($location);
             $entityManager->flush();
 
@@ -124,7 +126,6 @@ class ActivityController extends AbstractController
         if (!$activity) {
             throw $this->createNotFoundException('Cette sortie est introuvable.');
         }
-
 
             if ($activity->getOrganizer()->getId() == $user->getId()){
                 $activity->setStatus($statusRepository->findOneByWording('Annulée'));
