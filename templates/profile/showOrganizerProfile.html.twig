@@ -6,15 +6,18 @@
 
     <div class="detail-profile-show container-form-and-show">
 
-        <h2 class="title-show">Profil de {{ organizer.pseudo }}</h2>
-        <center><h3>Son campus : {{ organizer.campus }}</h3></center>
-
+        <center>
         {% if organizer %}
             {% if organizer.profilePicture %}
-                <img src="{{ asset('/images/' ~ organizer.profilePicture) }}" alt="Photo de profil">
+                <img class="profile-picture-big" src="{{ asset('/images/' ~ organizer.profilePicture) }}" alt="Photo de profil">
             {% else %}
+                <img class="profile-picture-big" src="{{ asset('/images/defaultpicture.jpg') }}" alt="Photo de profil"><br>
                 <p>{{ organizer.pseudo }} n'a pas encore de photo.</p>
             {% endif %}
+
+        <h2 class="title-show">Profil de {{ organizer.pseudo }}</h2>
+        <h3>Son campus : {{ organizer.campus }}</h3></center>
+
 
             <div class="group-edit-second">
                 <div class="form_champ">

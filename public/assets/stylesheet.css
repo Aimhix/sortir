@@ -10,7 +10,7 @@ h2 {
     margin: 0;
 }
 
-footer{
+footer {
     margin: 0;
     padding: 20px 0 50px;
     text-align: center;
@@ -18,7 +18,7 @@ footer{
     border-radius: 25px;
 }
 
-.header-content{
+.header-content {
     background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -66,127 +66,29 @@ nav a:hover {
 }
 
 /*Card Sorties */
-section {
-    width: 1100px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
+/*section {*/
+/*    width: 1100px;*/
+/*    margin: auto;*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(3, 1fr);*/
+/*    gap: 1rem;*/
+/*}*/
 
-@media screen and (max-width: 900px) {
+/*@media screen and (max-width: 900px) {*/
 
-    .section {
-        width: 600px;
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+/*    .section {*/
+/*        width: 600px;*/
+/*        grid-template-columns: repeat(2, 1fr);*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width: 900px) {
+/*@media screen and (max-width: 900px) {*/
 
-    .section {
-        width: 100%;
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-.total-card {
-    border: 15px solid rgba(100, 100, 100, 0.05);
-    border-radius: 40px;
-}
-
-.top {
-    min-height: 200px;
-    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
-    background-size: cover;
-    background-color: #fff;
-    border-radius: 24px 24px 0 0;
-}
-
-.bottom {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 0 0 24px 24px;
-}
-
-.tps {
-    display: block;
-    float: right;
-    padding: 8px 15px;
-    border-radius: 6px;
-    margin: 20px;
-    background-color: #fff;
-}
-
-.color-gradient {
-    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
-    -webkit-background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-}
-
-.fontweight {
-    font-weight: 700;
-}
-
-.bottom a {
-    position: relative;
-    top: -30px;
-    padding: 15px 25px;
-    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
-    border-radius: 8px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2em;
-    font-weight: 700;
-}
-
-.total-card-back-inner {
-    padding: 40px;
-}
-
-/*3D card activity*/
-.activity-card {
-    background-color: transparent;
-    perspective: 1100px; /* Remove this if you don't want the 3D effect */
-}
-
-.activity-card-inner {
-    position: relative;
-    transition: transform 0.4s;
-    transform-style: preserve-3d;
-}
-
-.activity-card:hover .activity-card-inner {
-    transform: rotateY(180deg) translateZ(-30px);;
-}
-
-.total-card, .total-card-back {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.total-card-back {
-    transform: rotateY(180deg) translateZ(0);
-    background-color: #DEE3E6;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 40px;
-    min-height: 100%;
-    width: 100%;
-}
-
-
-.activity-card:hover .bottom, .activity-card:hover .tps {
-    transform: translateZ(10px);
-    z-index: 1;
-}
-
-.activity-card:hover .activity-card-inner {
-    transform: rotateY(180deg) translateZ(-30px);
-}
+/*    .section {*/
+/*        width: 100%;*/
+/*        grid-template-columns: repeat(1, 1fr);*/
+/*    }*/
+/*}*/
 
 /*Barre de recherche*/
 
@@ -400,7 +302,7 @@ h1 {
     /*width: 45%;*/
 }
 
-#edit_profile_campus{
+#edit_profile_campus {
     width: 100%;
     padding: 8px 12px;
     border: 8px solid rgba(100, 100, 100, 0.05);
@@ -440,7 +342,6 @@ h1 {
 }
 
 
-
 .group-edit-first {
     width: 900px;
     margin: 30px auto 30px;
@@ -476,31 +377,32 @@ h1 {
 
 .btn-end-form {
     text-align: center;
-    margin:50px -50px -50px;
-    padding:30px 50px;
-    background-color:#DEE3E6;
+    margin: 50px -50px -50px;
+    padding: 30px 50px;
+    background-color: #DEE3E6;
     border-radius: 0 0 40px 40px;
 }
 
-.btn-end-form input[type="checkbox"]{
+.btn-end-form input[type="checkbox"] {
     background-color: #fff;
 }
-.btn-end-form label{
-    margin-right:10px;
+
+.btn-end-form label {
+    margin-right: 10px;
     float: left;
     line-height: 3em;
-    margin-left:8px;
+    margin-left: 8px;
 }
 
-.form-connexion .btn-end-form, .form-create-activity .btn-end-form{
+.form-connexion .btn-end-form, .form-create-activity .btn-end-form {
     min-height: 50px;
 }
 
-.btn-end-form .connexion-button{
-    float:right;
+.btn-end-form .connexion-button {
+    float: right;
 }
 
-#create-activity-add-location{
+#create-activity-add-location {
     float: right;
     margin-top: -43px;
     padding: 8px 12px;
@@ -516,7 +418,7 @@ h1 {
     font-weight: 700;
 }
 
-#activity_location{
+#activity_location {
     width: 100%;
     padding: 8px 12px;
     border: 8px solid rgb(244, 244, 244);
@@ -525,10 +427,10 @@ h1 {
     font-size: 1.1em;
 }
 
-#activity_dateStart, #activity_subLimitDate{
+#activity_dateStart, #activity_subLimitDate {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap:1rem;
+    gap: 1rem;
 }
 
 /*#activity_dateStart select{*/
@@ -539,7 +441,7 @@ h1 {
 /*    margin: 0 3px;*/
 /*}*/
 
-#activity_dateStart_date, #activity_dateStart_time, #activity_subLimitDate_date, #activity_subLimitDate_time{
+#activity_dateStart_date, #activity_dateStart_time, #activity_subLimitDate_date, #activity_subLimitDate_time {
     width: 100%;
     padding: 8px 12px;
     border: 8px solid rgba(100, 100, 100, 0.05);
@@ -550,13 +452,13 @@ h1 {
     text-align: center;
 }
 
-#activity_dateStart select, #activity_subLimitDate select{
-    font-size:1.1em;
-    border:none;
+#activity_dateStart select, #activity_subLimitDate select {
+    font-size: 1.1em;
+    border: none;
     background-color: transparent;
 }
 
-.form-create-activity .group-edit-second:nth-child(2){
+.form-create-activity .group-edit-second:nth-child(2) {
     grid-template-columns: 2fr 1fr;
 }
 
@@ -568,32 +470,33 @@ h1 {
     grid-template-columns: 1fr 2fr
 }
 
-#activity_infoActivity{
-    width:100%;
+#activity_infoActivity {
+    width: 100%;
     border: 8px solid rgba(100, 100, 100, 0.05);
     border-radius: 15px;
     height: 89px;
     padding: 12px;
     font-size: 1.5em;
     box-sizing: border-box;
-    min-height:200px;
+    min-height: 200px;
 }
 
-.create-activity-infoActivity{
+.create-activity-infoActivity {
     box-sizing: border-box;
 }
 
-.form-create-activity .btn-end-form input[type="checkbox"]{background-color: #fff;
-float: left;
-margin-top: 12px;
+.form-create-activity .btn-end-form input[type="checkbox"] {
+    background-color: #fff;
+    float: left;
+    margin-top: 12px;
 }
 
-#activity_save{
-    display:none;
+#activity_save {
+    display: none;
 }
 
-.create-activity-publication{
-    float:right;
+.create-activity-publication {
+    float: right;
 }
 
 .info-show {
@@ -603,45 +506,48 @@ margin-top: 12px;
     display: block;
 }
 
-.form_champ{
+.form_champ {
     color: #777777;
-    font-size:initial;
+    font-size: initial;
 }
 
-.form_champ span{
-    color:initial;
+.form_champ span {
+    color: initial;
     font-size: 1.1em;
-    margin:5px 0;
+    margin: 5px 0;
     line-height: 45px;
 
 }
 
-span.info-show-mini{
+span.info-show-mini {
     font-size: 0.9em;
-    color:#777777;
-    float:right;
+    color: #777777;
+    float: right;
     line-height: 35px;
 }
 
-.detail-activity-show .group-edit-second:nth-child(2){
+.detail-activity-show .group-edit-second:nth-child(2) {
     grid-template-columns: 8fr 2fr;
 }
 
 
-.detail-activity-show .group-edit-second:nth-child(3){
+.detail-activity-show .group-edit-second:nth-child(3) {
     grid-template-columns: 2fr 8fr;
 }
 
-.title-show{font-size:4em;}
+.title-show {
+    font-size: 4em;
+}
 
-.container-form-and-show{
+.container-form-and-show {
     width: 900px;
     margin: 50px auto 80px;
     background-color: #fff;
     padding: 50px;
     border-radius: 50px;
 }
-.container-form-and-show-min{
+
+.container-form-and-show-min {
     width: 600px;
     margin: 50px auto 80px;
     background-color: #fff;
@@ -649,19 +555,19 @@ span.info-show-mini{
     border-radius: 50px;
 }
 
-.mdp-forget{
+.mdp-forget {
     text-decoration: none;
-    color:#f3299c;
-    float:right;
-    margin-top:5px;
+    color: #f3299c;
+    float: right;
+    margin-top: 5px;
 }
 
-.btn-info-action{
+.btn-info-action {
     text-decoration: none;
-    color:#f3299c;
+    color: #f3299c;
 }
 
-.show-activity-card{
+.show-activity-card {
     margin: 50px 0 80px
 }
 
@@ -676,7 +582,7 @@ span.info-show-mini{
     50% {
         opacity: 1;
     }
-    100%{
+    100% {
         transform: translateY(-300px) scale(1); /* Montez et grossissez */
         opacity: 0;
     }
@@ -712,7 +618,7 @@ body::before {
     left: -20%;
     bottom: -100px;
     animation-delay: 0s; /* Pas de délai pour le premier */
-    width: 1000px;  /* Taille des bulles */
+    width: 1000px; /* Taille des bulles */
     height: 1000px; /* Taille des bulles */
     animation: floatBubble 17s linear infinite;
 }
@@ -720,10 +626,195 @@ body::before {
 body::after {
     left: 20%;
     bottom: -500px;
-    width: 1500px;  /* Taille des bulles */
+    width: 1500px; /* Taille des bulles */
     height: 1500px; /* Taille des bulles */
     animation-delay: 0s; /* Délai pour le second */
     animation: floatBubble 21s linear infinite;
 }
 
+.profile-picture-icon {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-bottom: -10px;
+    margin-right: 5px;
+}
 
+.profile-picture-big {
+    width: 200px;
+    border-radius: 50%;
+    margin: -80px 0 20px;
+    border: 15px solid rgba(100, 100, 100, 0.05);
+}
+
+
+.cards-container {
+    /* Styles communs aux deux vues */
+}
+
+.cards-container.list-view {
+    width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+.cards-container.card-view, .cards-container {
+    width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.total-card {
+    border: 15px solid rgba(100, 100, 100, 0.05);
+    border-radius: 40px;
+}
+
+.top {
+    min-height: 200px;
+    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
+    background-size: cover;
+    background-color: #fff;
+    border-radius: 24px 24px 0 0;
+}
+
+.cards-container.list-view .top {
+    min-height: 0px;
+    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
+    background-size: cover;
+    background-color: #fff;
+    box-shadow: 0 -200px 0 #fff inset;
+    border-radius: 24px 24px 0 0;
+}
+
+.bottom {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 0 24px 24px;
+}
+
+.tps {
+    display: block;
+    float: right;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin: 20px;
+    background-color: #fff;
+}
+
+.color-gradient {
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    -webkit-background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.fontweight {
+    font-weight: 700;
+}
+
+.bottom a {
+    position: relative;
+    top: -30px;
+    padding: 15px 25px;
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.total-card-back-inner {
+    padding: 40px;
+}
+
+/*3D card activity*/
+
+.cards-container.list-view .activity-card:hover .activity-card-inner, .cards-container.list-view .activity-card:hover .activity-card-inner {
+    transform: rotateY(0deg) translateZ(0px);
+}
+
+.activity-card {
+    background-color: transparent;
+    perspective: 1100px; /* Remove this if you don't want the 3D effect */
+}
+
+.activity-card-inner {
+    position: relative;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+}
+
+.activity-card:hover .activity-card-inner {
+    transform: rotateY(180deg) translateZ(-30px);;
+}
+
+.cards-container.list-view .activity-card:hover .activity-card-inner, .cards-container.list-view .activity-card:hover .activity-card-inner {
+    transform: rotateY(0deg) translateZ(0px);
+}
+
+.total-card, .total-card-back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.cards-container.card-view .total-card-back, .cards-container .total-card-back {
+    transform: rotateY(180deg) translateZ(0);
+    background-color: #DEE3E6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 40px;
+    min-height: 100%;
+    width: 100%;
+}
+
+.cards-container.list-view .total-card-back {
+    display: none;
+}
+
+.cards-container.list-view .total-card, .cards-container.list-view .total-card-back {
+    transform: rotateY(0deg) translateZ(0);
+}
+
+.cards-container.card-view .total-card .hidden-info {
+    display: none;
+}
+
+.cards-container.list-view .total-card .hidden-info {
+    display: block;
+}
+
+.activity-card:hover .activity-card-inner {
+    transform: rotateY(180deg) translateZ(-30px);
+}
+
+.cards-container.list-view .activity-card:hover .activity-card-inner {
+    transform: rotateY(00deg) translateZ(0px);
+}
+
+.btn-pref-activity {
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}
+
+#switch-to-list-view, #switch-to-card-view{
+    border: none;
+    background-color: #DEE3E6;
+    border-radius: 15px;
+    padding: 10px;
+    display: inline-block;
+    margin: 3px;
+    cursor:pointer;
+}
+
+#switch-to-list-view img, #switch-to-card-view img{width:20px;cursor:pointer;}
+#switch-to-list-view{}
+#switch-to-card-view{
+}

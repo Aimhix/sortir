@@ -1,3 +1,5 @@
+<section class="cards-container">
+    {% for activity in activities %}
 <article class="activity-card">
     <div class="activity-card-inner">
         <div class="total-card">
@@ -17,7 +19,7 @@
                 <span class="fontweight">{{ activity.dateStart | date("d/m") }}</span>
                 à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
                 à <span class="fontweight">{{ activity.campus.name }}</span>
-                <br><br>
+                <br><br><span clas="hidden-info">{{ activity.infoActivity|slice(0, 350) }}<br><br></span>
 
                 Encore <span class="fontweight">{{ activity.subMax }}</span> places
             </div>
@@ -29,11 +31,23 @@
                     {{ activity.name }}</a><br>
                 {{ activity.infoActivity|slice(0, 250) }}<br><br>
 
-                Organisateur: <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
-                                 class="btn-info-action">{{ activity.organizer.pseudo }}</a>
+                Organisateur:
+                <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
+                   class="btn-info-action">
+                {% if app.user.profilePicture %}
+                    <img class="profile-picture-icon" src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt="">
+                {% else %}
+                    <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
+                {% endif %}
+
+{#                <img class="profile-picture-icon" src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt="">#}
+                {{ activity.organizer.pseudo }}</a>
 
 
             </div>
         </div>
     </div>
 </article>
+
+    {% endfor %}
+</section>

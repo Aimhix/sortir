@@ -12,6 +12,14 @@
                         <a class="call-action-btn" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
                     <li class="dropdown">
+
+                        {% if app.user.profilePicture %}
+                            <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="photo">
+                        {% else %}
+                            <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
+                        {% endif %}
+
+{#                        <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="">#}
                         <a href="#">{{ app.user.fullName }}</a>
                         <ul class="dropdown-menu">
 {#                            <li><a href="#">Mes Sorties</a></li>#}
