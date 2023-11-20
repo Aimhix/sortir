@@ -4,6 +4,11 @@
 
 {% block body %}
 
+{#        {% set count = 0 %}#}
+{#    {% for participant in participant %}#}
+{#        {% set count = count + 1 %}#}
+{#    {% endfor %}#}
+
 
     <h2>Nature de la sortie : {{ activity.name }}</h2>
     <h4>Date et heure : {{ activity.dateStart | date }}</h4>
@@ -49,6 +54,7 @@
             {% endif %}
 
         {% endif %}
+
 
     {% endif %}
 
