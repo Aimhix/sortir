@@ -10,7 +10,7 @@
     <h4>Date limite d'inscription : {{ activity.subLimitDate | date }}</h4>
     <h4>Maximum de participants : {{ activity.subMax }}</h4>
 
-    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a>
+    {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
 
 
 
@@ -23,24 +23,35 @@
     <h4>Latitude : {{ activity.location.latitude }}</h4>
     <h4>Longitude : {{ activity.location.longitude }}</h4>
 
-
-
-
-    {% if activity.users|length < activity.subMax %}
-        <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
-    {% endif %}
-
-    <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire la sortie</a>
-
-    {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
-        <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
-    {% endif %}
-
     {% if activity.organizer.id  ==  app.user.id %}
 
         <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
+    {% else %}
+
+        {#  Le if vérifie si l'acti est ouverte (ID 2 en database) #}
+        {% if activity.status.id == 2 %}
+
+            {% if activity.users|length < activity.subMax %}
+
+                <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+            {% else %}
+
+                <p>Complet</p>
+
+            {% endif %}
+
+            {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+
+                <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+
+            {% endif %}
+
+        {% endif %}
+
     {% endif %}
+
+    {% include 'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
 
 
 {% endblock %}

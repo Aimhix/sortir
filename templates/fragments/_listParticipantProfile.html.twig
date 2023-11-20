@@ -1,0 +1,10 @@
+{% block body %}
+    <h2>Participants de l'activité</h2>
+
+    <ul>
+        {% for participant in participant %}
+            <li><a href="{{ path('app_participant_profile', {'id': participant.id}) }}">{{ participant.pseudo }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

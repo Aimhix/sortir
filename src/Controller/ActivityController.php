@@ -22,9 +22,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
+
     #[Route('/create', name: 'app_activity_create')]
     public function createActivity(StatusRepository $statusRepository ,Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $user = $this->getUser();
 
         $activity = new Activity();
@@ -62,6 +64,7 @@ class ActivityController extends AbstractController
         $locationForm->handleRequest($request);
 
         if ($locationForm->isSubmitted() && $locationForm->isValid()){
+
             $entityManager->persist($location);
             $entityManager->flush();
 
@@ -145,6 +148,17 @@ class ActivityController extends AbstractController
         return $this->render('activity/show.html.twig', [
             'activity' => $activity,
             'user' => $user
+        ]);
+    }
+
+    #[Route('/activity/{id}', name: 'activity_show')]
+    public function showList(Activity $activity): Response
+    {
+        $participant = $activity->getUsers();
+
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'participant' => $participant,
         ]);
     }
 

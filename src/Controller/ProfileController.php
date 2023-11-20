@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditProfileType;
 use App\Services\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ProfileController extends AbstractController
 {
@@ -30,9 +32,9 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/organizer/profile/{id}', name: 'app_organizer_profile')]
-    public function showOrganizerProfile($id): Response
+    public function showOrganizerProfile(EntityManagerInterface $entityManager, $id): Response
     {
-        $organizer = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $organizer = $entityManager->getRepository(User::class)->find($id);
 
         if (!$organizer) {
             throw $this->createNotFoundException('Organisateur non trouvé');
@@ -43,9 +45,9 @@ class ProfileController extends AbstractController
 
 
     #[Route('/participant/profile/{id}', name: 'app_participant_profile')]
-    public function showParticipantsProfile($id): Response
+    public function showParticipantsProfile(EntityManagerInterface $entityManager, $id): Response
     {
-        $participant = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $participant = $entityManager->getRepository(User::class)->find($id);
 
         if (!$participant) {
             throw $this->createNotFoundException('Participant non trouvé');
@@ -55,7 +57,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/editprofile', name: 'app_editprofile')]
-    public function edit(Request $request, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $authenticationUtils): Response
     {
 
         $user = $this->getUser();
@@ -65,7 +67,9 @@ class ProfileController extends AbstractController
         }
 
         // Formulaire ProfileType
-        $form = $this->createForm(EditProfileType::class, $user);
+        $form = $this->createForm(EditProfileType::class, $user, [
+            'action' => $this->generateUrl('app_editprofile'),
+        ]);
 
         // Soumission formulaire
         $form->handleRequest($request);
@@ -81,7 +85,7 @@ class ProfileController extends AbstractController
 
             // Vérifier pseudo
             $pseudo = $form->get('pseudo')->getData();
-            $existingUser = $this->getDoctrine()->getRepository(User::class)->findOneBy(['pseudo' => $pseudo]);
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['pseudo' => $pseudo]);
 
             if ($existingUser && $existingUser->getId() !== $user->getId()) {
                 $this->addFlash('error', 'Le pseudo est déjà pris');
@@ -93,8 +97,8 @@ class ProfileController extends AbstractController
                 $user->setPassword($encodedPassword);
 
                 //Enregistrer les modifications dans la BDD
-                $profileManager = $this->getDoctrine()->getManager();
-                $profileManager->flush();
+
+                $entityManager->flush();
 
                 $this->addFlash('success', 'Profil mis à jour');
 
@@ -102,8 +106,10 @@ class ProfileController extends AbstractController
             }
         }
 
-        return $this->render('profile/editProfile.html.twig',
-            ['form' => $form->createView(),]);
+        return $this->render('profile/editProfile.html.twig', [
+            'form' => $form->createView(),
+            'error' => $authenticationUtils->getLastAuthenticationError(),
+        ]);
     }
 
 }
