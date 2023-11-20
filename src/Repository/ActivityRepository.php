@@ -50,10 +50,12 @@ class ActivityRepository extends ServiceEntityRepository
             ->leftJoin('a.campus', 'c')
             ->leftJoin('a.users', 'u')
             ->leftJoin('a.organizer', 'o');
+        // créer jointure pour voir si publié
 
         // par campus
         if (!empty($searchCriteria->campus)) {
-            $query->andWhere('c.name = :campus')
+            $query->andWhere('c = :campus')
+//                ->setParameter('published', true)
                 ->setParameter('campus', $searchCriteria->campus);
         }
 
@@ -95,6 +97,15 @@ class ActivityRepository extends ServiceEntityRepository
         if (!empty($searchCriteria->isPast)) {
             $query->andWhere('a.dateStart < CURRENT_DATE()');
         }
+
+        $query->andWhere('(
+        a.isPublished = :published
+        OR (a.organizer = :organizer AND a.isPublished = :notPublished)
+    )')
+            ->setParameter('published', true)
+            ->setParameter('organizer', $user)
+            ->setParameter('notPublished', false);
+
 
         return $query->getQuery()->getResult();
     }
