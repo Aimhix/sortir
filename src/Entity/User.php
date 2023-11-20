@@ -36,6 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        max: 10,
+        maxMessage: "Le nom de famille ne peut pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\NotBlank(message: "Le nom de famille ne peut pas être vide.")]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -43,10 +48,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         max: 10,
         maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères."
     )]
+    #[Assert\NotBlank(message: "Le prénom ne peut pas être vide.")]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^0[1-9] \d{2} \d{2} \d{2} \d{2}$/',
+        message: "Le numéro de téléphone doit être au format (0X XX XX XX XX)."
+    )]
     private $phone;
+
 
     #[ORM\Column(type: 'boolean')]
     private $activeStatus;

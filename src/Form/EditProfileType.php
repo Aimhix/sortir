@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,14 +22,7 @@ class EditProfileType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('phone', TelType::class, [
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^0[1-9]\d{8}$/',
-                        'message' => 'Le numéro de téléphone ne respecte pas un bon format, par exemple : 0123456789.',
-                    ]),
-                ],
-            ])
+            ->add('phone', TelType::class)
             ->add('email', EmailType::class, [
                 'attr' => ['readonly' => true],])
             ->add('password', PasswordType::class,)
@@ -44,10 +38,10 @@ class EditProfileType extends AbstractType
 
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'App\Entity\User',
+            'data_class' => User::class,
         ]);
     }
 }
