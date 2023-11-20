@@ -1,5 +1,6 @@
 body {
     font-family: Arial, serif;
+    background-color: rgba(245, 245, 245, 0.53);
 }
 
 h2 {
@@ -15,7 +16,6 @@ footer{
     text-align: center;
     background-color: #DEE3E6;
     border-radius: 25px;
-
 }
 
 .header-content{
@@ -99,13 +99,13 @@ section {
     min-height: 200px;
     background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
     background-size: cover;
-    background-color: #ddd;
+    background-color: #fff;
     border-radius: 24px 24px 0 0;
 }
 
 .bottom {
     padding: 20px;
-    background-color: #DEE3E6;
+    background-color: #fff;
     border-radius: 0 0 24px 24px;
 }
 
@@ -154,7 +154,7 @@ section {
 
 .activity-card-inner {
     position: relative;
-    transition: transform 0.8s;
+    transition: transform 0.4s;
     transform-style: preserve-3d;
 }
 
@@ -418,7 +418,7 @@ h1 {
     box-sizing: border-box;
 }
 
-.form_champ label {
+.form_champ label, .form- {
     color: #7a7a7a;
     font-size: 0.9em;
     margin: 5px 0 5px;
@@ -443,7 +443,7 @@ h1 {
 
 .group-edit-first {
     width: 900px;
-    margin: 10px auto 10px;
+    margin: 30px auto 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
@@ -451,7 +451,7 @@ h1 {
 
 .group-edit-second {
     width: 900px;
-    margin: 10px auto 10px;
+    margin: 30px auto 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -459,7 +459,7 @@ h1 {
 
 .group-edit-zero {
     width: 900px;
-    margin: 10px auto 10px;
+    margin: 30px auto 30px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
@@ -468,7 +468,7 @@ h1 {
 
 .group-edit-min {
     width: 600px;
-    margin: 10px auto 10px;
+    margin: 30px auto 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -476,10 +476,10 @@ h1 {
 
 .btn-end-form {
     text-align: center;
-    margin:20px auto;
-    padding:10px;
+    margin:50px -50px -50px;
+    padding:30px 50px;
     background-color:#DEE3E6;
-    border-radius: 15px;
+    border-radius: 0 0 40px 40px;
 }
 
 .btn-end-form input[type="checkbox"]{
@@ -502,9 +502,9 @@ h1 {
 
 #create-activity-add-location{
     float: right;
-    margin-top: -41px;
-    padding: 6px 12px;
-    background-color: #ddd;
+    margin-top: -43px;
+    padding: 8px 12px;
+    background-color: #fff;
     border: none;
     border-radius: 8px;
     z-index: 1;
@@ -513,14 +513,15 @@ h1 {
     font-size: 0.9em;
     text-decoration: none;
     color: #f3299c;
+    font-weight: 700;
 }
 
 #activity_location{
     width: 100%;
     padding: 8px 12px;
-    border: 8px solid rgba(100, 100, 100, 0.05);
+    border: 8px solid rgb(244, 244, 244);
     border-radius: 15px;
-    background-color: #fff;
+    background-color: rgb(244, 244, 244);
     font-size: 1.1em;
 }
 
@@ -594,3 +595,135 @@ margin-top: 12px;
 .create-activity-publication{
     float:right;
 }
+
+.info-show {
+    padding: 6px 15px;
+    border-radius: 15px;
+    background-color: rgba(100, 100, 100, 0.05);
+    display: block;
+}
+
+.form_champ{
+    color: #777777;
+    font-size:initial;
+}
+
+.form_champ span{
+    color:initial;
+    font-size: 1.1em;
+    margin:5px 0;
+    line-height: 45px;
+
+}
+
+span.info-show-mini{
+    font-size: 0.9em;
+    color:#777777;
+    float:right;
+    line-height: 35px;
+}
+
+.detail-activity-show .group-edit-second:nth-child(2){
+    grid-template-columns: 8fr 2fr;
+}
+
+
+.detail-activity-show .group-edit-second:nth-child(3){
+    grid-template-columns: 2fr 8fr;
+}
+
+.title-show{font-size:4em;}
+
+.container-form-and-show{
+    width: 900px;
+    margin: 50px auto 80px;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 50px;
+}
+.container-form-and-show-min{
+    width: 600px;
+    margin: 50px auto 80px;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 50px;
+}
+
+.mdp-forget{
+    text-decoration: none;
+    color:#f3299c;
+    float:right;
+    margin-top:5px;
+}
+
+.btn-info-action{
+    text-decoration: none;
+    color:#f3299c;
+}
+
+.show-activity-card{
+    margin: 50px 0 80px
+}
+
+
+/*animation fond*/
+
+@keyframes floatBubble {
+    0% {
+        transform: translateY(20px) scale(0.5); /* Commencez petit et en bas */
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-300px) scale(1); /* Montez et grossissez */
+        opacity: 0;
+    }
+}
+
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(100, 100, 100, 0.1); /* la couleur de vos cercles */
+    animation: floatBubble 20s linear infinite;
+    bottom: -150px;
+    opacity: 0;
+}
+
+/*body {*/
+/*    background-color: white; !* la couleur de fond de votre site *!*/
+/*    margin: 0;*/
+/*    width: 100%;*/
+/*}*/
+
+body::before, body::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%; /* Cela rendra les éléments circulaires */
+    background-color: rgba(100, 100, 100, 0.05); /* Couleur de fond des bulles */
+    z-index: -1;
+    /* Autres propriétés */
+}
+
+body::before {
+    left: -20%;
+    bottom: -100px;
+    animation-delay: 0s; /* Pas de délai pour le premier */
+    width: 1000px;  /* Taille des bulles */
+    height: 1000px; /* Taille des bulles */
+    animation: floatBubble 17s linear infinite;
+}
+
+body::after {
+    left: 20%;
+    bottom: -500px;
+    width: 1500px;  /* Taille des bulles */
+    height: 1500px; /* Taille des bulles */
+    animation-delay: 0s; /* Délai pour le second */
+    animation: floatBubble 21s linear infinite;
+}
+
+

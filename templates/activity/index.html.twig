@@ -15,6 +15,16 @@
 
 {% block body %}
 
+    {% block headerBig %}
+        <div class="header-content">
+            <h1 class="site-title">
+                SORTIR<span class="com">.COM</span>
+            </h1>
+            <br>
+            <h2>    <span class="sub-title">Sorties entre étudiants</span></h2>
+        </div>
+    {% endblock %}
+
     {{ form_start(form, {'attr': {'class': 'activity-search-form'}}) }}
 
     <div id="container-search">
@@ -93,8 +103,8 @@
     {{ form_end(form) }}
 
 
-        <div>
-            <h2 class="color-gradient">Sorties à venir</h2>
+        <div class="show-activity-card">
+            <h2 class="color-gradient" style="margin:50px 0 50px">Sorties à venir</h2>
     <section>
         {% for activity in activities %}
             {% include 'activity/_card.html.twig' %}

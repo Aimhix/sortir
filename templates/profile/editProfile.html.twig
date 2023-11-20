@@ -5,7 +5,6 @@
 {% block title %}Editer le profil{{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Editer votre profil</h1>
 
     {# Afficher les messages flash s'il y en a #}
     {% for message in app.flashes('success') %}
@@ -21,7 +20,9 @@
     {% endfor %}
 
     {# Afficher le formulaire #}
-    <div class="edit-form form-profile">
+    <div class="edit-form form-profile container-form-and-show">
+        <h2 class="title-show">Modifier mon profil</h2>
+
         {{ form_start(form) }}
         {{ form_errors(form) }}
 {#        {{ app.user.profilePicture }}#}

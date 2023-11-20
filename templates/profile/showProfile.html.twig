@@ -4,7 +4,8 @@
 
 {% block body %}
 
-    <h1>Profil</h1>
+    <div class="detail-profile-show container-form-and-show">
+    <h2 class="title-show">Profil de {{ app.user.pseudo }}</h2>
 
     {% if app.user %}
         {% if app.user.profilePicture %}
@@ -12,6 +13,8 @@
         {% else %}
             <p>Aucune photo de profil disponible</p>
         {% endif %}
+
+
 
         <form method="post">
             <h2>Pseudo : {{ app.user.pseudo }}</h2>
@@ -31,4 +34,5 @@
         <p>Utilisateur non connecté</p>
     {% endif %}
 
+    </div>
 {% endblock %}

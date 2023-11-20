@@ -4,28 +4,47 @@
 
 {% block body %}
 
-    <h1>Profil {{ organizer.pseudo }}</h1>
+    <div class="detail-profile-show container-form-and-show">
 
-    {% if organizer %}
-        {% if organizer.profilePicture %}
-            <img src="{{ asset('/images/' ~ organizer.profilePicture) }}" alt="Photo de profil">
+        <h2 class="title-show">Profil de {{ organizer.pseudo }}</h2>
+        <center><h3>Son campus : {{ organizer.campus }}</h3></center>
+
+        {% if organizer %}
+            {% if organizer.profilePicture %}
+                <img src="{{ asset('/images/' ~ organizer.profilePicture) }}" alt="Photo de profil">
+            {% else %}
+                <p>{{ organizer.pseudo }} n'a pas encore de photo.</p>
+            {% endif %}
+
+            <div class="group-edit-second">
+                <div class="form_champ">
+                    Prénom :<br> <span class="info-show">{{ organizer.firstname }}</span>
+                </div>
+                <div class="form_champ">
+                    Nom :<br> <span class="info-show">{{ organizer.lastname }}</span>
+                </div>
+            </div>
+            <div class="group-edit-second">
+                <div class="form_champ">
+                    Téléphone :<br> <span class="info-show">{{ organizer.phone }}</span>
+                </div>
+                <div class="form_champ">
+                    Email :<br> <span class="info-show">{{ organizer.email }}</span>
+                </div>
+            </div>
+
+            {# Mettre le lien de la page d'accueil #}
+            <div class="btn-end-form">
+
+                <a href="{{ path('app_activity_index') }}" class="stop-action-btn">Retour</a>
+
+            </div>
+            {# Ajouter le lien vers la page d'édition du profil de l'organisateur #}
+
         {% else %}
-            <p>Aucune photo de profil disponible</p>
+            <h2 class="title-show">Organisateur non trouvé</h2>
         {% endif %}
 
-        <h2>Pseudo : {{ organizer.pseudo }}</h2>
-        <p>Prénom : {{ organizer.firstname }}</p>
-        <p>Nom : {{ organizer.lastname }}</p>
-        <p>Téléphone : {{ organizer.phone }}</p>
-        <p>Email : {{ organizer.email }}</p>
-        <p>Ville de rattachement : {{ organizer.campus }}</p>
-
-        {# Mettre le lien de la page d'accueil #}
-        <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
-        {# Ajouter le lien vers la page d'édition du profil de l'organisateur #}
-
-    {% else %}
-        <p>Organisateur non trouvé</p>
-    {% endif %}
+    </div>
 
 {% endblock %}
