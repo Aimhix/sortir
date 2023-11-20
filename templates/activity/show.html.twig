@@ -23,18 +23,19 @@
     <h4>Latitude : {{ activity.location.latitude }}</h4>
     <h4>Longitude : {{ activity.location.longitude }}</h4>
 
-    {% if activity.organizer.id  ==  app.user.id %}
 
-        <a href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
+        {% if activity.organizer.id  ==  app.user.id %}
 
-    {% else %}
+            <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
-        {#  Le if vérifie si l'acti est ouverte (ID 2 en database) #}
-        {% if activity.status.id == 2 %}
+        {% else %}
+
+{#  Le if vérifie si l'acti est ouverte (ID 2 en database)#}
+    {% if activity.status.id == 2 %}
 
             {% if activity.users|length < activity.subMax %}
 
-                <a href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
             {% else %}
 
                 <p>Complet</p>
@@ -43,7 +44,7 @@
 
             {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
 
-                <a href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+                <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
 
             {% endif %}
 

@@ -168,6 +168,11 @@ class Activity
         return $this->isPublished;
     }
 
+    public function getisPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
