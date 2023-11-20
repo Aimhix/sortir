@@ -34,13 +34,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(
-        max: 30,
+        max: 50,
         maxMessage: "Le pseudo ne peut pas dépasser {{ limit }} caractères.")]
     private $pseudo;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(
-        max: 30,
+        max: 50,
         maxMessage: "Le nom de famille ne peut pas dépasser {{ limit }} caractères."
     )]
     #[Assert\NotBlank(message: "Le nom de famille ne peut pas être vide.")]
@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(
-        max: 30,
+        max: 50,
         maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères."
     )]
     #[Assert\NotBlank(message: "Le prénom ne peut pas être vide.")]
