@@ -20,7 +20,7 @@ class ActivityUpdateService
             $dateDifference = $dateStart->diff($currentDate)->days;
 
 
-            if ($activity->isIsPublished()){
+            if ($activity->isIsPublished()  && $activity->getStatus()->getId() != 6){
                 $activity->setStatus($statusRepository->findOneByWording('Ouverte'));
             }
 
