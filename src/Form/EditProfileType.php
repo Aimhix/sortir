@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EditProfileType extends AbstractType
 {
@@ -19,8 +21,16 @@ class EditProfileType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('phone', TelType::class)
-            ->add('email', EmailType::class)
+            ->add('phone', TelType::class, [
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^0[1-9]\d{8}$/',
+                        'message' => 'Le numéro de téléphone ne respecte pas un bon format, par exemple : 0123456789.',
+                    ]),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => ['readonly' => true],])
             ->add('password', PasswordType::class,)
             ->add('confirmpassword', PasswordType::class, [
                 'label' => 'Confirmer mot de passe',

@@ -27,46 +27,55 @@
     <div>
         {{ form_label(form.pseudo) }}
         {{ form_widget(form.pseudo) }}
+        {{ form_errors(form.pseudo) }}
     </div>
 
     <div>
         {{ form_label(form.firstname) }}
         {{ form_widget(form.firstname) }}
+        {{ form_errors(form.firstname) }}
     </div>
 
     <div>
         {{ form_label(form.lastname) }}
         {{ form_widget(form.lastname) }}
+        {{ form_errors(form.lastname) }}
     </div>
 
     <div>
         {{ form_label(form.phone) }}
         {{ form_widget(form.phone) }}
+        {{ form_errors(form.phone) }}
     </div>
 
     <div>
         {{ form_label(form.email) }}
         {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
     </div>
 
     <div>
         {{ form_label(form.password) }}
         {{ form_widget(form.password) }}
+        {{ form_errors(form.password) }}
     </div>
 
     <div>
         {{ form_label(form.confirmpassword) }}
         {{ form_widget(form.confirmpassword) }}
+        {{ form_errors(form.confirmpassword) }}
     </div>
 
     <div>
         {{ form_label(form.campus) }}
         {{ form_widget(form.campus) }}
+        {{ form_errors(form.campus) }}
     </div>
 
     <div>
         {{ form_label(form.profilePicture) }}
         {{ form_widget(form.profilePicture) }}
+        {{ form_errors(form.profilePicture) }}
     </div>
 
     <button type="submit">Enregistrer</button>

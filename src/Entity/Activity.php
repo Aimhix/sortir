@@ -56,6 +56,7 @@ class Activity
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities', cascade: ['persist', 'remove'])]
     private $users;
+    
 
     public function __construct()
     {
@@ -239,7 +240,6 @@ class Activity
                 ->addViolation();
         }
     }
-
 
 
     /**
