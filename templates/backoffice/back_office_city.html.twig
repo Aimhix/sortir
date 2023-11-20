@@ -6,10 +6,20 @@
     {% for city in cities %}
         <br>
         <p>{{ city.name }}</p>
-        <a href="{{ path('app_cities_management_delete', {'id': city.id}) }}">Supprimer</a>
-
+        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}">Supprimer</a>
     {% endfor %}
 
+    <br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br>
+    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a>
+    <a class="stop-action-btn" href="{{ path('app_back_office') }}">Retour</a>
 {% endblock %}
 
 
