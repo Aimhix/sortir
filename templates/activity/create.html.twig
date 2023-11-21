@@ -67,9 +67,9 @@
             {{ form_label(activityForm.activityPicture) }}<br>
             {% if activityForm.activityPicture.vars.value is not null %}
                 <img id="image-preview" src="{{ asset('images/activity/' ~ activityForm.activityPicture.vars.value) }}"
-                     alt="Aperçu de l'image" style="max-width: 200px; max-height: 200px;">
+                     alt="" style="max-width: 200px; max-height: 200px;">
             {% else %}
-                <img id="image-preview" alt="Aperçu de l'image" style="max-width: 200px; max-height: 200px;">
+                <img id="image-preview" alt="" style="max-width: 200px; max-height: 200px;">
             {% endif %}
             {{ form_widget(activityForm.activityPicture, { 'attr': {'onchange': 'previewImage(this)'} }) }}<br>
             {{ form_errors(activityForm.activityPicture) }}<br>
