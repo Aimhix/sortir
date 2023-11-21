@@ -56,7 +56,7 @@
            class="btn-info-action">{{ activity.organizer.pseudo }}</a></h3>
         <h4>Ville organisatrice : {{ activity.campus }}</h4>
 
-        {% include 'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
+        {% include  'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
 
         {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
 

@@ -1,53 +1,58 @@
 <section class="cards-container">
     {% for activity in activities %}
-<article class="activity-card">
-    <div class="activity-card-inner">
-        <div class="total-card">
-            <div class="top">
-                <div class="tps">
-                    <div class="color-gradient">
-                        Clos le <span class="fontweight">{{ activity.subLimitDate | date("d/m") }}</span>
-                        à <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+        {% if activity.status.wording != 'Annulée' %}
+            <article class="activity-card">
+                <div class="activity-card-inner">
+                    <div class="total-card">
+                        <div class="top"
+                             style="background-image: url('{{ asset('/images/activity/' ~ activity.activityPicture) }}'); background-size: cover; background-position: center;">
+                            <div class="tps">
+                                <div class="color-gradient">
+                                    Clos le <span class="fontweight">{{ activity.subLimitDate | date("d/m") }}</span>
+                                    à
+                                    <span class="fontweight">{{ activity.subLimitDate |format_datetime('none', 'short', locale='fr') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <a href="{{ path('activity_show', {'id': activity.id}) }}">
+                                {{ activity.name }}</a>
+                            <br>
+
+                            <span class="fontweight">{{ activity.dateStart | date("d/m") }}</span>
+                            à
+                            <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
+                            à <span class="fontweight">{{ activity.campus.name }}</span>
+                            <br><br><span class="hidden-info">{{ activity.infoActivity|slice(0, 350) }}<br><br></span>
+
+                            Encore <span class="fontweight">{{ activity.subMax }}</span> places
+                        </div>
+                    </div>
+                    <div class="total-card-back">
+
+                        <div class="total-card-back-inner">
+                            <a class="btn-info-action" href="{{ path('activity_show', {'id': activity.id}) }}">
+                                {{ activity.name }}</a><br>
+                            {{ activity.infoActivity|slice(0, 250) }}<br><br>
+
+                            Organisateur:
+                            <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
+                               class="btn-info-action">
+                                {% if app.user.profilePicture %}
+                                    <img class="profile-picture-icon"
+                                         src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt="">
+                                {% else %}
+                                    <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
+                                {% endif %}
+
+                                {#                <img class="profile-picture-icon" src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt=""> #}
+                                {{ activity.organizer.pseudo }}</a>
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bottom">
-                <a href="{{ path('activity_show', {'id': activity.id}) }}">
-                    {{ activity.name }}</a>
-                <br>
-
-                <span class="fontweight">{{ activity.dateStart | date("d/m") }}</span>
-                à <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
-                à <span class="fontweight">{{ activity.campus.name }}</span>
-                <br><br><span class="hidden-info">{{ activity.infoActivity|slice(0, 350) }}<br><br></span>
-
-                Encore <span class="fontweight">{{ activity.subMax }}</span> places
-            </div>
-        </div>
-        <div class="total-card-back">
-
-            <div class="total-card-back-inner">
-                <a class="btn-info-action" href="{{ path('activity_show', {'id': activity.id}) }}">
-                    {{ activity.name }}</a><br>
-                {{ activity.infoActivity|slice(0, 250) }}<br><br>
-
-                Organisateur:
-                <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
-                   class="btn-info-action">
-                {% if app.user.profilePicture %}
-                    <img class="profile-picture-icon" src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt="">
-                {% else %}
-                    <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
-                {% endif %}
-
-{#                <img class="profile-picture-icon" src="{{ asset('/images/' ~ activity.organizer.profilePicture) }}" alt="">#}
-                {{ activity.organizer.pseudo }}</a>
-
-
-            </div>
-        </div>
-    </div>
-</article>
-
+            </article>
+        {% endif %}
     {% endfor %}
 </section>
