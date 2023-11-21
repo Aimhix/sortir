@@ -40,11 +40,13 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
-        $user = $this->userRepository->findOneBy(['email' => $email]);
-
-        if ($user && !$user->isActiveStatus()) {
-            throw new AccessDeniedException('Connection non authorisée.');
-        }
+        //Essaie de connection deny, mais trouvé meilleur methode :)
+//
+//        $user = $this->userRepository->findOneBy(['email' => $email]);
+//
+//        if ($user && !$user->isActiveStatus()) {
+//            throw new AccessDeniedException('Connection non authorisée.');
+//        }
 
         return new Passport(
             new UserBadge($email),

@@ -6,6 +6,10 @@
 
     <form method="post">
 
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
         {% for message in app.flashes('error') %}
             <div class="flash-notice">
                 {{ message }}
