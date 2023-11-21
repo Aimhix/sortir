@@ -1,59 +1,99 @@
 {% extends 'base.html.twig' %}
 
+{% block headerBig %}
+{% endblock %}
+
 {% block title %}Détail activitée {{ parent() }}{% endblock %}
 
 {% block body %}
 
 
-    <h2>Nature de la sortie : {{ activity.name }}</h2>
-    <h4>Date et heure : {{ activity.dateStart | date }}</h4>
-    <h4>Date limite d'inscription : {{ activity.subLimitDate | date }}</h4>
-    <h4>Maximum de participants : {{ activity.subMax }}</h4>
 
-    {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
-
-
-
-    <h4>Duréer de la sortie : {{ activity.duration }} min</h4>
-    <h4>Description et infos : {{ activity.infoActivity }}</h4>
-    <h4>Ville organisatrice : {{ activity.campus }}</h4>
-    <h4>Lieu : {{ activity.location.name }}</h4>
-    <h4>Rue : {{ activity.location.streetName }}</h4>
-    <h4>Code postal : {{ activity.location.cities.postcode }}</h4>
-    <h4>Latitude : {{ activity.location.latitude }}</h4>
-    <h4>Longitude : {{ activity.location.longitude }}</h4>
+    <div class="detail-activity-show container-form-and-show">
+        <div class="group-edit-zero">
+            <h2 class="title-show">{{ activity.name }}</h2>
+            <center><h3>Début : {{ activity.dateStart | date }}</h3></center>
+        </div>
 
 
+        <div class="group-edit-second">
+
+            <div class="form_champ activity-location-show">
+                Lieu : <br><span class="info-show">
+                {{ activity.location.streetName }} {{ activity.location.name }} {{ activity.location.cities.postcode }}
+                <span class="info-show-mini">Lat. : {{ activity.location.latitude }} | Long. : {{ activity.location.longitude }}</span></span>
+            </div>
+            <div class="form_champ activity-duration-show">
+                Durée : <br><span class="info-show">{{ activity.duration }} min</span>
+            </div>
+        </div>
+
+        <div class="group-edit-second">
+
+            <div class="form_champ activity-nombre-show">
+                {% set count = 0 %}
+                {% for particpant in participant %}
+                    {% set count = count + 1 %}
+                {% endfor %}
+                {% set remainingPlaces = activity.subMax - count %}
+
+                Places restantes :<br> <span class="info-show">{{ remainingPlaces }}</span>
+            </div>
+            <div class="form_champ activity-sublimitdate-show">
+                Date limite d'inscription : <br><span class="info-show">{{ activity.subLimitDate | date }}</span>
+            </div>
+
+        </div>
+
+        <div class="group-edit-zero">
+            <div class="form_champ activity-infoActivity-show">
+                Description de l'évènement : <br><span class="info-show">{{ activity.infoActivity }}</span>
+            </div>
+        </div>
+
+        <h3>Organisateur :
+        <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
+           class="btn-info-action">{{ activity.organizer.pseudo }}</a></h3>
+        <h4>Ville organisatrice : {{ activity.campus }}</h4>
+
+        {% include 'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
+
+        {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
+
+
+
+        <div class="btn-end-form">
         {% if activity.organizer.id  ==  app.user.id %}
 
             <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
         {% else %}
 
-{#  Le if vérifie si l'acti est ouverte (ID 2 en database)#}
-    {% if activity.status.id == 2 %}
+            {#  Le if vérifie si l'acti est ouverte (ID 2 en database) #}
+            {% if activity.status.id == 2 %}
 
-            {% if activity.users|length < activity.subMax %}
+                {% if activity.users|length < activity.subMax %}
 
-                <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
-            {% else %}
+                    <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                {% else %}
 
-                <p>Complet</p>
+                    <p>Complet</p>
 
-            {% endif %}
+                {% endif %}
 
-            {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+                {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
 
-                <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
+                    <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se
+                        désinscrire</a>
+
+                {% endif %}
 
             {% endif %}
 
         {% endif %}
+        </div>
 
-    {% endif %}
-
-    {% include 'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
-
+    </div>
 
 {% endblock %}
 

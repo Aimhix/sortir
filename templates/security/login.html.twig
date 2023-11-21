@@ -19,8 +19,10 @@
             </div>
         {% endif %}
 
-        <h1>Connexion</h1>
-        <div class="form-connexion">
+
+        <div class="form-connexion container-form-and-show-min">
+
+            <h2 class="title-show">Connexion</h2>
             <div class="group-edit-min">
                 <div class="connexion-email form_champ">
                     <label for="inputEmail">Email : </label><br>
@@ -32,6 +34,7 @@
                     <input type="password" name="password" id="inputPassword" class="form-control"
                            autocomplete="current-password"
                            required>
+                    <a class="mdp-forget" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
                 </div>
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -39,11 +42,9 @@
             <div class="btn-end-form">
                 <label>
                     <input type="checkbox" name="_remember_me"> Se souvenir de moi</label>
-                <button class="call-action-btn connexion-button form_champ" type="submit">Connexion</button>
+                <button class="call-action-btn connexion-button" type="submit">Connexion</button>
             </div>
         </div>
     </form>
-
-    <a class="link-form-action" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
 
 {% endblock %}

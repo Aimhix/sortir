@@ -4,58 +4,69 @@
 
 {% block nav %}
     <div class="container">
-    {% if app.user %}
-        <div>
-            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
+        {% if app.user %}
+            <div>
+                Vous êtes connecté en tant que {{ app.user.username }}, <a
+                        href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
 
-    {% endif %}
+        {% endif %}
     </div>
 {% endblock %}
 
 {% block body %}
+
+    {% block headerBig %}
+        <div class="header-content">
+            <h1 class="site-title">
+                SORTIR<span class="com">.COM</span>
+            </h1>
+            <br>
+            <h2><span class="sub-title">Sorties entre étudiants</span></h2>
+        </div>
+    {% endblock %}
 
     {{ form_start(form, {'attr': {'class': 'activity-search-form'}}) }}
 
     <div id="container-search">
         <div id="container-form">
 
-    {# recherche par nom #}
-    <div class="form-group">
-{#        <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label>#}
-        {{ form_errors(form.search) }}
-        {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Que cherches-tu ?'}}) }}
-    </div>
+            {# recherche par nom #}
+            <div class="form-group">
+                {#        <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label> #}
+                {{ form_errors(form.search) }}
+                {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Que cherches-tu ?'}}) }}
+            </div>
 
-    {# date de début avec icône, à voir si je suis faible et je met fontAwesome #}
-    <div class="form-group date-picker">Du
-{#        {{ form_label(form.dateStart) }}#}
-        {{ form_widget(form.dateStart) }}
-        <span class="date-icon">
+            {# date de début avec icône, à voir si je suis faible et je met fontAwesome #}
+            <div class="form-group date-picker">Du
+                {#        {{ form_label(form.dateStart) }} #}
+                {{ form_widget(form.dateStart) }}
+                <span class="date-icon">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
-    </div>
+            </div>
 
-    {# date de fin #}
-    <div class="form-group date-picker">Au
-{#        {{ form_label(form.subLimitDate) }}#}
-        {{ form_widget(form.subLimitDate) }}
-        <span class="date-icon-end">
+            {# date de fin #}
+            <div class="form-group date-picker">Au
+                {#        {{ form_label(form.subLimitDate) }} #}
+                {{ form_widget(form.subLimitDate) }}
+                <span class="date-icon-end">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
-    </div>
+            </div>
 
-        {# recherche par campus #}
-        <div class="form-group">
-            <label for="{{ form.campus.vars.id }}"></label>
-            {{ form_errors(form.campus) }}
-            {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Campus'}}) }}
-        </div>
+            {# recherche par campus #}
+            <div class="form-group">
+                <label for="{{ form.campus.vars.id }}"></label>
+                {{ form_errors(form.campus) }}
+                {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Campus'}}) }}
+            </div>
 
-        {# Bouton de soumission du formulaire #}
-        <div class="form-submit">
-            <input type="submit" value="{{ ' '|trans }}" class="submit-button">
-        </div>
+            {# Bouton de soumission du formulaire #}
+            <div class="form-submit">
+                <input type="submit" value="{{ ' '|trans }}" class="submit-button">
+            </div>
 
         </div>
     </div>
@@ -64,10 +75,10 @@
     <div class="checkbox-group">
         <div class="form-check">
             <label class="add-checkbox">
-            {{ form_widget(form.organizer) }}
-            <span class="checkmark"></span>
+                {{ form_widget(form.organizer) }}
+                <span class="checkmark"></span>
 
-            <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
+                <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
             </label>
             {{ form_errors(form.organizer) }}
         </div>
@@ -93,20 +104,34 @@
     {{ form_end(form) }}
 
 
-        <div>
-            <h2 class="color-gradient">Sorties à venir</h2>
-    <section>
-        {% for activity in activities %}
-            {% include 'activity/_card.html.twig' %}
-        {% endfor %}
-    </section>
+    <div class="show-activity-card">
+        <h2 class="color-gradient" style="margin:50px 0 50px">Sorties à venir</h2>
+        <div class="btn-pref-activity">
+            <button id="switch-to-list-view"><img class="btn-pref-activity" src="{{ asset('/images/list.png') }}" alt="list"></button>
+{#            <i class="icon-list"></i><i class="icon-card"></i>#}
+            <button id="switch-to-card-view"><img class="btn-pref-activity" src="{{ asset('/images/card.png') }}" alt="card"></button>
+        </div>
+        <section>
+            <div class="show-activity-card">
+                <div class="buttons">
+                </div>
+                {% include 'activity/_card.html.twig' %}
+            </div>
+
+
+{#            {% include 'activity/_activityList.html.twig' %}#}
+
+{#            {% for activity in activities %}#}
+{#                {% include 'activity/_card.html.twig' %}#}
+{#            {% endfor %}#}
+        </section>
 
     </div>
 
 
     {# J'exécute le script AJAX :') #}
     <script>
-        document.getElementById('activity-search-form').addEventListener('submit', function(e) {
+        document.getElementById('activity-search-form').addEventListener('submit', function (e) {
             e.preventDefault();
             var data = new FormData(this);
 
@@ -134,4 +159,40 @@
                 }
             });
         });</script>
+    <script>
+        // document.getElementById('switch-to-card-view').addEventListener('click', function () {
+        //     document.querySelector('.cards-container').classList.add('card-view');
+        //     document.querySelector('.cards-container').classList.remove('list-view');
+        // });
+        //
+        // document.getElementById('switch-to-list-view').addEventListener('click', function () {
+        //     document.querySelector('.cards-container').classList.add('list-view');
+        //     document.querySelector('.cards-container').classList.remove('card-view');
+        // });
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var viewPreference = localStorage.getItem('viewPreference');
+
+            if (viewPreference === 'list') {
+                document.querySelector('.cards-container').classList.add('list-view');
+                document.querySelector('.cards-container').classList.remove('card-view');
+            } else {
+                document.querySelector('.cards-container').classList.add('card-view');
+                document.querySelector('.cards-container').classList.remove('list-view');
+            }
+
+            document.getElementById('switch-to-list-view').addEventListener('click', function () {
+                localStorage.setItem('viewPreference', 'list');
+                document.querySelector('.cards-container').classList.add('list-view');
+                document.querySelector('.cards-container').classList.remove('card-view');
+            });
+
+            document.getElementById('switch-to-card-view').addEventListener('click', function () {
+                localStorage.setItem('viewPreference', 'card');
+                document.querySelector('.cards-container').classList.add('card-view');
+                document.querySelector('.cards-container').classList.remove('list-view');
+            });
+        });
+
+    </script>
 {% endblock %}

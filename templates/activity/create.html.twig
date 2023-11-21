@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <div class="form-create-activity">
-        <span class="title-page-header">Créer ma sortie</span>
-        <p>Campus affilié : {{ user.campus }}</p><br><br>
+    <div class="form-create-activity container-form-and-show">
+        <span class="title-page-header title-show">Créer ma sortie</span>
+        <h3>Campus affilié : {{ user.campus }}</h3><br><br>
 
         {{ form_start(activityForm) }}
 
