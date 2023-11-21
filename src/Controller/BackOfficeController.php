@@ -11,6 +11,7 @@ use App\Repository\LocationRepository;
 use App\Repository\UserRepository;
 use App\Services\BackOfficeServices;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BackOfficeController extends AbstractController
 {
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/users_management', name: 'app_users_management')]
     public function userBackOffice( UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
@@ -32,6 +34,7 @@ class BackOfficeController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/city_management', name: 'app_city_management')]
     public function cityBackOffice( CityRepository $cityRepository,  EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -59,6 +62,7 @@ class BackOfficeController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/users_management_soft_delete/{id}', name: 'app_users_management_soft_delete')]
     public function softDeleteUser(BackOfficeServices $backOfficeServices, UserRepository $userRepository, int $id, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +72,7 @@ class BackOfficeController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/users_management_delete/{id}', name: 'app_users_management_delete')]
     public function deleteUser(BackOfficeServices $backOfficeServices, UserRepository $userRepository, int $id): Response
     {
@@ -77,6 +82,7 @@ class BackOfficeController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/cities_management_delete/{id}', name: 'app_cities_management_delete')]
     public function deleteCity(BackOfficeServices $backOfficeServices, CityRepository $cityRepository, int $id): Response
     {
@@ -85,6 +91,7 @@ class BackOfficeController extends AbstractController
         return $this->redirectToRoute('app_city_management');
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/location_management', name: 'app_location_management')]
     public function locationBackOffice( LocationRepository $locationRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -111,6 +118,16 @@ class BackOfficeController extends AbstractController
             'locations' => $locations
         ]);
     }
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/back_office/cities_location_delete/{id}', name: 'app_location_management_delete')]
+    public function deleteLocation(BackOfficeServices $backOfficeServices, LocationRepository $locationRepository, int $id): Response
+    {
+        $location = $locationRepository->findOneById($id);
+        $backOfficeServices->deleteLocation($location, $locationRepository);
+        return $this->redirectToRoute('app_location_management');
+    }
+
 
 
 
