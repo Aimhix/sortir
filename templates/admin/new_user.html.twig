@@ -32,9 +32,6 @@
      Afficher le formulaire
     {{ form_start(registrationForm) }}
 
-
-
-
 <div>
     {{ form_label(registrationForm.firstname) }}
     {{ form_widget(registrationForm.firstname) }}
@@ -94,6 +91,9 @@
 
 {{ form_end(registrationForm) }}
 
-
+{{ form_start(csvForm) }}
+    {{ form_row(csvForm.file) }}
+<button type="submit">Upload CSV</button>
+{{ form_end(csvForm) }}
 
 {% endblock %}

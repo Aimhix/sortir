@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\User;
 use App\Form\UserRegistrationFormType;
+use App\Services\CsvImporter;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -28,82 +32,193 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-    #[Route('/admin/new-user', name: 'admin_new_user')]
-    public function newUser(Request $request): Response
-    {
-        // Si le formulaire est soumis, utilise la méthode createUserManually
-        if ($request->isMethod('POST')) {
-            return $this->createUserManually($request);
-        }
-
-        $user = new User();
-        $form = $this->createForm(UserRegistrationFormType::class, $user);
-
-        return $this->render('admin/new_user.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
+//    public function createUserManually(Request $request): Response
+//    {
+//
+//        // Récupération manuelle du prénom de l'utilisateur par l'administrateur
+//        $firstName = $request->request->get('user_registration_form')['firstname'];; // récupération du prénom depuis le formulaire
+//        $lastName= $request->request->get('user_registration_form')['lastname'];
+//        $phone= $request->request->get('user_registration_form')['phone'];
+//        $email = $request->request->get('user_registration_form')['email'];
+//        $password= $request->request->get('user_registration_form')['password'];
+//        $campus = $request->request->get('user_registration_form')['campus'];
+//       // $profilePicture= $request->request->get('user_registration_form')['profilePicture'];
+//
+//        // Génération du pseudo basé sur le prénom du nouvel utilisateur
+//        $pseudo = strtolower($firstName); // Pseudo en minuscules
+//
+//        // Création d'un nouvel utilisateur avec le pseudo généré
+//        $newUser = new User();
+//        // Hasher le mot de passe
+//        $hashedPassword = $this->passwordHasher->hashPassword($newUser, $password);
+//
+//        // Vérification si le pseudo existe déjà dans la base de données
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $userRepository = $entityManager->getRepository(User::class);
+//
+//        $i = 1;
+//        $uniquePseudo = $pseudo;
+//        while ($userRepository->findOneBy(['pseudo' => $uniquePseudo])) {
+//            // Si le pseudo existe déjà, ajouter un numéro d'incrémentation pour le rendre unique
+//            $uniquePseudo = $pseudo . '_' . $i;
+//            $i++;
+//        }
+//
+//
+//
+//
+//// campus le transformer en objet avec repository A FAIREEEEEEE
+//
+//        $newUser->setFirstName($firstName);
+//        $newUser->setLastname($lastName);
+//        $newUser->setPhone($phone);
+//        $newUser->setEmail($email);
+//        $newUser->setPassword($hashedPassword);
+//        $newUser->setCampus($campus);
+//        //$newUser->setProfilePicture($profilePicture);
+//        $newUser->setPseudo($uniquePseudo);
+//
+//
+//
+//        // Enregistrement du nouvel utilisateur dans la base de données
+//        $entityManager = $this->getDoctrine()->getManager();
+//        $entityManager->persist($newUser);
+//        $entityManager->flush();
+//
+//
+//
+//        // Retourne une réponse, puis redirection vers une autre page
+//        return $this->redirectToRoute('app_activity_index');
+//    }
 
     public function createUserManually(Request $request): Response
     {
-
-        // Récupération manuelle du prénom de l'utilisateur par l'administrateur
-        $firstName = $request->request->get('user_registration_form')['firstname'];; // récupération du prénom depuis le formulaire
-        $lastName= $request->request->get('user_registration_form')['lastname'];
-        $phone= $request->request->get('user_registration_form')['phone'];
-        $email = $request->request->get('user_registration_form')['email'];
-        $password= $request->request->get('user_registration_form')['password'];
-        $campus = $request->request->get('user_registration_form')['campus'];
-       // $profilePicture= $request->request->get('user_registration_form')['profilePicture'];
-
-        // beug trouver la bonne key pour le firstname car sinon il le mets en null, à voir si c'est bon car beug sur email
-
-        // Génération du pseudo basé sur le prénom du nouvel utilisateur
-        $pseudo = strtolower($firstName); // Pseudo en minuscules
-
-        // Création d'un nouvel utilisateur avec le pseudo généré
-        $newUser = new User();
-        // Hasher le mot de passe
-        $hashedPassword = $this->passwordHasher->hashPassword($newUser, $password);
-
-        // Vérification si le pseudo existe déjà dans la base de données
         $entityManager = $this->getDoctrine()->getManager();
-        $userRepository = $entityManager->getRepository(User::class);
 
-        $i = 1;
-        $uniquePseudo = $pseudo;
-        while ($userRepository->findOneBy(['pseudo' => $uniquePseudo])) {
-            // Si le pseudo existe déjà, ajouter un numéro d'incrémentation pour le rendre unique
-            $uniquePseudo = $pseudo . '_' . $i;
-            $i++;
-        }
+        $userFormData = $request->request->get('user_registration_form'); // Assurez-vous que cela correspond au nom de votre formulaire
 
+        $newUser = new User();
 
-// campus le transformer en objet avec repository A FAIREEEEEEE
+        $newUser->setFirstname($userFormData['firstname']);
+        $newUser->setLastname($userFormData['lastname']);
+        $newUser->setPhone($userFormData['phone']);
+        $newUser->setEmail($userFormData['email']);
+        $newUser->setActiveStatus(true);
 
-        $newUser->setFirstName($firstName);
-        $newUser->setLastname($lastName);
-        $newUser->setPhone($phone);
-        $newUser->setEmail($email);
-        $newUser->setPassword($hashedPassword);
-        $newUser->setCampus($campus);
-        //$newUser->setProfilePicture($profilePicture);
+        // Génération et assignation du pseudo
+        $pseudo = strtolower($userFormData['firstname']);
+        $uniquePseudo = $this->generateUniquePseudo($pseudo, $entityManager);
         $newUser->setPseudo($uniquePseudo);
 
+        // Hashage du mot de passe
+        $hashedPassword = $this->passwordHasher->hashPassword($newUser, $userFormData['password']);
+        $newUser->setPassword($hashedPassword);
 
+        // Récupération et assignation du campus
+        $campus = $entityManager->getRepository(Campus::class)->find($userFormData['campus']);
+        if ($campus) {
+            $newUser->setCampus($campus);
+        } else {
+            // Gérer le cas où le campus n'est pas trouvé
+        }
 
-        // Enregistrement du nouvel utilisateur dans la base de données
-        $entityManager = $this->getDoctrine()->getManager();
+        $defaultProfilePicture = '/public/images/defaultpicture.jpg'; // Chemin relatif ou absolu vers l'image
+        $newUser->setProfilePicture($defaultProfilePicture);
+
         $entityManager->persist($newUser);
         $entityManager->flush();
 
-
-
-        // Retourne une réponse, puis redirection vers une autre page
+        // Redirection ou autre réponse
         return $this->redirectToRoute('app_activity_index');
     }
+//
+//    #[Route('/admin/upload-csv', name: 'admin_upload_csv')]
+//    public function uploadCsv(Request $request, CsvImporter $csvImporter): Response
+//    {
+//        $csvForm = $this->createFormBuilder()
+//            ->add('file', FileType::class)
+//            ->getForm();
+//
+//        $csvForm->handleRequest($request);
+//
+//        if ($csvForm->isSubmitted() && $csvForm->isValid()) {
+//            $file = $csvForm['file']->getData();
+//            if ($file) {
+//                $csvImporter->importFromCsv($file);
+//            }
+//
+//            return $this->redirectToRoute('some_admin_route');
+//        }
+//
+//        return $this->render('admin/new_user.html.twig', [
+//            'csvForm' => $csvForm->createView(),
+//        ]);
+//    }
 
+
+//    #[Route('/admin/new-user', name: 'admin_new_user')]
+//    public function newUser(Request $request): Response
+//    {
+//        // Si le formulaire est soumis, utilise la méthode createUserManually
+//        if ($request->isMethod('POST')) {
+//            return $this->createUserManually($request);
+//        }
+//
+//        $user = new User();
+//        $form = $this->createForm(UserRegistrationFormType::class, $user);
+//
+//        return $this->render('admin/new_user.html.twig', [
+//            'registrationForm' => $form->createView(),
+//        ]);
+//    }
+
+    private function generateUniquePseudo(string $basePseudo, EntityManagerInterface $entityManager): string
+    {
+        $userRepository = $entityManager->getRepository(User::class);
+        $i = 1;
+        $uniquePseudo = $basePseudo;
+        while ($userRepository->findOneBy(['pseudo' => $uniquePseudo])) {
+            $uniquePseudo = $basePseudo . '_' . $i;
+            $i++;
+        }
+        return $uniquePseudo;
+    }
+
+    #[Route('/admin/new-user', name: 'admin_new_user')]
+    public function newUser(Request $request, CsvImporter $csvImporter): Response
+    {
+        // Formulaire d'inscription manuelle
+        $user = new User();
+        $registrationForm = $this->createForm(UserRegistrationFormType::class, $user);
+        $registrationForm->handleRequest($request);
+
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+            return $this->createUserManually($request);
+
+//            return $this->redirectToRoute('');
+        }
+
+        // Formulaire d'upload CSV
+        $csvForm = $this->createFormBuilder()
+            ->add('file', FileType::class)
+            ->getForm();
+        $csvForm->handleRequest($request);
+
+        if ($csvForm->isSubmitted() && $csvForm->isValid()) {
+            $file = $csvForm['file']->getData();
+            if ($file) {
+                $csvImporter->importFromCsv($file);
+            }
+
+            return $this->redirectToRoute('app_activity_index');
+        }
+
+        // Passer les deux formulaires au template
+        return $this->render('admin/new_user.html.twig', [
+            'registrationForm' => $registrationForm->createView(),
+            'csvForm' => $csvForm->createView(),
+        ]);
+    }
 
 
 
