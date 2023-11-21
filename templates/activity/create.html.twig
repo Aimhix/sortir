@@ -63,17 +63,22 @@
             </div>
         </div>
 
-        <div>
+        <div class="thumbnail-container">
             {{ form_label(activityForm.activityPicture) }}<br>
-            {% if activityForm.activityPicture.vars.value is not null %}
-                <img id="image-preview" src="{{ asset('images/activity/' ~ activityForm.activityPicture.vars.value) }}"
-                     alt="" style="max-width: 200px; max-height: 200px;">
-            {% else %}
-                <img id="image-preview" alt="" style="max-width: 200px; max-height: 200px;">
-            {% endif %}
             {{ form_widget(activityForm.activityPicture, { 'attr': {'onchange': 'previewImage(this)'} }) }}<br>
+
+            <div id="image-container" style="width: 200px; height: 200px; overflow: hidden;">
+                {% if activityForm.activityPicture.vars.value is not null %}
+                    <img id="image-preview" src="{{ asset('images/activity/' ~ activityForm.activityPicture.vars.value) }}"
+                         alt="" style="width: 100%; height: 100%;">
+                {% else %}
+                    <img id="image-preview" alt="" style="width: 100%; height: 100%;">
+                {% endif %}
+            </div>
+
             {{ form_errors(activityForm.activityPicture) }}<br>
         </div>
+
 
         <div class="btn-end-form create-activity-action">
             {{ form_widget(activityForm.isPublished) }}<br>

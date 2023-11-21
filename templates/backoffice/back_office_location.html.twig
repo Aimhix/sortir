@@ -8,6 +8,7 @@
         <p>Nom :{{ location.name }}</p>
         <p>Adresse :{{ location.streetName }}</p>
         <br>
+        <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer {{ location.name }}</a>
     {% endfor %}
     {{ form_start(locationForm) }}
     {{ form_widget(locationForm) }}
