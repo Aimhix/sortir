@@ -81,6 +81,9 @@ class Activity
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities', cascade: ['persist', 'remove'])]
     private $users;
 
+    #[ORM\Column(length: 255)]
+    private ?string $activityPicture;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -377,5 +380,17 @@ class Activity
 //                ->addViolation();
 //        }
 //    }
+
+public function getActivityPicture(): ?string
+{
+    return $this->activityPicture;
+}
+
+public function setActivityPicture(string $activityPicture): static
+{
+    $this->activityPicture = $activityPicture;
+
+    return $this;
+}
 }
 
