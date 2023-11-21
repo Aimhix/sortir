@@ -804,17 +804,44 @@ body::after {
     text-align: center;
 }
 
-#switch-to-list-view, #switch-to-card-view{
+#switch-to-list-view, #switch-to-card-view {
     border: none;
     background-color: #DEE3E6;
     border-radius: 15px;
     padding: 10px;
     display: inline-block;
     margin: 3px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-#switch-to-list-view img, #switch-to-card-view img{width:20px;cursor:pointer;}
-#switch-to-list-view{}
-#switch-to-card-view{
+#switch-to-list-view img, #switch-to-card-view img {
+    width: 20px;
+    cursor: pointer;
 }
+
+#switch-to-list-view {
+}
+
+#switch-to-card-view {
+}
+
+.thumbnail-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+#activity_activityPicture {
+    background-color: #f3299c;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+
