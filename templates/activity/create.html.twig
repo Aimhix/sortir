@@ -14,11 +14,13 @@
 
             <div class="form_champ create-activity-name">
                 {{ form_label(activityForm.name) }}<br>
-                {{ form_widget(activityForm.name) }}
+                {{ form_widget(activityForm.name) }}<br>
+                {{ form_errors(activityForm.name) }}<br>
             </div>
             <div class="form_champ create-activity-location">
                 {{ form_label(activityForm.location) }}<br>
                 {{ form_widget(activityForm.location) }}<br>
+                {{ form_errors(activityForm.location) }}<br>
                 <a id="create-activity-add-location" href="{{ path('app_activity_create_location') }}">Ajouter un
                     nouveau lieu</a>
             </div>
@@ -28,11 +30,13 @@
 
             <div class="form_champ create-activity-dateStart">
                 {{ form_label(activityForm.dateStart) }}<br>
-                {{ form_widget(activityForm.dateStart) }}
+                {{ form_widget(activityForm.dateStart) }}<br>
+                {{ form_errors(activityForm.dateStart) }}<br>
             </div>
             <div class="form_champ create-activity-duration">
                 {{ form_label(activityForm.duration) }}<br>
-                {{ form_widget(activityForm.duration) }}
+                {{ form_widget(activityForm.duration) }}<br>
+                {{ form_errors(activityForm.duration) }}<br>
             </div>
         </div>
 
@@ -40,11 +44,13 @@
 
             <div class="form_champ create-activity-subMax">
                 {{ form_label(activityForm.subMax) }}<br>
-                {{ form_widget(activityForm.subMax) }}
+                {{ form_widget(activityForm.subMax) }}<br>
+                {{ form_errors(activityForm.subMax) }}<br>
             </div>
             <div class="form_champ create-activity-subLimitDate">
                 {{ form_label(activityForm.subLimitDate) }}<br>
-                {{ form_widget(activityForm.subLimitDate) }}
+                {{ form_widget(activityForm.subLimitDate) }}<br>
+                {{ form_errors(activityForm.subLimitDate) }}<br>
             </div>
         </div>
 
@@ -52,14 +58,16 @@
 
             <div class="form_champ create-activity-infoActivity">
                 {{ form_label(activityForm.infoActivity) }}<br>
-                {{ form_widget(activityForm.infoActivity) }}
+                {{ form_widget(activityForm.infoActivity) }}<br>
+                {{ form_errors(activityForm.infoActivity) }}<br>
             </div>
         </div>
 
         <div class="btn-end-form create-activity-action">
 
-            {{ form_widget(activityForm.isPublished) }}
-            {{ form_label(activityForm.isPublished) }}
+            {{ form_widget(activityForm.isPublished) }}<br>
+            {{ form_label(activityForm.isPublished) }}<br>
+            {{ form_errors(activityForm.isPublished) }}<br>
 
             <button type="submit" class="call-action-btn create-activity-publication">Créer ma sortie</button>
         </div>
