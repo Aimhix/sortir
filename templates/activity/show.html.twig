@@ -32,7 +32,7 @@
 
             <div class="form_champ activity-nombre-show">
                 {% set count = 0 %}
-                {% for particpant in participant %}
+                {% for participant in participant %}
                     {% set count = count + 1 %}
                 {% endfor %}
                 {% set remainingPlaces = activity.subMax - count %}
