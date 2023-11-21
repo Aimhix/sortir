@@ -9,7 +9,11 @@
         <p>Adresse :{{ location.streetName }}</p>
         <br>
     {% endfor %}
-    <a href="{{ path('app_back_office') }}">Retour</a>
+    {{ form_start(locationForm) }}
+    {{ form_widget(locationForm) }}
+    <button type="submit" class="call-action-btn create-activity-publication">Ajouter un lieu</button>
+    {{ form_end(locationForm) }}
+    <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
 {% endblock %}
 
 

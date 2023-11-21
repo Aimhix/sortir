@@ -26,9 +26,6 @@ class AppFixtures extends Fixture
     {
 
 
-
-
-
         //        Fixtures de ville
 
         $city1 = new City();
@@ -62,9 +59,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($city4);
         $manager->flush();
-
-
-
 
 
         //        Fixtures d'etat d'activités
@@ -112,7 +106,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
         //        Fixtures de lieu
 
         $location1 = new Location();
@@ -156,11 +149,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
-
-
-
         //        Fixtures des campus
 
         $campus1 = new Campus();
@@ -188,12 +176,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
-
         //        Fixtures des Users
-
-
 
 
         $user1 = new User();
@@ -207,6 +190,7 @@ class AppFixtures extends Fixture
         $user1->setCampus($campus1);
         $user1->setProfilePicture("../../public/images/Olaf.jpg");
         $user1->setPassword($this->hasher->hashPassword($user1, '0000'));
+
 
         $manager->persist($user1);
         $manager->flush();
@@ -254,8 +238,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-
         //        Fixtures des Activitées
 
         $dateStart1 = new \DateTime('2023-11-16T15:52:01+00:00');
@@ -277,6 +259,7 @@ class AppFixtures extends Fixture
         $activities1->setDateStart(new \DateTime('2023-11-16T12:30:01+00:00'));
         $activities1->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities1->setInfoActivity('Activité début le 16/11 et donc status : passée // sub limite à 3');
+        $activities1->setActivityPicture("../../public/images/Olaf.jpg");
 
 
         $manager->persist($activities1);
@@ -295,6 +278,7 @@ class AppFixtures extends Fixture
         $activities2->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities2->setSubLimitDate($subLimitDate1);
         $activities2->setInfoActivity('Activité en cours');
+        $activities2->setActivityPicture("../../public/images/Olaf.jpg");
 
         $manager->persist($activities2);
         $manager->flush();
@@ -312,6 +296,7 @@ class AppFixtures extends Fixture
         $activities3->setDateStart(new \DateTime('2023-12-10T08:30:01+00:00'));
         $activities3->setSubLimitDate(new \DateTime('2023-12-05T08:30:01+00:00'));
         $activities3->setInfoActivity('Activité juste créée');
+        $activities3->setActivityPicture("../../public/images/Olaf.jpg");
 
         $manager->persist($activities3);
         $manager->flush();
@@ -329,6 +314,7 @@ class AppFixtures extends Fixture
         $activities4->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities4->setSubLimitDate(new \DateTime('2023-11-10T08:30:01+00:00'));
         $activities4->setInfoActivity('L\'acti est annulée');
+        $activities4->setActivityPicture("../../public/images/Olaf.jpg");
 
         $manager->persist($activities4);
         $manager->flush();
@@ -346,10 +332,10 @@ class AppFixtures extends Fixture
         $activities5->setDateStart(new \DateTime('2023-12-16T08:30:01+00:00'));
         $activities5->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities5->setInfoActivity('Acti clotuée');
+        $activities5->setActivityPicture("../../public/images/Olaf.jpg");
 
         $manager->persist($activities5);
         $manager->flush();
-
 
 
         $activities6 = new Activity();
@@ -364,10 +350,10 @@ class AppFixtures extends Fixture
         $activities6->setDateStart(new \DateTime('2023-11-28T08:30:01+00:00'));
         $activities6->setSubLimitDate(new \DateTime('2023-11-15T08:30:01+00:00'));
         $activities6->setInfoActivity('acti ouverte');
+        $activities6->setActivityPicture("../../public/images/Olaf.jpg");
 
         $manager->persist($activities6);
         $manager->flush();
-
 
 
     }

@@ -6,20 +6,26 @@
     {% for city in cities %}
         <br>
         <p>{{ city.name }}</p>
-        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}">Supprimer</a>
+        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
+           onclick="return confirm('are u sure?')">Supprimer</a>
     {% endfor %}
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
 
-    <br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br>
-    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a>
-    <a class="stop-action-btn" href="{{ path('app_back_office') }}">Retour</a>
+    {{ form_start(cityForm) }}
+    {{ form_widget(cityForm) }}
+    <button type="submit" class="call-action-btn create-activity-publication">Ajouter une ville</button>
+    {{ form_end(cityForm) }}
+
+
+
+    {#    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a> #}
+    <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
 {% endblock %}
 
 

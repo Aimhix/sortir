@@ -3,7 +3,7 @@
 
     <ul>
         {% for participant in participant %}
-            <li><a href="{{ path('app_participant_profile', {'id': participant.id}) }}">{{ participant.pseudo }}</a>
+            <li><a class="btn-info-action" href="{{ path('app_participant_profile', {'id': participant.id}) }}">{{ participant.pseudo }}</a>
             </li>
         {% endfor %}
     </ul>

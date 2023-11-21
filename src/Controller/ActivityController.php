@@ -12,6 +12,7 @@ use App\Form\LocationType;
 use App\Repository\ActivityRepository;
 use App\Services\ActivityService;
 use App\Repository\StatusRepository;
+use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class ActivityController extends AbstractController
 {
 
     #[Route('/create', name: 'app_activity_create')]
-    public function createActivity(StatusRepository $statusRepository ,Request $request, EntityManagerInterface $entityManager): Response
+    public function createActivity(StatusRepository $statusRepository, Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
 
         $user = $this->getUser();
@@ -38,7 +39,14 @@ class ActivityController extends AbstractController
         $activityForm->handleRequest($request);
 
 
-        if ($activityForm->isSubmitted() && $activityForm->isValid()){
+        if ($activityForm->isSubmitted() && $activityForm->isValid()) {
+
+            $imageFile = $activityForm['activityPicture']->getData();
+
+            if ($imageFile) {
+                $newFilename = $fileUploader->upload($imageFile, $this->getParameter('kernel.project_dir') . '/public/images/activity');
+                $activity->setActivityPicture($newFilename);
+            }
 
             $entityManager->persist($activity);
             $entityManager->flush();
@@ -49,7 +57,7 @@ class ActivityController extends AbstractController
         }
 
         return $this->render('activity/create.html.twig', [
-            'activityForm' => $activityForm ->createView(), 'user' => $user
+            'activityForm' => $activityForm->createView(), 'user' => $user
         ]);
     }
 
@@ -63,7 +71,7 @@ class ActivityController extends AbstractController
 
         $locationForm->handleRequest($request);
 
-        if ($locationForm->isSubmitted() && $locationForm->isValid()){
+        if ($locationForm->isSubmitted() && $locationForm->isValid()) {
 
             $entityManager->persist($location);
             $entityManager->flush();
@@ -74,7 +82,7 @@ class ActivityController extends AbstractController
         }
 
         return $this->render('activity/create_location.html.twig', [
-            'locationForm' => $locationForm ->createView()
+            'locationForm' => $locationForm->createView()
         ]);
     }
 
@@ -85,7 +93,7 @@ class ActivityController extends AbstractController
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw new \LogicException('L\'utilisateur actuel n\'est pas une instance de \App\Entity\User');
-    }
+        }
 
         $activityService = new ActivityService($entityManager);
         $activity = $managerRegistry->getRepository(Activity::class)->find($activityId);
@@ -101,7 +109,7 @@ class ActivityController extends AbstractController
     }
 
     #[Route('/activity/unsubscribe/{activityId}', name: 'activity_unsubscribe')]
-    public function unsubscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId ): Response
+    public function unsubscribeAction(EntityManagerInterface $entityManager, ManagerRegistry $managerRegistry, int $activityId): Response
     {
         $user = $this->getUser();
 
@@ -119,7 +127,7 @@ class ActivityController extends AbstractController
 
 
     #[Route('/activity/cancel/{activityId}', name: 'activity_cancel')]
-    public function cancelActivity(EntityManagerInterface $entityManager, int $activityId, ActivityRepository $activityRepository, StatusRepository $statusRepository ): Response
+    public function cancelActivity(EntityManagerInterface $entityManager, int $activityId, ActivityRepository $activityRepository, StatusRepository $statusRepository): Response
     {
         $user = $this->getUser();
 
@@ -129,15 +137,15 @@ class ActivityController extends AbstractController
         }
 
 
-            if ($activity->getOrganizer()->getId() == $user->getId()){
-                $activity->setStatus($statusRepository->findOneByWording('Annulée'));
-                $entityManager->persist($activity);
-                $entityManager->flush();
-                $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+        if ($activity->getOrganizer()->getId() == $user->getId()) {
+            $activity->setStatus($statusRepository->findOneByWording('Annulée'));
+            $entityManager->persist($activity);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
 
-                return $this->redirectToRoute('app_activity_index');
-            }
-        return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties' );
+            return $this->redirectToRoute('app_activity_index');
+        }
+        return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties');
     }
 
 
