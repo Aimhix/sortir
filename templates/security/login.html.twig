@@ -19,25 +19,32 @@
             </div>
         {% endif %}
 
-        <h1>Connexion</h1>
 
-        <label for="inputEmail">Email : </label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
-               autocomplete="email" required autofocus>
-        <label for="inputPassword">Mot de passe : </label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
-               required>
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-        <div>
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi</label>
+        <div class="form-connexion container-form-and-show-min">
+
+            <h2 class="title-show">Connexion</h2>
+            <div class="group-edit-min">
+                <div class="connexion-email form_champ">
+                    <label for="inputEmail">Email : </label><br>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                           autocomplete="email" required autofocus>
+                </div>
+                <div class="connexion-password form_champ">
+                    <label for="inputPassword">Mot de passe : </label><br>
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                           autocomplete="current-password"
+                           required>
+                    <a class="mdp-forget" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+                </div>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="btn-end-form">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Se souvenir de moi</label>
+                <button class="call-action-btn connexion-button" type="submit">Connexion</button>
+            </div>
         </div>
-
-        <button type="submit">Connexion</button>
     </form>
-
-    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié </a>
 
 {% endblock %}

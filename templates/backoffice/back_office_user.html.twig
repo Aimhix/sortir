@@ -3,27 +3,30 @@
 {% block title %}BackOfficeUser {{ parent() }}{% endblock %}
 
 {% block body %}
- {% for user in users %}
-
-  <br>
-  <p>{{ user.pseudo }}</p>
-  <div>
-   <p>Status du compte :</p>
-   {% if user.activeStatus == 1 %}
-    <p>Activé</p>
-   {% else %}
-    <p>Désactivé</p>
-   {% endif %}
-
- </div>
-  <a href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}"> Desactiver le compte de : {{ user.pseudo }}</a>
-  <br>
-  <a href="{{ path('app_users_management_delete', {'id': user.id}) }}"> Supprimer : {{ user.pseudo }}</a>
-
-
- {% endfor %}
-
-
+    {% for user in users %}
+        <br>
+        <p>{{ user.pseudo }}</p>
+        <div>
+            <p>Status du compte :</p>
+            {% if user.activeStatus == 1 %}
+                <p>Activé</p>
+            {% else %}
+                <p>Désactivé</p>
+            {% endif %}
+        </div>
+        {% if user.activeStatus == 1 %}
+            <a href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}"> Desactiver le compte de
+                : {{ user.pseudo }}</a>
+        {% else %}
+            <a href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}"> Réactiver le compte de
+                : {{ user.pseudo }}</a>
+        {% endif %}
+        <br>
+        <a href="{{ path('app_users_management_delete', {'id': user.id}) }}"> Supprimer : {{ user.pseudo }}</a>
+    {% endfor %}
+    <br>
+    <br>
+    <a class="stop-action-btn" href="{{ path('app_back_office') }}">Retour</a>
 
 {% endblock %}
 

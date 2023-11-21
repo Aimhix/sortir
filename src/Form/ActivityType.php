@@ -33,6 +33,7 @@ class ActivityType extends AbstractType
                 'label' => 'Nombre maximum de participant : ',
             ])
             ->add('infoActivity',null,  [
+                'attr' => array('rows' => '6'),
                 'label' => 'Infos suplémentaire : ',
             ])
             ->add('isPublished',null,  [

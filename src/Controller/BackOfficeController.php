@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
+use App\Form\CityType;
 use App\Repository\CityRepository;
 use App\Repository\LocationRepository;
 use App\Repository\UserRepository;
 use App\Services\BackOfficeServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -70,6 +73,29 @@ class BackOfficeController extends AbstractController
         $city = $cityRepository->findOneById($id);
         $backOfficeServices->deleteCity($city, $cityRepository);
         return $this->redirectToRoute('app_city_management');
+    }
+
+    #[Route('/back_office/cities_management_new', name: 'app_cities_management_new')]
+    public function newCity(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $city = new City();
+        $cityForm = $this->createForm(CityType::class, $city);
+
+        $cityForm->handleRequest($request);
+
+        if ($cityForm->isSubmitted() && $cityForm->isValid()){
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ville créée avec succès !');
+
+            return $this->redirectToRoute('app_city_management');
+        }
+
+        return $this->render('backoffice/new_city.html.twig', [
+            'cityForm' => $cityForm ->createView()
+        ]);
     }
 
 

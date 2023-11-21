@@ -9,13 +9,21 @@
             {% if app.user %}
                 {% if is_granted('ROLE_USER') %}
                     <li>
-                        <a id="add-an-activity" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                        <a class="call-action-btn" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
                     </li>
                     <li class="dropdown">
+
+                        {% if app.user.profilePicture %}
+                            <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="photo">
+                        {% else %}
+                            <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
+                        {% endif %}
+
+{#                        <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="">#}
                         <a href="#">{{ app.user.fullName }}</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Mes Sorties</a></li>
-                            <li><a href="{{ path('app_profile') }}">Mon profil</a></li>
+{#                            <li><a href="#">Mes Sorties</a></li>#}
+                            <li><a href="{{ path('app_editprofile') }}">Mon profil</a></li>
                             <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                         </ul>
                     </li>
@@ -45,14 +53,6 @@
             </ul>
         </nav>
 
-    <div class="header-content">
-    <h1 class="site-title">
-        SORTIR<span class="com">.COM</span>
-    </h1>
-        <br>
-        <h2>    <span class="sub-title">Sorties entre étudiants</span></h2>
-    </div>
-
-
     </div>
 </header>
+

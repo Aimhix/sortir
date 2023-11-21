@@ -12,19 +12,26 @@ use Doctrine\ORM\EntityManagerInterface;
 class BackOfficeServices
 {
 
-    public function softDeleteUser(User $user, EntityManagerInterface $entityManager){
-        $user->setActiveStatus(false);
+    public function softDeleteUser(User $user, EntityManagerInterface $entityManager)
+    {
+        if ($user->isActiveStatus()) {
+            $user->setActiveStatus(false);
+        }
+        else {
+            $user->setActiveStatus(true);
+        }
 
         $entityManager->persist($user);
         $entityManager->flush();
     }
 
-    public function deleteUser(User $user, UserRepository $userRepository){
+    public function deleteUser(User $user, UserRepository $userRepository)
+    {
         $userRepository->remove($user, true);
 
     }
 
-    public function deleteCity(City $city,CityRepository $cityRepository)
+    public function deleteCity(City $city, CityRepository $cityRepository)
     {
         $cityRepository->remove($city, true);
     }

@@ -9,26 +9,27 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ActivityUpdateService
 {
-    public function activityUpdate(ActivityRepository $activityRepository, EntityManagerInterface $entityManager, StatusRepository $statusRepository){
+    public function activityUpdate(ActivityRepository $activityRepository, EntityManagerInterface $entityManager, StatusRepository $statusRepository)
+    {
 
         $activities = $activityRepository->findAll();
 
-        foreach ($activities as $activity){
+        foreach ($activities as $activity) {
 
             $currentDate = new \DateTime();
             $dateStart = $activity->getDateStart();
             $dateDifference = $dateStart->diff($currentDate)->days;
 
 
-            if ($activity->isIsPublished()  && $activity->getStatus()->getId() != 6){
+            if ($activity->isIsPublished() && $activity->getStatus()->getId() != 6) {
                 $activity->setStatus($statusRepository->findOneByWording('Ouverte'));
             }
 
-            if ($activity->getSubLimitDate() < $currentDate && $activity->getStatus()->getId() != 6){
+            if ($activity->getSubLimitDate() < $currentDate && $activity->getStatus()->getId() != 6) {
                 $activity->setStatus($statusRepository->findOneByWording('Clôturée'));
             }
 
-            if ($activity->getDateStart() < $currentDate && $activity->getStatus()->getId() != 6){
+            if ($activity->getDateStart() < $currentDate && $activity->getStatus()->getId() != 6) {
                 $activity->setStatus($statusRepository->findOneByWording('Activité en cours'));
             }
 

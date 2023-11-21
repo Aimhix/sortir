@@ -1,0 +1,15 @@
+<section class="cards-container">
+    {% for activity in activities %}
+        <div class="activity-card">
+            <h3>{{ activity.name }}</h3>
+            <p>Date: {{ activity.dateStart|date('Y-m-d H:i') }}</p>
+            <p>Lieu: {{ activity.location.name }}</p>
+            <p>Organisateur: {{ activity.organizer.username }}</p>
+            <p>Participants: {{ activity.users|length }} / {{ activity.subMax }}</p>
+            <!-- Autres détails de l'activité -->
+            <div class="activity-actions">
+                <!-- Boutons ou liens d'actions -->
+            </div>
+        </div>
+    {% endfor %}
+</section>
