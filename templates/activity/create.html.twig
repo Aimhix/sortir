@@ -63,8 +63,19 @@
             </div>
         </div>
 
-        <div class="btn-end-form create-activity-action">
+        <div>
+            {{ form_label(activityForm.activityPicture) }}<br>
+            {% if activityForm.activityPicture.vars.value is not null %}
+                <img id="image-preview" src="{{ asset('images/activity/' ~ activityForm.activityPicture.vars.value) }}"
+                     alt="" style="max-width: 200px; max-height: 200px;">
+            {% else %}
+                <img id="image-preview" alt="" style="max-width: 200px; max-height: 200px;">
+            {% endif %}
+            {{ form_widget(activityForm.activityPicture, { 'attr': {'onchange': 'previewImage(this)'} }) }}<br>
+            {{ form_errors(activityForm.activityPicture) }}<br>
+        </div>
 
+        <div class="btn-end-form create-activity-action">
             {{ form_widget(activityForm.isPublished) }}<br>
             {{ form_label(activityForm.isPublished) }}<br>
             {{ form_errors(activityForm.isPublished) }}<br>
@@ -75,8 +86,7 @@
         {{ form_end(activityForm) }}
     </div>
 
-
-
+    <script src="{{ asset('assets/previewImageActivity.js') }}"></script>
 
 {% endblock %}
 
