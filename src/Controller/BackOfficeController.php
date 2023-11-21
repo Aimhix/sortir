@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\City;
+use App\Entity\Location;
 use App\Form\CityType;
+use App\Form\LocationType;
 use App\Repository\CityRepository;
 use App\Repository\LocationRepository;
 use App\Repository\UserRepository;
@@ -19,13 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class BackOfficeController extends AbstractController
 {
 
-    #[Route('/back_office/', name: 'app_back_office')]
-    public function mainBackOffice(): Response
-    {
-        return $this->render('backoffice/back_office.html.twig');
-    }
-
-
     #[Route('/back_office/users_management', name: 'app_users_management')]
     public function userBackOffice( UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
@@ -38,15 +33,30 @@ class BackOfficeController extends AbstractController
 
 
     #[Route('/back_office/city_management', name: 'app_city_management')]
-    public function cityBackOffice( CityRepository $cityRepository): Response
+    public function cityBackOffice( CityRepository $cityRepository,  EntityManagerInterface $entityManager, Request $request): Response
     {
         $cities = $cityRepository->findAll();
 
+        $city = new City();
+        $cityForm = $this->createForm(CityType::class, $city);
+
+        $cityForm->handleRequest($request);
+
+        if ($cityForm->isSubmitted() && $cityForm->isValid()){
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ville créée avec succès !');
+
+            return $this->redirectToRoute('app_city_management');
+        }
+
         return $this->render('backoffice/back_office_city.html.twig', [
+            'cityForm' => $cityForm ->createView(),
             'cities' => $cities
         ]);
     }
-
 
 
     #[Route('/back_office/users_management_soft_delete/{id}', name: 'app_users_management_soft_delete')]
@@ -75,37 +85,29 @@ class BackOfficeController extends AbstractController
         return $this->redirectToRoute('app_city_management');
     }
 
-    #[Route('/back_office/cities_management_new', name: 'app_cities_management_new')]
-    public function newCity(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/back_office/location_management', name: 'app_location_management')]
+    public function locationBackOffice( LocationRepository $locationRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $city = new City();
-        $cityForm = $this->createForm(CityType::class, $city);
+        $locations = $locationRepository->findAll();
 
-        $cityForm->handleRequest($request);
 
-        if ($cityForm->isSubmitted() && $cityForm->isValid()){
+        $location = new Location();
+        $locationForm = $this->createForm(LocationType::class, $location);
 
-            $entityManager->persist($city);
+        $locationForm->handleRequest($request);
+
+        if ($locationForm->isSubmitted() && $locationForm->isValid()){
+
+            $entityManager->persist($location);
             $entityManager->flush();
 
             $this->addFlash('success', 'Ville créée avec succès !');
 
-            return $this->redirectToRoute('app_city_management');
+            return $this->redirectToRoute('app_location_management');
         }
 
-        return $this->render('backoffice/new_city.html.twig', [
-            'cityForm' => $cityForm ->createView()
-        ]);
-    }
-
-
-
-    #[Route('/back_office/location_management', name: 'app_location_management')]
-    public function locationBackOffice( LocationRepository $locationRepository): Response
-    {
-        $locations = $locationRepository->findAll();
-
         return $this->render('backoffice/back_office_location.html.twig', [
+            'locationForm' => $locationForm ->createView(),
             'locations' => $locations
         ]);
     }

@@ -23,7 +23,6 @@ class LocationType extends AbstractType
                 'class'=> City::class,
                 'choice_label'=> 'name'
         ])
-            ->add("save",SubmitType::class,["label"=>"Enregistrer"])
         ;
     }
 

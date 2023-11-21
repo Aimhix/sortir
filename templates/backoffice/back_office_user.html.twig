@@ -3,6 +3,11 @@
 {% block title %}BackOfficeUser {{ parent() }}{% endblock %}
 
 {% block body %}
+
+    <a href="{{ path('admin_new_user') }}">Add Users</a>
+    <br>
+
+
     {% for user in users %}
         <br>
         <p>{{ user.pseudo }}</p>
@@ -26,7 +31,7 @@
     {% endfor %}
     <br>
     <br>
-    <a class="stop-action-btn" href="{{ path('app_back_office') }}">Retour</a>
+    <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
 
 {% endblock %}
 

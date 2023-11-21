@@ -208,6 +208,7 @@ class AppFixtures extends Fixture
         $user1->setProfilePicture("../../public/images/Olaf.jpg");
         $user1->setPassword($this->hasher->hashPassword($user1, '0000'));
 
+
         $manager->persist($user1);
         $manager->flush();
 
