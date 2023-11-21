@@ -1,49 +1,77 @@
 <header>
-<div>
-    <nav id="header-nav">
-        <ul class="header-nav-inner">
-            <li class="logo-nav">
-                <a href="/">SORTIR<span class="com">.COM</span></a>
-            </li>
+    <div>
+        <nav id="header-nav">
+            <ul class="header-nav-inner">
+                <li class="logo-nav">
+                    <a href="/">SORTIR<span class="com">.COM</span></a>
+                </li>
 
-            {% if app.user %}
-                {% if is_granted('ROLE_USER') %}
-                    <li>
-                        <a class="call-action-btn" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
-                    </li>
-                    <li class="dropdown">
+                {% if app.user %}
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a class="call-action-btn" href="{{ path('app_activity_create') }}">Proposer une sortie</a>
+                        </li>
 
-                        {% if app.user.profilePicture %}
-                            <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="photo">
-                        {% else %}
-                            <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
-                        {% endif %}
 
-{#                        <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="">#}
-                        <a href="#">{{ app.user.fullName }}</a>
-                        <ul class="dropdown-menu">
-{#                            <li><a href="#">Mes Sorties</a></li>#}
-                            <li><a href="{{ path('app_editprofile') }}">Mon profil</a></li>
-                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li>
-                        <a href="{{ path('app_city_management') }}">Gestion des Villes</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_location_management') }}">Gestion des Lieux</a>
-                    </li>
+                        <div class="menu-deroulant">
+                            <ul class="menu">
+                                <li>
+                                    {% if app.user.profilePicture %}
+                                        <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="photo">
+                                    {% else %}<img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br>
+                                    {% endif %}
+                                    <a href="#">{{ app.user.fullName }}</a>
+                                    <ul class="sub-menu">
+                                        <li><a class="sub-menu-deroulant" href="{{ path('app_editprofile') }}">Mon
+                                                profil</a></li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                        <li><a href="{{ path('app_users_management') }}">Gestion Users</a></li>
+                                            <li><a href="{{ path('app_location_management') }}">Gestion des Lieux</a></li>
+                                            <li><a href="{{ path('app_city_management') }}">Gestion des Villes</a></li>
+                                        {% endif %}
+                                        <li><a class="sub-menu-deroulant"
+                                               href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
 
-                    <li>
-{#                        <a href="{{ path('app_sites') }}">Add Sites</a>#}
-                    </li>
-                    <li>
-                        <a href="{{ path('app_users_management') }}">Gestion Users</a>
-                    </li>
 
-                {% endif %}
+
+                        {#                    <li class="dropdown"> #}
+
+                        {#                        {% if app.user.profilePicture %} #}
+                        {#                            <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt="photo"> #}
+                        {#                        {% else %} #}
+                        {#                            <img src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo"><br> #}
+                        {#                        {% endif %} #}
+
+                        {#                        <img class="profile-picture-icon" src="{{ asset('/images/' ~ app.user.profilePicture) }}" alt=""> #}
+                        {#                        <a href="#">{{ app.user.fullName }}</a> #}
+                        {#                        <ul class="dropdown-menu"> #}
+                        {#                            <li><a href="#">Mes Sorties</a></li> #}
+                        {#                            <li><a href="{{ path('app_editprofile') }}">Mon profil</a></li> #}
+                        {#                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li> #}
+                        {#                        </ul> #}
+                        {#                    </li> #}
+                    {% endif %}
+{#                    {% if is_granted('ROLE_ADMIN') %}#}
+
+{#                        <li>#}
+{#                            <a href="{{ path('app_city_management') }}">Gestion des Villes</a>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('app_location_management') }}">Gestion des Lieux</a>#}
+{#                        </li>#}
+
+{#                        <li>#}
+{#                            #}{#                        <a href="{{ path('app_sites') }}">Add Sites</a> #}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('app_users_management') }}">Gestion Users</a>#}
+{#                        </li>#}
+
+{#                    {% endif %}#}
 
                 {% else %}
                     <li>
@@ -52,7 +80,6 @@
 
 
                 {% endif %}
-
 
 
             </ul>

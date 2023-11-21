@@ -49,10 +49,11 @@ nav {
     text-align: right;
 }
 
-#header-nav li:not(.dropdown li) {
+#header-nav li {
     display: inline-block;
-    padding: 20px;
+    padding: 20px 0;
     margin: auto;
+    height:20px;
 }
 
 #header-nav a:not(.call-action-btn) {
@@ -233,30 +234,82 @@ h1 {
 
 
 /* menu deroulant */
-.dropdown-menu {
-    display: none; /* Masque le menu déroulant par défaut */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+.menu-deroulant {
+    text-align: center;
+    display:inline-block;
+    position:relative;
+    bottom:-25px;
+}
+.menu {
+    display: inline-block;
+}
+.menu > li {
+    float:right;
+    width: 180px;
+    cursor: pointer;
+    border-radius:25px
+}
+.sub-menu {
+    transform: scale(0);
+    transform-origin: top center;
+    transition: all 300ms ease-in-out;
+    padding:5px
+}
+.sub-menu li {
+    font-size: 1em;
+    background: #fff;
+    padding: 8px 0;
+    transform: scale(0);
+    transform-origin: top center;
+    transition: all 300ms ease-in-out;
+    width:100%
+}
+.sub-menu li:first-child {
+    border-radius: 15px 15px 0 0;
+}
+.sub-menu li:last-child {
+    border-radius: 0 0 15px 15px;
+}
+.sub-menu li:hover {
+    background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
+}
+.menu > li:hover .sub-menu li {
+    transform: scale(1);
+}
+.menu > li:hover .sub-menu {
+    transform: scale(1);
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block; /* Affiche le menu déroulant lorsqu'on survole l'élément parent */
-    position: relative;
+.sub-menu li:hover a{
+    color:#fff; !important;
 }
 
-.dropdown-menu:hover .dropdown-menu li {
-    padding: 10px;
-    display: block;
-    margin: 0;
-}
 
-/* Styles pour le survol de l'élément parent */
-.dropdown:hover a {
-    background-color: #eee;
-}
+/*.dropdown-menu {*/
+/*    display: none; !* Masque le menu déroulant par défaut *!*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    left: 0;*/
+/*    background-color: #fff;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+/*.dropdown:hover .dropdown-menu {*/
+/*    display: block; !* Affiche le menu déroulant lorsqu'on survole l'élément parent *!*/
+/*    position: relative;*/
+/*}*/
+
+/*.dropdown-menu:hover .dropdown-menu li {*/
+/*    padding: 10px;*/
+/*    display: block;*/
+/*    margin: 0;*/
+/*}*/
+
+/*!* Styles pour le survol de l'élément parent *!*/
+/*.dropdown:hover a {*/
+/*    background-color: #eee;*/
+/*}*/
 
 .call-action-btn {
     background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
