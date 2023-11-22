@@ -24,7 +24,7 @@ class MainController extends AbstractController
         $activities = $activityRepository->findAll();
 
         $activityUpdate = new ActivityUpdateService();
-        $activityUpdate->activityUpdate($activityRepository,$entityManager,$statusRepository);
+        $activityUpdate->activityUpdate($activityRepository, $entityManager, $statusRepository);
 
         if ($user instanceof User) {
             $searchDTO = new ActivitySearchDTO();
