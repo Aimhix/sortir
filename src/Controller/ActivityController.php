@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -229,4 +228,22 @@ class ActivityController extends AbstractController
         // Sinon renvoyer sur la page de création de sorties
         return $this->redirectToRoute('app_activity_create');
     }
+
+    #[Route('/activity_publish/{activityId}', name: 'activity_publish')]
+    public function publish(int $activityId, EntityManagerInterface $entityManager, ActivityRepository $activityRepository): Response
+    {
+
+        $updatedActivity = $activityRepository->findOneById($activityId);
+        $updatedActivity->setIsPublished(true);
+
+        $entityManager->persist($updatedActivity);
+        $entityManager->flush();
+
+
+        $this->addFlash('success', 'Votre sortie a bien été publiée.');
+
+        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
+    }
+
+
 }
