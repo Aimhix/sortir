@@ -19,7 +19,7 @@ footer {
 }
 
 .header-content {
-    background-image: url("https://images.rtl.fr/~c/770v513/rtl/www/1135693-l-art-de-faire-la-fete.jpg");
+    background-image: url("https://www.visiter-bordeaux.eu/wp-content/uploads/2022/08/sortie-amies-1.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: 0 -114px;
@@ -27,6 +27,7 @@ footer {
     text-align: center;
     border: 15px outset rgba(100, 100, 100, 0.2);
     border-radius: 35px;
+    background-position: 50%;
 }
 
 #container {
@@ -49,10 +50,11 @@ nav {
     text-align: right;
 }
 
-#header-nav li:not(.dropdown li) {
+#header-nav li {
     display: inline-block;
-    padding: 20px;
+    padding: 16px 0;
     margin: auto;
+    height:20px;
 }
 
 #header-nav a:not(.call-action-btn) {
@@ -113,6 +115,7 @@ nav a:hover {
     border-radius: 0;
     font-size: 1.1em;
     margin: 0 10px;
+    background-color: transparent;
 }
 
 .form-group select {
@@ -160,11 +163,13 @@ nav a:hover {
     border-radius: 8px;
     border: none;
     font-size: 1.1em;
+    background-color: transparent;
 }
 
 .checkbox-group {
     width: 600px;
     margin: 20px auto 20px;
+    color:#f3299c;
 }
 
 .form-check {
@@ -233,30 +238,86 @@ h1 {
 
 
 /* menu deroulant */
-.dropdown-menu {
-    display: none; /* Masque le menu déroulant par défaut */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+.menu-deroulant {
+    text-align: center;
+    display:inline-block;
+    position:relative;
+    bottom:-20px;
+    margin-top:-20px;
+}
+.menu {
+    display: inline-block;
+    padding-inline-start: 0;
+
+}
+.menu > li {
+    float:right;
+    width: 180px;
+    cursor: pointer;
+    border-radius:25px
+}
+.sub-menu {
+    transform: scale(0);
+    transform-origin: top center;
+    transition: all 300ms ease-in-out;
+    background-color:#DEE3E6;
+    border-radius:15px;
+    padding:5px;
+    margin:10px;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block; /* Affiche le menu déroulant lorsqu'on survole l'élément parent */
-    position: relative;
+.sub-menu li {
+    font-size: 0.9em;
+    /*background: #fff;*/
+    padding: 6px 0;
+    transform: scale(0);
+    transform-origin: top center;
+    transition: all 300ms ease-in-out;
+    width:100%;
+    border-radius:13px;
+}
+.sub-menu li:hover {
+    /*background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);*/
+    background-color: rgba(0, 0, 0, 0.08);
+}
+.menu > li:hover .sub-menu li {
+    transform: scale(1);
+}
+.menu > li:hover .sub-menu {
+    transform: scale(1);
 }
 
-.dropdown-menu:hover .dropdown-menu li {
-    padding: 10px;
-    display: block;
-    margin: 0;
+#header-nav > ul > div > ul > li > ul > li:hover > a, body.night-theme #header-nav > ul > div > ul > li > ul > li:hover > a{
+    /*color:#fff;*/
+    color:#f72791;
 }
 
-/* Styles pour le survol de l'élément parent */
-.dropdown:hover a {
-    background-color: #eee;
-}
+
+/*.dropdown-menu {*/
+/*    display: none; !* Masque le menu déroulant par défaut *!*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    left: 0;*/
+/*    background-color: #fff;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+/*.dropdown:hover .dropdown-menu {*/
+/*    display: block; !* Affiche le menu déroulant lorsqu'on survole l'élément parent *!*/
+/*    position: relative;*/
+/*}*/
+
+/*.dropdown-menu:hover .dropdown-menu li {*/
+/*    padding: 10px;*/
+/*    display: block;*/
+/*    margin: 0;*/
+/*}*/
+
+/*!* Styles pour le survol de l'élément parent *!*/
+/*.dropdown:hover a {*/
+/*    background-color: #eee;*/
+/*}*/
 
 .call-action-btn {
     background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);
@@ -609,7 +670,7 @@ body::before, body::after {
     display: block;
     position: absolute;
     border-radius: 50%; /* Cela rendra les éléments circulaires */
-    background-color: rgba(100, 100, 100, 0.05); /* Couleur de fond des bulles */
+    background-color: rgba(0, 0, 0, 0.04); /* Couleur de fond des bulles */
     z-index: -1;
     /* Autres propriétés */
 }
@@ -725,13 +786,15 @@ body::after {
     border-radius: 8px;
     color: #fff;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 700;
 }
 
 .total-card-back-inner {
     padding: 40px;
 }
+
+.list-view .bottom{border-radius: 24px;}
 
 /*3D card activity*/
 
@@ -804,17 +867,136 @@ body::after {
     text-align: center;
 }
 
-#switch-to-list-view, #switch-to-card-view{
-    border: none;
-    background-color: #DEE3E6;
+#switch-to-list-view, #switch-to-card-view {
+    background-color: rgba(0, 0, 0, 0.1);
+    border:none;
     border-radius: 15px;
     padding: 10px;
     display: inline-block;
     margin: 3px;
-    cursor:pointer;
+    cursor: pointer;
+}
+#switch-to-list-view:hover, #switch-to-card-view:hover{background-color: rgba(0, 0, 0, 0.25);}
+
+#switch-to-list-view img, #switch-to-card-view img {
+    width: 20px;
+    cursor: pointer;
 }
 
-#switch-to-list-view img, #switch-to-card-view img{width:20px;cursor:pointer;}
-#switch-to-list-view{}
-#switch-to-card-view{
+#switch-to-list-view {
 }
+
+#switch-to-card-view {
+}
+
+.thumbnail-container {
+    display: flex;
+    align-items: center;
+}
+
+.btn-pref-activity{border-radius: 15px;
+}
+
+#activity_activityPicture {
+    background-color: #f3299c;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+
+.required-info, .flash-notice, .alert-danger{
+    background-color: #ffbcbc85;
+    border-radius: 15px;
+    display: block;
+    padding: 10px 12px;
+    color: #60162e;
+    text-align: center;
+    width: 600px;
+    margin: 5px auto;
+    line-height: 1.8em;
+}
+
+
+
+
+
+/*Thème nuit*/
+
+
+body.night-theme{background-color:#28292c;}
+
+/*foncé*/
+body.night-theme footer, body.night-theme .cards-container .total-card-back,
+body.night-theme .cards-container.card-view .total-card-back,
+body.night-theme .form-group select, body.night-theme #create-activity-add-location,
+body.night-theme .btn-end-form, body.night-theme .tps
+{color:#fff;background-color: #202124;}
+/*cas particuliers*/
+body.night-theme .form-group select{border-right: 15px solid #202124;}
+body.night-theme .info-show{background-color: rgb(36 40 49 / 16%);}
+body.night-theme #activity_location, body.night-theme #edit_profile_campus {border: 8px solid transparent;background-color:#7d818c29}
+
+/*bordures formulaires*/
+body.night-theme .form_champ input, body.night-theme #activity_infoActivity,
+body.night-theme #activity_dateStart_date, body.night-theme #activity_dateStart_time,
+body.night-theme #activity_subLimitDate_date, body.night-theme #activity_subLimitDate_time
+{border: 8px solid #7d818c29;background-color: transparent}
+
+/*clair*/
+body.night-theme .bottom,
+body.night-theme .sub-menu,
+body.night-theme .container-form-and-show, body.night-theme .btn-pref-activity{background-color: #51535a}
+
+/*blanc*/
+body.night-theme input[type=checkbox]{background-color: #fff;}
+
+/*police foncée*/
+body.night-theme #header-nav a:not(.call-action-btn),
+body.night-theme .form_champ label, body.night-theme .form_champ{color:#fff;}
+
+/*police foncée*/
+
+
+#theme-toggle{
+    border:none;
+    border-radius: 15px;
+    padding: 14px 8px 5px 5px;
+    cursor: pointer;
+    bottom: -16px;
+    position: relative;
+    margin-top: -18px;
+}
+
+.fa-sun, .fa-moon{
+    width:35px;
+    height:35px;
+    /*background-color: #ddd;*/
+    border: none;
+    display:block;
+    border-radius: 15px;
+    color: #000;
+    top: -5px;
+    position: relative;
+    margin-left: 5px;
+}
+body.night-theme #theme-toggle {
+    color: #fff;
+    background-color: #51535a;
+
+}
+
+#theme-toggle .fa-moon{
+    background-image:url("../images/icon/lune.png");
+background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: 4px 7px;}
+#theme-toggle .fa-sun{background-image:url("../images/icon/sun.png");
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 2px 3px;}

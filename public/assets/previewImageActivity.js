@@ -13,3 +13,4 @@ function previewImage(input) {
         preview.src = "";
     }
 }
+
