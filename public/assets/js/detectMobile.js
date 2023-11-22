@@ -1,35 +1,36 @@
-// Fonction pour détecter si l'appareil est considéré comme mobile
+// Fonction pour dï¿½tecter si l'appareil est considï¿½rï¿½ comme mobile
 function isMobileDevice() {
     console.log("ismobiledevice");
     console.log("window.innerWidth="+window.innerWidth);
 
-    return window.innerWidth <= 1200; // considérer comme mobile si la largeur est inférieure ou égale à 768 pixels
-    // Attention cela fonction mais soucis avec la taille écran pc, au pire on peut le modifier à 1200 par exemple
+    return window.innerWidth <= 1200; // considerer comme mobile si la largeur est inferieure ou egale a 768 pixels
+    // Attention cela fonction mais soucis avec la taille ecran pc, au pire on peut le modifier a 1200 par exemple
 
 }
 
-// Exécutez cette fonction lors du chargement de la page ou lors d'un événement pertinent
+// Exï¿½cutez cette fonction lors du chargement de la page ou lors d'un evenement pertinent
 document.addEventListener('DOMContentLoaded', function() {
-    //DOMContentLoaded : événement est déclenché lorsque le document HTML est complètement chargé et analysé
+    //DOMContentLoaded : evenement est dï¿½clenchï¿½ lorsque le document HTML est complï¿½tement chargï¿½ et analysï¿½
     //, sans attendre les feuilles de style, images et ressources externes.
-console.log("chargement"); // test
+    console.log("chargement"); // test
     if (isMobileDevice()) {
         console.log("ismobile");//test
-        // Envoie d'une requête AJAX pour indiquer que l'appareil est mobile
+        // Envoie d'une requete AJAX pour indiquer que l'appareil est mobile
         fetch('/check-mobile-device', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ isMobile: true }),
+            body: JSON.stringify({isMobile: true}),
         })
             .then(response => {
-                // Gérer la réponse si nécessaire
+                // Gerer la reponse si necessaire
                 console.log('l\'appareil est mobile');
             })
             .catch(error => {
-                // Gérer les erreurs si nécessaire
-                console.error('Erreur lors de l\'envoi de la requête AJAX :', error);
+                // Gerer les erreurs si necessaire
+                console.error('Erreur lors de l\'envoi de la requï¿½te AJAX :', error);
             });
     }
-});
+}
+
