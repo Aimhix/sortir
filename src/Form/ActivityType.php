@@ -40,13 +40,14 @@ class ActivityType extends AbstractType
             ])
             ->add('isPublished', null, [
                 'required' => false,
+                'data' => true,
                 'label' => 'Publier la sortie',
             ])
             ->add('location', EntityType::class, [
                 'class' => Location::class,
                 'choice_label' => 'name',
                 'label' => 'Lieu de la sortie',
-                'placeholder' => 'Selectionnez un lieu  '
+                'placeholder' => 'Selectionnez un lieu'
             ])
             ->add('activityPicture', FileType::class,
                 ['label' => 'Selectionnez une image 📷',

@@ -70,9 +70,8 @@
                 <p>{{ location.streetName }}</p>
                 <br>
                 <div class="btn-inner-container">
-
-                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>
                     <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer</a>
+                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>
                 </div>
             </div>
         {% endfor %}

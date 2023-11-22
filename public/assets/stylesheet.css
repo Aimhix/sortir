@@ -1063,6 +1063,11 @@ background-size: 25px;
 
 }
 
+.total-card-back-inner .stop-action-btn{
+    position:absolute;
+    right:25px;
+    bottom:25px;
+}
 
 @media screen and (max-width: 600px) {
     .form-create-activity .group-edit-min, .form-create-activity .group-edit-second,
