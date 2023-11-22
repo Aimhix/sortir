@@ -107,14 +107,14 @@ class ProfileController extends AbstractController
 
                 return $this->redirectToRoute('app_activity_index');
             }
-            } else {
-                // En cas d'erreur, utilisez les noms et prénoms d'origine
-                $user->setFirstName($originalFirstName);
-                $user->setLastName($originalLastName);
-            }
+        } else {
+            // En cas d'erreur, utilisez les noms et prénoms d'origine
+            $user->setFirstName($originalFirstName);
+            $user->setLastName($originalLastName);
+        }
 
 
-            return $this->render('profile/editProfile.html.twig', [
+        return $this->render('profile/editProfile.html.twig', [
             'form' => $form->createView(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
