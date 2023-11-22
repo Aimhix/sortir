@@ -145,8 +145,16 @@ class ActivityController extends AbstractController
             $activity->setStatus($statusRepository->findOneByWording('Annulée'));
             $entityManager->persist($activity);
             $entityManager->flush();
-            $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+            $participants = $activity->getUsers();
+            $actionMessage = 'Activité annulée avec succès.';
+            foreach ($participants as $participant) {
+                if ($participant->getId() == $user->getId()) {
+                    $actionMessage = 'Vous êtes inscrit(e) à cette sortie.';
+                    break;
+                }
+            }
 
+            $this->addFlash('success', $actionMessage);
             return $this->redirectToRoute('app_activity_index');
         }
         return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties');
