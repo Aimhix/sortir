@@ -26,7 +26,7 @@ class ActivityType extends AbstractType
                 'label' => 'Date et heure de début de la sortie : ',
             ])
             ->add('duration', null, [
-                'label' => 'Durée de la sortie : ',
+                'label' => 'Durée de la sortie (en minutes) : ',
             ])
             ->add('subLimitDate', null, [
                 'label' => 'Date et heure limite d\'inscription : ',

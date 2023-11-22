@@ -12,18 +12,19 @@ h2 {
 }
 
 footer {
-    margin: 0;
+    margin: 180px 0 0;
     padding: 20px 0 50px;
     text-align: center;
     background-color: #DEE3E6;
     border-radius: 25px;
+    min-height: 200px;
 }
 
 .header-content {
     background-image: url("https://www.visiter-bordeaux.eu/wp-content/uploads/2022/08/sortie-amies-1.jpg");
     background-size: cover;
     background-attachment: fixed;
-    background-position: 0 -114px;
+    /*background-position: 0 -114px;*/
     padding: 120px 50px 80px;
     text-align: center;
     border: 15px outset rgba(100, 100, 100, 0.2);
@@ -540,6 +541,11 @@ h1 {
     grid-template-columns: 1fr 2fr
 }
 
+.form-create-activity div.group-edit-second:nth-child(4){
+    grid-template-columns: 1fr 3fr
+
+}
+
 #activity_infoActivity {
     width: 100%;
     border: 8px solid rgba(100, 100, 100, 0.05);
@@ -606,7 +612,7 @@ span.info-show-mini {
 }
 
 .title-show {
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .container-form-and-show {
@@ -619,7 +625,7 @@ span.info-show-mini {
 
 .container-form-and-show-min {
     width: 600px;
-    margin: 50px auto 80px;
+    margin: 120px auto 180px;
     background-color: #fff;
     padding: 50px;
     border-radius: 50px;
@@ -712,6 +718,8 @@ body::after {
 
 .profile-picture-big {
     width: 200px;
+    height:200px;
+    background-size:cover;
     border-radius: 50%;
     margin: -80px 0 20px;
     border: 15px solid rgba(100, 100, 100, 0.05);
@@ -903,10 +911,6 @@ body::after {
 #switch-to-card-view {
 }
 
-.thumbnail-container {
-    display: flex;
-    align-items: center;
-}
 
 .btn-pref-activity {
     border-radius: 15px;
@@ -922,8 +926,34 @@ body::after {
     display: inline-block;
     margin-right: 100px;
     margin-left: 100px;
+    display:none;
 }
 
+#image-container{
+    background-color:rgb(244, 244, 244);
+    border-radius:15px;
+}
+
+.thumbnail-container > label:nth-child(3){
+    color: #f3299c;
+    cursor: pointer;
+    padding: 139px 0 43px 31px;
+    font-weight: 700;
+    top: -200px;
+    position: relative;
+    display:block;
+}
+
+.thumbnail-container{
+    height:200px;width:200px;
+    margin-top:20px;
+}
+
+.header-content-flex{
+    display:flex;
+    width:100%;
+    justify-items: stretch;
+}
 
 .required-info, .flash-notice, .alert-danger {
     background-color: #ffbcbc85;
@@ -979,6 +1009,7 @@ body.night-theme .btn-end-form, body.night-theme .tps {
 body.night-theme .form-group select {
     border-right: 15px solid #202124;
 }
+body.night-theme #image-container{background-color:#7d818c29 }
 
 body.night-theme .info-show {
     background-color: rgb(36 40 49 / 16%);
@@ -1012,9 +1043,12 @@ body.night-theme input[type=checkbox] {
 }
 
 /*police foncée*/
-body.night-theme #header-nav a:not(.call-action-btn),
+body.night-theme #header-nav a:not(.call-action-btn)
+{color: #fff;
+}
+
 body.night-theme .form_champ label, body.night-theme .form_champ {
-    color: #fff;
+    color: #ffffff4f;
 }
 
 /*police foncée*/
@@ -1158,6 +1192,7 @@ body.night-theme #theme-toggle {
         margin-top: 10px;
         right: 0px;
     }
+    .call-action-btn{display:none;}
 
 
 }

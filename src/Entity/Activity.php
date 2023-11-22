@@ -392,5 +392,10 @@ public function setActivityPicture(string $activityPicture): static
 
     return $this;
 }
+
+    public function getRemainingPlaces(): int
+    {
+        return $this->subMax - count($this->users);
+    }
 }
 

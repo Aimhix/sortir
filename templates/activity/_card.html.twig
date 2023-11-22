@@ -23,7 +23,8 @@
                             à <span class="fontweight">{{ activity.campus.name }}</span>
                             <br><br><span class="hidden-info">{{ activity.infoActivity|slice(0, 350) }}<br><br></span>
 
-                            Encore <span class="fontweight">{{ activity.subMax }}</span> places
+                            Encore <span class="fontweight">{{ activity.getRemainingPlaces }}</span> places
+
                         </div>
                     </div>
                     <div class="total-card-back">
