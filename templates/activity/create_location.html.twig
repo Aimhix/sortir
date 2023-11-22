@@ -4,12 +4,44 @@
 
 {% block body %}
 
-    {{ form_start(locationForm) }}
-    {{ form_widget(locationForm) }}
-    <button type="submit" class="call-action-btn create-activity-publication">Ajouter un lieu</button>
-    {{ form_end(locationForm) }}
-    <a class="stop-action-btn" href="{{ path('app_activity_create') }}">Retour</a>
+    <div class="container-form-and-show">
 
+        <span class="title-page-header title-show">Ajouter un lieu</span>
+        <br><br>
+
+        {{ form_start(locationForm) }}
+        <div class="form_champ">
+            {{ form_label(locationForm.name) }}
+            {{ form_widget(locationForm.name) }}
+            {{ form_errors(locationForm.name) }}
+        </div>
+        <div class="form_champ">
+            {{ form_label(locationForm.streetName) }}
+            {{ form_widget(locationForm.streetName) }}
+            {{ form_errors(locationForm.streetName) }}
+        </div>
+        <div class="form_champ">
+            {{ form_label(locationForm.latitude) }}
+            {{ form_widget(locationForm.latitude) }}
+            {{ form_errors(locationForm.streetName) }}
+        </div>
+        <div class="form_champ">
+            {{ form_label(locationForm.longitude) }}
+            {{ form_widget(locationForm.longitude) }}
+            {{ form_errors(locationForm.streetName) }}
+        </div>
+        <div class="form_champ create-activity-location">
+            {{ form_label(locationForm.cities) }}
+            {{ form_widget(locationForm.cities) }}
+            {{ form_errors(locationForm.streetName) }}
+        </div>
+        <div class="btn-end-form">
+            <a class="stop-action-btn" href="{{ path('app_activity_create') }}">Retour</a>
+            <button type="submit" class="call-action-btn">Ajouter un lieu</button>
+            {{ form_end(locationForm) }}
+        </div>
+
+    </div>
 {% endblock %}
 
 
