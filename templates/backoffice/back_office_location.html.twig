@@ -43,6 +43,9 @@
             <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
             <button type="submit" class="call-action-btn">Ajouter un lieu</button>
 
+            {% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm) }}</span>
+            {% endif %}
 
         </div>
         {{ form_end(locationForm) }}

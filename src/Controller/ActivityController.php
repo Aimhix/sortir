@@ -137,7 +137,7 @@ class ActivityController extends AbstractController
         }
 
 
-        if ($activity->getOrganizer()->getId() == $user->getId()) {
+        if ($this->isGranted('ROLE_ADMIN') || $activity->getOrganizer()->getId() == $user->getId()) {
             $activity->setStatus($statusRepository->findOneByWording('Annulée'));
             $entityManager->persist($activity);
             $entityManager->flush();
@@ -204,4 +204,17 @@ class ActivityController extends AbstractController
         ]);
     }
 
+    #[Route('/check-mobile-device', name: 'check_mobile_device')]
+    public function checkMobileDevice(Request $request): Response
+    {
+        // Récupérer les données JSON envoyées depuis le client
+        $data = json_decode($request->getContent(), true);
+        if (isset($data['isMobile']) && $data['isMobile'] === true) {
+            // S'il détecte la version mobile, il envoie ce message dans une page d'erreur
+            //return $this->redirectToRoute('app_activity_index');
+           return new Response('La création de sortie n\'est pas autorisée sur les appareils mobiles.', 403);
+        }
+            // Sinon renvoyer sur la page de création de sorties
+            return $this->redirectToRoute('app_activity_create');
+    }
 }

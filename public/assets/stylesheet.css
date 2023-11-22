@@ -172,7 +172,6 @@ nav a:hover {
     max-width: 600px;
     margin: 20px auto 20px;
     color:#f3299c;
-    text-align: center;
 }
 
 .form-check {
@@ -926,6 +925,20 @@ body::after {
     line-height: 1.8em;
 }
 
+.alert-success {
+    background-color: rgba(151, 196, 133, 0.52);
+    border-radius: 15px;
+    padding: 10px 12px;
+    color: #60162e;
+    text-align: center;
+    width: 300px;
+    margin: 5px auto;
+    line-height: 1.8em;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
 
 
 

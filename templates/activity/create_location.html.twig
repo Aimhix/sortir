@@ -35,13 +35,16 @@
             {{ form_widget(locationForm.cities) }}
             {{ form_errors(locationForm.streetName) }}
         </div>
+        {% if form_errors(locationForm)|length > 0 %}
+            <span class="required-info">{{ form_errors(locationForm) }}</span>
+        {% endif %}
         <div class="btn-end-form">
             <a class="stop-action-btn" href="{{ path('app_activity_create') }}">Retour</a>
             <button type="submit" class="call-action-btn">Ajouter un lieu</button>
+
             {{ form_end(locationForm) }}
         </div>
 
-    </div>
 {% endblock %}
 
 
