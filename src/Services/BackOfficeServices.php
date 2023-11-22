@@ -42,4 +42,6 @@ class BackOfficeServices
     {
         $locationRepository->remove($location, true);
     }
+
+
 }

@@ -7,34 +7,34 @@
     <div class="detail-profile-show container-form-and-show">
 
         <center>
-            {% if app.user %}
-            {% if app.user.profilePicture %}
-                <img class="profile-picture-big" src="{{ asset('/images/' ~ app.user.profilePicture) }}"
+            {% if app_users %}
+            {% if app_users.profilePicture %}
+                <img class="profile-picture-big" src="{{ asset('/images/' ~ app_users.profilePicture) }}"
                      alt="Photo de profil">
             {% else %}
                 <img class="profile-picture-big" src="{{ asset('/images/defaultpicture.jpg') }}" alt="Photo de profil">
                 <br>
-                <p>{{ app.user.pseudo }} n'a pas encore de photo.</p>
+                <p>{{ app_users.pseudo }} n'a pas encore de photo.</p>
             {% endif %}
 
-            <h2 class="title-show">Profil de {{ app.user.pseudo }}</h2>
-            <h3>Son campus : {{ app.user.campus }}</h3></center>
+            <h2 class="title-show">Profil de {{ app_users.pseudo }}</h2>
+            <h3>Son campus : {{ app_users.campus }}</h3></center>
 
 
         <div class="group-edit-second">
             <div class="form_champ">
-                Prénom :<br> <span class="info-show">{{ app.user.firstname }}</span>
+                Prénom :<br> <span class="info-show">{{ app_users.firstname }}</span>
             </div>
             <div class="form_champ">
-                Nom :<br> <span class="info-show">{{ app.user.lastname }}</span>
+                Nom :<br> <span class="info-show">{{ app_users.lastname }}</span>
             </div>
         </div>
         <div class="group-edit-second">
             <div class="form_champ">
-                Téléphone :<br> <span class="info-show">{{ app.user.phone }}</span>
+                Téléphone :<br> <span class="info-show">{{ app_users.phone }}</span>
             </div>
             <div class="form_champ">
-                Email :<br> <span class="info-show">{{ app.user.email }}</span>
+                Email :<br> <span class="info-show">{{ app_users.email }}</span>
             </div>
         </div>
 

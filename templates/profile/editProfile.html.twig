@@ -6,18 +6,6 @@
 
 {% block body %}
 
-    {# Afficher les messages flash s'il y en a #}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    {% for message in app.flashes('error') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
 
     {# Afficher le formulaire #}
     <div class="edit-form form-profile container-form-and-show">
@@ -25,17 +13,19 @@
 
         {{ form_start(form) }}
         {{ form_errors(form) }}
-{#        {{ app.user.profilePicture }}#}
+        {#        {{ app.user.profilePicture }} #}
         <div class="group-edit-zero">
             <div class="edit-actual-picture form_champ">
-{#                <img src="{{ absolute_url(asset('/public/images/app.user.profilePiecture')) }}" alt="Photo de profil"/>#}
-{#                <img src="{{ absolute_url(asset(app.user.profilePicture)) }}" alt="Photo de profil"/>#}
+                {#                <img src="{{ absolute_url(asset('/public/images/app.user.profilePiecture')) }}" alt="Photo de profil"/> #}
+                {#                <img src="{{ absolute_url(asset(app.user.profilePicture)) }}" alt="Photo de profil"/> #}
 
             </div>
             <div class="edit-picture form_champ">
                 Changer votre photo<br>
                 {{ form_widget(form.profilePicture) }}
-                {{ form_errors(form.profilePicture) }}
+                {% if form_errors(form.profilePicture)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.profilePicture) }}</span>
+                {% endif %}
             </div>
         </div>
 
@@ -43,19 +33,25 @@
             <div class="edit-pseudo form_champ">
                 {{ form_label(form.pseudo) }}<br>
                 {{ form_widget(form.pseudo) }}
-                {{ form_errors(form.pseudo) }}
+                {% if form_errors(form.pseudo)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.pseudo) }}</span>
+                {% endif %}
             </div>
 
             <div class="edit-firstname form_champ">
                 {{ form_label(form.firstname) }}<br>
                 {{ form_widget(form.firstname) }}
-                {{ form_errors(form.firstname) }}
+                {% if form_errors(form.firstname)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.firstname) }}</span>
+                {% endif %}
             </div>
 
             <div class="edit-lastname form_champ">
                 {{ form_label(form.lastname) }}<br>
                 {{ form_widget(form.lastname) }}
-                {{ form_errors(form.lastname) }}
+                {% if form_errors(form.lastname)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.lastname) }}</span>
+                {% endif %}
             </div>
         </div>
 
@@ -64,20 +60,26 @@
             <div class="edit-campus form_champ">
                 {{ form_label(form.campus) }}<br>
                 {{ form_widget(form.campus) }}
-                {{ form_errors(form.campus) }}
+                {% if form_errors(form.campus)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.campus) }}</span>
+                {% endif %}
             </div>
 
             <div class="edit-phone form_champ">
                 {{ form_label(form.phone) }}<br>
                 {{ form_widget(form.phone) }}
-                {{ form_errors(form.phone) }}
+                {% if form_errors(form.phone)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.phone) }}</span>
+                {% endif %}
 
             </div>
 
             <div class="edit-email form_champ">
                 {{ form_label(form.email) }}<br>
                 {{ form_widget(form.email) }}
-                {{ form_errors(form.email) }}
+                {% if form_errors(form.email)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.email) }}</span>
+                {% endif %}
             </div>
         </div>
 
@@ -85,13 +87,17 @@
             <div class="edit-password form_champ">
                 {{ form_label(form.password) }}<br>
                 {{ form_widget(form.password) }}
-                {{ form_errors(form.password) }}
+                {% if form_errors(form.password)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.password) }}</span>
+                {% endif %}
             </div>
 
             <div class="edit-confirm-password form_champ">
                 {{ form_label(form.confirmpassword) }}<br>
                 {{ form_widget(form.confirmpassword) }}
-                {{ form_errors(form.confirmpassword) }}
+                {% if form_errors(form.confirmpassword)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.confirmpassword) }}</span>
+                {% endif %}
             </div>
         </div>
 
