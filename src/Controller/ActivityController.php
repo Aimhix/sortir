@@ -137,7 +137,7 @@ class ActivityController extends AbstractController
         }
 
 
-        if ($activity->getOrganizer()->getId() == $user->getId()) {
+        if ($this->isGranted('ROLE_ADMIN') || $activity->getOrganizer()->getId() == $user->getId()) {
             $activity->setStatus($statusRepository->findOneByWording('Annulée'));
             $entityManager->persist($activity);
             $entityManager->flush();

@@ -1,16 +1,17 @@
-// Fonction pour d�tecter si l'appareil est consid�r� comme mobile
+// Fonction pour detecter si l'appareil est considere comme mobile
 function isMobileDevice() {
     console.log("ismobiledevice");
-    console.log("window.innerWidth="+window.innerWidth);
+    console.log("window.innerWidth=" + window.innerWidth);
 
     return window.innerWidth <= 1200; // considerer comme mobile si la largeur est inferieure ou egale a 768 pixels
     // Attention cela fonction mais soucis avec la taille ecran pc, au pire on peut le modifier a 1200 par exemple
 
 }
 
-// Ex�cutez cette fonction lors du chargement de la page ou lors d'un evenement pertinent
-document.addEventListener('DOMContentLoaded', function() {
-    //DOMContentLoaded : evenement est d�clench� lorsque le document HTML est compl�tement charg� et analys�
+// Executez cette fonction lors du chargement de la page ou lors d'un evenement pertinent
+
+document.addEventListener('DOMContentLoaded', function () {
+    //DOMContentLoaded : evenement est declenche lorsque le document HTML est completement charge et analyse
     //, sans attendre les feuilles de style, images et ressources externes.
     console.log("chargement"); // test
     if (isMobileDevice()) {
@@ -29,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 // Gerer les erreurs si necessaire
-                console.error('Erreur lors de l\'envoi de la requ�te AJAX :', error);
+                console.error('Erreur lors de l\'envoi de la requete AJAX :', error);
             });
     }
-}
-
+});
