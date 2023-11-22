@@ -55,7 +55,7 @@ nav {
     display: inline-block;
     padding: 16px 0;
     margin: auto;
-    height:20px;
+    height: 20px;
 }
 
 #header-nav a:not(.call-action-btn) {
@@ -171,7 +171,7 @@ nav a:hover {
 .checkbox-group {
     max-width: 600px;
     margin: 20px auto 20px;
-    color:#f3299c;
+    color: #f3299c;
 }
 
 .form-check {
@@ -243,30 +243,33 @@ h1 {
 
 .menu-deroulant {
     text-align: center;
-    display:inline-block;
-    position:relative;
-    bottom:-20px;
-    margin-top:-20px;
+    display: inline-block;
+    position: relative;
+    bottom: -20px;
+    margin-top: -20px;
 }
+
 .menu {
     display: inline-block;
     padding-inline-start: 0;
 
 }
+
 .menu > li {
-    float:right;
+    float: right;
     width: 180px;
     cursor: pointer;
-    border-radius:25px
+    border-radius: 25px
 }
+
 .sub-menu {
     transform: scale(0);
     transform-origin: top center;
     transition: all 300ms ease-in-out;
-    background-color:#DEE3E6;
-    border-radius:15px;
-    padding:5px;
-    margin:10px;
+    background-color: #DEE3E6;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px;
 }
 
 .sub-menu li {
@@ -276,23 +279,26 @@ h1 {
     transform: scale(0);
     transform-origin: top center;
     transition: all 300ms ease-in-out;
-    width:100%;
-    border-radius:13px;
+    width: 100%;
+    border-radius: 13px;
 }
+
 .sub-menu li:hover {
     /*background-image: linear-gradient(to right top, #d04dcf, #db44c3, #e53bb6, #ed32a9, #f3299c, #f72791, #fb2786, #fd2a7b, #fe3371, #ff3c66, #fe465d, #fc4f54);*/
     background-color: rgba(0, 0, 0, 0.08);
 }
+
 .menu > li:hover .sub-menu li {
     transform: scale(1);
 }
+
 .menu > li:hover .sub-menu {
     transform: scale(1);
 }
 
-#header-nav > ul > div > ul > li > ul > li:hover > a, body.night-theme #header-nav > ul > div > ul > li > ul > li:hover > a{
+#header-nav > ul > div > ul > li > ul > li:hover > a, body.night-theme #header-nav > ul > div > ul > li > ul > li:hover > a {
     /*color:#fff;*/
-    color:#f72791;
+    color: #f72791;
 }
 
 
@@ -482,7 +488,7 @@ h1 {
 }
 
 #activity_location, #location_cities, #user_registration_form_campus,
-#user_registration_form_profilePicture, #form_file{
+#user_registration_form_profilePicture, #form_file {
     width: 100%;
     padding: 8px 12px;
     border: 8px solid rgb(244, 244, 244);
@@ -797,7 +803,9 @@ body::after {
     padding: 40px;
 }
 
-.list-view .bottom{border-radius: 24px;}
+.list-view .bottom {
+    border-radius: 24px;
+}
 
 /*3D card activity*/
 
@@ -872,14 +880,17 @@ body::after {
 
 #switch-to-list-view, #switch-to-card-view {
     background-color: rgba(0, 0, 0, 0.1);
-    border:none;
+    border: none;
     border-radius: 15px;
     padding: 10px;
     display: inline-block;
     margin: 3px;
     cursor: pointer;
 }
-#switch-to-list-view:hover, #switch-to-card-view:hover{background-color: rgba(0, 0, 0, 0.25);}
+
+#switch-to-list-view:hover, #switch-to-card-view:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
 
 #switch-to-list-view img, #switch-to-card-view img {
     width: 20px;
@@ -897,7 +908,8 @@ body::after {
     align-items: center;
 }
 
-.btn-pref-activity{border-radius: 15px;
+.btn-pref-activity {
+    border-radius: 15px;
 }
 
 #activity_activityPicture {
@@ -913,7 +925,7 @@ body::after {
 }
 
 
-.required-info, .flash-notice, .alert-danger{
+.required-info, .flash-notice, .alert-danger {
     background-color: #ffbcbc85;
     border-radius: 15px;
     display: block;
@@ -923,6 +935,12 @@ body::after {
     width: 600px;
     margin: 5px auto;
     line-height: 1.8em;
+    list-style: none;
+}
+.required-info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .alert-success {
@@ -941,49 +959,69 @@ body::after {
 }
 
 
-
-
 /*Thème nuit*/
 
 
-body.night-theme{background-color:#28292c;}
+body.night-theme {
+    background-color: #28292c;
+}
 
 /*foncé*/
 body.night-theme footer, body.night-theme .cards-container .total-card-back,
 body.night-theme .cards-container.card-view .total-card-back,
 body.night-theme .form-group select, body.night-theme #create-activity-add-location,
-body.night-theme .btn-end-form, body.night-theme .tps
-{color:#fff;background-color: #202124;}
+body.night-theme .btn-end-form, body.night-theme .tps {
+    color: #fff;
+    background-color: #202124;
+}
+
 /*cas particuliers*/
-body.night-theme .form-group select{border-right: 15px solid #202124;}
-body.night-theme .info-show{background-color: rgb(36 40 49 / 16%);}
+body.night-theme .form-group select {
+    border-right: 15px solid #202124;
+}
+
+body.night-theme .info-show {
+    background-color: rgb(36 40 49 / 16%);
+}
+
 body.night-theme #activity_location, body.night-theme #edit_profile_campus,
 body.night-theme #location_cities, body.night-theme #user_registration_form_campus,
-body.night-theme #user_registration_form_profilePicture, body.night-theme #form_file{border: 8px solid transparent;background-color:#7d818c29}
+body.night-theme #user_registration_form_profilePicture, body.night-theme #form_file {
+    border: 8px solid transparent;
+    background-color: #7d818c29
+}
 
 /*bordures formulaires*/
 body.night-theme .form_champ input, body.night-theme #activity_infoActivity,
 body.night-theme #activity_dateStart_date, body.night-theme #activity_dateStart_time,
-body.night-theme #activity_subLimitDate_date, body.night-theme #activity_subLimitDate_time
-{border: 8px solid #7d818c29;background-color: transparent}
+body.night-theme #activity_subLimitDate_date, body.night-theme #activity_subLimitDate_time {
+    border: 8px solid #7d818c29;
+    background-color: transparent
+}
 
 /*clair*/
 body.night-theme .bottom,
 body.night-theme .sub-menu,
-body.night-theme .container-form-and-show, body.night-theme .btn-pref-activity, body.night-theme .stop-action-btn{background-color: #51535a}
+body.night-theme .container-form-and-show, body.night-theme .btn-pref-activity, body.night-theme .stop-action-btn {
+    background-color: #51535a
+}
 
 /*blanc*/
-body.night-theme input[type=checkbox]{background-color: #fff;}
+body.night-theme input[type=checkbox] {
+    background-color: #fff;
+}
 
 /*police foncée*/
 body.night-theme #header-nav a:not(.call-action-btn),
-body.night-theme .form_champ label, body.night-theme .form_champ{color:#fff;}
+body.night-theme .form_champ label, body.night-theme .form_champ {
+    color: #fff;
+}
 
 /*police foncée*/
 
 
-#theme-toggle{
-    border:none;
+#theme-toggle {
+    border: none;
     border-radius: 15px;
     padding: 14px 8px 5px 5px;
     cursor: pointer;
@@ -992,45 +1030,51 @@ body.night-theme .form_champ label, body.night-theme .form_champ{color:#fff;}
     margin-top: -18px;
 }
 
-.fa-sun, .fa-moon{
-    width:35px;
-    height:35px;
+.fa-sun, .fa-moon {
+    width: 35px;
+    height: 35px;
     /*background-color: #ddd;*/
     border: none;
-    display:block;
+    display: block;
     border-radius: 15px;
     color: #000;
     top: -5px;
     position: relative;
     margin-left: 5px;
 }
+
 body.night-theme #theme-toggle {
     color: #fff;
     background-color: #51535a;
 
 }
 
-#theme-toggle .fa-moon{
-    background-image:url("../images/icon/lune.png");
-background-size: 25px;
+#theme-toggle .fa-moon {
+    background-image: url("../images/icon/lune.png");
+    background-size: 25px;
     background-repeat: no-repeat;
-    background-position: 4px 7px;}
-#theme-toggle .fa-sun{background-image:url("../images/icon/sun.png");
+    background-position: 4px 7px;
+}
+
+#theme-toggle .fa-sun {
+    background-image: url("../images/icon/sun.png");
     background-size: 30px;
     background-repeat: no-repeat;
-    background-position: 2px 3px;}
+    background-position: 2px 3px;
+}
 
 
-.desactive-status{
+.desactive-status {
     background-color: #ffbcbc85;
     color: #60162e;
 }
+
 .active-status {
     color: #426016;
     background-color: #cbffbc85;
 }
 
-.active-status, .desactive-status{
+.active-status, .desactive-status {
     border-radius: 15px;
     padding: 10px 12px;
     width: auto;
@@ -1038,10 +1082,11 @@ background-size: 25px;
     line-height: 1.8em;
 }
 
-.admin-control-user{}
+.admin-control-user {
+}
 
-.form-info-inner{
-    color:#000;
+.form-info-inner {
+    color: #000;
     font-size: 1.2em;
 }
 
@@ -1053,7 +1098,7 @@ background-size: 25px;
     margin-right: 5px;
 }
 
-.container-user{
+.container-user {
     display: inline-block;
     width: 40%;
     padding: 40px;
@@ -1075,30 +1120,43 @@ background-size: 25px;
     .form-create-activity .group-edit-first:nth-child(0), .form-create-activity .group-edit-min:nth-child(1), .form-create-activity .group-edit-second:nth-child(1),
     .form-create-activity .group-edit-first:nth-child(1), .form-create-activity .group-edit-min:nth-child(2), .form-create-activity .group-edit-second:nth-child(2),
     .form-create-activity .group-edit-first:nth-child(2), .form-create-activity .group-edit-min:nth-child(3), .form-create-activity .group-edit-second:nth-child(3),
-    .form-create-activity .group-edit-first:nth-child(3){
-        max-width: 100%; !important;
-        grid-template-columns: repeat(1, 1fr); !important;
+    .form-create-activity .group-edit-first:nth-child(3) {
+        max-width: 100%;
+    !important;
+        grid-template-columns: repeat(1, 1fr);
+    !important;
     }
-    .title-show{font-size: 2em;}
-    .container-form-and-show{
-        padding:40px 15px;
-    }
-    .cards-container.card-view, .cards-container{
-        max-width: 100%; !important;
-        grid-template-columns: repeat(1, 1fr); !important;
-    }
-    h1{
+
+    .title-show {
         font-size: 2em;
     }
-    #activity_search_search{
+
+    .container-form-and-show {
+        padding: 40px 15px;
+    }
+
+    .cards-container.card-view, .cards-container {
+        max-width: 100%;
+    !important;
+        grid-template-columns: repeat(1, 1fr);
+    !important;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #activity_search_search {
         text-align: center;
     }
-    #activity_search_campus{
-        margin-top:5px;
+
+    #activity_search_campus {
+        margin-top: 5px;
     }
-    #create-activity-add-location{
-        margin-top:10px;
-        right:0px;
+
+    #create-activity-add-location {
+        margin-top: 10px;
+        right: 0px;
     }
 
 
