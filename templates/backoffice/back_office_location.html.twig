@@ -13,39 +13,45 @@
         <div class="form_champ">
             {{ form_label(locationForm.name) }}
             {{ form_widget(locationForm.name) }}
-            {{ form_errors(locationForm.name) }}
+            {{ form_errors(locationForm.name) }}{% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm.Name) }}</span>
+            {% endif %}
         </div>
         <div class="form_champ">
             {{ form_label(locationForm.streetName) }}
             {{ form_widget(locationForm.streetName) }}
-            {{ form_errors(locationForm.streetName) }}
+            {{ form_errors(locationForm.streetName) }}{% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm.streetName) }}</span>
+            {% endif %}
         </div>
 
         <div class="form_champ">
             {{ form_label(locationForm.latitude) }}
             {{ form_widget(locationForm.latitude) }}
-            {{ form_errors(locationForm.latitude) }}
+            {{ form_errors(locationForm.latitude) }}{% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm.latitude) }}</span>
+            {% endif %}
         </div>
 
         <div class="form_champ">
             {{ form_label(locationForm.longitude) }}
             {{ form_widget(locationForm.longitude) }}
-            {{ form_errors(locationForm.longitude) }}
+            {{ form_errors(locationForm.longitude) }}{% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm.longitude) }}</span>
+            {% endif %}
         </div>
 
         <div class="form_champ">
             {{ form_label(locationForm.cities) }}
             {{ form_widget(locationForm.cities) }}
-            {{ form_errors(locationForm.cities) }}
+            {{ form_errors(locationForm.cities) }}{% if form_errors(locationForm)|length > 0 %}
+                <span class="required-info">{{ form_errors(locationForm.cities) }}</span>
+            {% endif %}
         </div>
 
         <div class="btn-end-form">
             <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
             <button type="submit" class="call-action-btn">Ajouter un lieu</button>
-
-            {% if form_errors(locationForm)|length > 0 %}
-                <span class="required-info">{{ form_errors(locationForm) }}</span>
-            {% endif %}
 
         </div>
         {{ form_end(locationForm) }}
@@ -53,12 +59,10 @@
     </div>
 
 
-    </div>
-
     <div class="detail-profile-show container-form-and-show">
 
         <span class="title-page-header title-show">Modifier un lieu</span>
-<br><br><br>
+        <br><br><br>
 
         {% for location in locations %}
             <div class="container-user">
@@ -67,8 +71,8 @@
                 <br>
                 <div class="btn-inner-container">
 
-                <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer</a>
-{#                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>#}
+                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>
+                    <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer</a>
                 </div>
             </div>
         {% endfor %}

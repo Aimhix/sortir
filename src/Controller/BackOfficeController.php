@@ -127,25 +127,56 @@ class BackOfficeController extends AbstractController
         return $this->redirectToRoute('app_location_management');
     }
 
-//
-//    #[IsGranted('ROLE_ADMIN')]
-//    #[Route('/back_office/cities_location_update/{id}', name: 'app_cities_management_update')]
-//    public function updateCity(int $id): Response
-//    {
-//
-//    }
-
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/cities_update/{id}', name: 'app_city_management_update')]
-    public function updateCity(EntityManagerInterface $entityManager, CityRepository $cityRepository, int $id): Response
+    public function updateCity(EntityManagerInterface $entityManager,CityRepository $cityRepository, int $id, Request $request): Response
     {
-        $updatecity = new City();
+
         $city = $cityRepository->findOneById($id);
+        $cityForm = $this->createForm(CityType::class, $city);
 
+        $cityForm->handleRequest($request);
 
-        return $this->redirectToRoute('app_location_management');
+        if ($cityForm->isSubmitted() && $cityForm->isValid()) {
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ville modifié avec succes !');
+
+            return $this->redirectToRoute('app_city_management');
+        }
+
+        return $this->render('backoffice/back_office_city_update.html.twig', [
+            'cityForm' => $cityForm->createView()
+        ]);
     }
 
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/back_office/locations_update/{id}', name: 'app_location_management_update')]
+    public function updateLocation(EntityManagerInterface $entityManager,LocationRepository $locationRepository, int $id, Request $request): Response
+    {
+
+        $location = $locationRepository->findOneById($id);
+        $locationForm = $this->createForm(LocationType::class, $location);
+
+        $locationForm->handleRequest($request);
+
+        if ($locationForm->isSubmitted() && $locationForm->isValid()) {
+
+            $entityManager->persist($location);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Lieu modifié avec succes !');
+
+            return $this->redirectToRoute('app_location_management');
+        }
+
+        return $this->render('backoffice/back_office_location_update.html.twig', [
+            'locationForm' => $locationForm->createView()
+        ]);
+    }
 
 }

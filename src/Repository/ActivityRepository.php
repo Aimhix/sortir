@@ -40,7 +40,6 @@ class ActivityRepository extends ServiceEntityRepository
         }
     }
 
-    // à placer dans ActivityRepository
     // searchCriteria = tableau associatif de données
 
     public function findBySearchCriteria($searchCriteria, User $user)
