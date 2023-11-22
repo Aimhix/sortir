@@ -6,6 +6,7 @@
     {% for city in cities %}
         <br>
         <p>{{ city.name }}</p>
+{#        <a class="stop-action-btn" href="{{ path('app_cities_management_update', {'id': city.id}) }}">Modifier</a>#}
         <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
            onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">Supprimer</a>
     {% endfor %}

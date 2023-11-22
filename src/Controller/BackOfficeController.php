@@ -128,6 +128,14 @@ class BackOfficeController extends AbstractController
         return $this->redirectToRoute('app_location_management');
     }
 
+//
+//    #[IsGranted('ROLE_ADMIN')]
+//    #[Route('/back_office/cities_location_update/{id}', name: 'app_cities_management_update')]
+//    public function updateCity(int $id): Response
+//    {
+//
+//    }
+
 
 
 
