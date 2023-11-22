@@ -6,7 +6,12 @@
     <h1>Réinitialiser votre mot de passe</h1>
 
     {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Réinitialiser</button>
+    {{ form_row(resetForm.plainPassword) }}
+    <button class="btn btn-primary">Réinitialiser</button>
+
+    {% if form_errors(resetForm)|length > 0 %}
+        <span class="required-info">{{ form_errors(resetForm) }}</span>
+    {% endif %}
+
     {{ form_end(resetForm) }}
 {% endblock %}

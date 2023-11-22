@@ -20,6 +20,9 @@
     {{ form_start(cityForm) }}
     {{ form_widget(cityForm) }}
     <button type="submit" class="call-action-btn create-activity-publication">Ajouter une ville</button>
+    {% if form_errors(cityForm)|length > 0 %}
+        <span class="required-info">{{ form_errors(cityForm) }}</span>
+    {% endif %}
     {{ form_end(cityForm) }}
 
 

@@ -934,6 +934,25 @@ body::after {
     line-height: 1.8em;
 }
 
+.alert-success {
+    background-color: rgba(151, 196, 133, 0.52);
+    border-radius: 15px;
+    padding: 10px 12px;
+    color: #60162e;
+    text-align: center;
+    width: 300px;
+    margin: 5px auto;
+    line-height: 1.8em;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.active-status {
+
+}
+
 
 /*Thème nuit*/
 
@@ -1036,3 +1055,4 @@ body.night-theme #theme-toggle {
     background-repeat: no-repeat;
     background-position: 2px 3px;
 }
+
