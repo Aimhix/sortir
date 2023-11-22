@@ -161,15 +161,15 @@ class ActivityController extends AbstractController
     }
 
 
-    #[Route('/activity/{id}', name: 'activity_show')]
-    public function show(Activity $activity): Response
-    {
-        $user = $this->getUser();
-        return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
-            'user' => $user
-        ]);
-    }
+//    #[Route('/activity/{id}', name: 'activity_show')]
+//    public function show(Activity $activity): Response
+//    {
+//        $user = $this->getUser();
+//        return $this->render('activity/show.html.twig', [
+//            'activity' => $activity,
+//            'user' => $user
+//        ]);
+//    }
 
     #[Route('/activity/{id}', name: 'activity_show')]
     public function showList(Activity $activity): Response
