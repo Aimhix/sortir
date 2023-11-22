@@ -50,7 +50,7 @@ class ActivityType extends AbstractType
                 'placeholder' => 'Selectionnez un lieu'
             ])
             ->add('activityPicture', FileType::class,
-                ['label' => 'Selectionnez une image 📷',
+                ['label' => 'Sélectionnez une image 📷',
                     'required' => false,
                     'mapped' => false,
                 ])

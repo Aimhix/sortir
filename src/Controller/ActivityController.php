@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivityController extends AbstractController
 {
@@ -145,23 +144,31 @@ class ActivityController extends AbstractController
             $activity->setStatus($statusRepository->findOneByWording('Annulée'));
             $entityManager->persist($activity);
             $entityManager->flush();
-            $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+            $participants = $activity->getUsers();
+            $actionMessage = 'Activité annulée avec succès.';
+            foreach ($participants as $participant) {
+                if ($participant->getId() == $user->getId()) {
+                    $actionMessage = 'Vous êtes inscrit(e) à cette sortie.';
+                    break;
+                }
+            }
 
+            $this->addFlash('success', $actionMessage);
             return $this->redirectToRoute('app_activity_index');
         }
         return throw $this->createAccessDeniedException('Seul l\'organisateur peu suprimer ses sorties');
     }
 
 
-    #[Route('/activity/{id}', name: 'activity_show')]
-    public function show(Activity $activity): Response
-    {
-        $user = $this->getUser();
-        return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
-            'user' => $user
-        ]);
-    }
+//    #[Route('/activity/{id}', name: 'activity_show')]
+//    public function show(Activity $activity): Response
+//    {
+//        $user = $this->getUser();
+//        return $this->render('activity/show.html.twig', [
+//            'activity' => $activity,
+//            'user' => $user
+//        ]);
+//    }
 
     #[Route('/activity/{id}', name: 'activity_show')]
     public function showList(Activity $activity): Response
@@ -221,4 +228,22 @@ class ActivityController extends AbstractController
         // Sinon renvoyer sur la page de création de sorties
         return $this->redirectToRoute('app_activity_create');
     }
+
+    #[Route('/activity_publish/{activityId}', name: 'activity_publish')]
+    public function publish(int $activityId, EntityManagerInterface $entityManager, ActivityRepository $activityRepository): Response
+    {
+
+        $updatedActivity = $activityRepository->findOneById($activityId);
+        $updatedActivity->setIsPublished(true);
+
+        $entityManager->persist($updatedActivity);
+        $entityManager->flush();
+
+
+        $this->addFlash('success', 'Votre sortie a bien été publiée.');
+
+        return $this->redirectToRoute('activity_show', ['id' => $activityId]);
+    }
+
+
 }

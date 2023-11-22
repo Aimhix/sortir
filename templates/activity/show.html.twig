@@ -52,8 +52,8 @@
         </div>
 
         <h3>Organisateur :
-        <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
-           class="btn-info-action">{{ activity.organizer.pseudo }}</a></h3>
+            <a href="{{ path('app_organizer_profile', {'id': activity.organizer.getId()}) }}"
+               class="btn-info-action">{{ activity.organizer.pseudo }}</a></h3>
         <h4>Ville organisatrice : {{ activity.campus }}</h4>
 
         {% include  'fragments/_listParticipantProfile.html.twig' with {'participant': participant} %}
@@ -61,36 +61,40 @@
         {#    <a href="{{ path('activity_participants', {'activityId': activity.id}) }}">Liste des participants</a> #}
 
 
-
         <div class="btn-end-form">
-        {% if activity.organizer.id  ==  app.user.id  or is_granted('ROLE_ADMIN')%}
+            {% if not activity.isPublished %}
+                <a class="call-action-btn" href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
+            {% endif %}
 
-            <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
+            {% if activity.organizer.id  ==  app.user.id  or is_granted('ROLE_ADMIN') %}
 
-        {% else %}
+                <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
-            {#  Le if vérifie si l'acti est ouverte (ID 2 en database) #}
-            {% if activity.status.id == 2 %}
+            {% else %}
 
-                {% if activity.users|length < activity.subMax %}
+                {#  Le if vérifie si l'acti est ouverte (ID 2 en database) #}
+                {% if activity.status.id == 2 %}
 
-                    <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
-                {% else %}
+                    {% if activity.users|length < activity.subMax %}
 
-                    <p>Complet</p>
+                        <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                    {% else %}
 
-                {% endif %}
+                        <p>Complet</p>
 
-                {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+                    {% endif %}
 
-                    <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se
-                        désinscrire</a>
+                    {% if app.user and app.user in activity.users and activity.organizer.id != app.user.id %}
+
+                        <a class="stop-action-btn"
+                           href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se
+                            désinscrire</a>
+
+                    {% endif %}
 
                 {% endif %}
 
             {% endif %}
-
-        {% endif %}
         </div>
 
     </div>
