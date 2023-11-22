@@ -3,33 +3,63 @@
 {% block title %}BackOfficeCity {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% for city in cities %}
+
+
+    <div class="detail-profile-show container-form-and-show">
+
+        <span class="title-page-header title-show">Ajouter une ville</span>
+
         <br>
-        <p>{{ city.name }}</p>
-{#        <a class="stop-action-btn" href="{{ path('app_cities_management_update', {'id': city.id}) }}">Modifier</a>#}
-        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
-           onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">Supprimer</a>
-    {% endfor %}
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
+        <br><br>
 
-    {{ form_start(cityForm) }}
-    {{ form_widget(cityForm) }}
-    <button type="submit" class="call-action-btn create-activity-publication">Ajouter une ville</button>
-    {% if form_errors(cityForm)|length > 0 %}
-        <span class="required-info">{{ form_errors(cityForm) }}</span>
-    {% endif %}
-    {{ form_end(cityForm) }}
+        {{ form_start(cityForm) }}
+        <div class="form_champ">
+            {{ form_label(cityForm.name) }}
+            {{ form_widget(cityForm.name) }}
+            {{ form_errors(cityForm.name) }}
+        </div>
+        <div class="form_champ">
+            {{ form_label(cityForm.postcode) }}
+            {{ form_widget(cityForm.postcode) }}
+            {{ form_errors(cityForm.postcode) }}
+        </div>
 
 
+        <div class="btn-end-form">
+            {#    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a> #}
+            <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
+            <button type="submit" class="call-action-btn">Ajouter une ville</button>
+        </div>
 
-    {#    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a> #}
-    <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
+        {{ form_end(cityForm) }}
+
+
+    </div>
+
+    <div class="container-form-and-show">
+
+        <span class="title-page-header title-show">Modifier une ville</span>
+        <br>
+        <br><br>
+
+        {% for city in cities %}
+            <div class="container-user">
+                <span class="form-info-inner">{{ city.name }}</span>
+
+                <br><br><br>
+                <div class="btn-inner-container">
+
+                    <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
+                       onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">Supprimer</a>
+                    {#            <a class="call-action-btn" href="{{ path('app_cities_management_update', {'id': city.id}) }}">Modifier</a> #}
+                </div>
+            </div>
+        {% endfor %}
+        <br><br>
+        <br>
+
+    </div>
+
 {% endblock %}
 
 

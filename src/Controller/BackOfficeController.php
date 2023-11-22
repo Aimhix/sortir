@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Location;
 use App\Form\CityType;
+use App\Form\CityUpdateType;
 use App\Form\LocationType;
 use App\Repository\CityRepository;
 use App\Repository\LocationRepository;
@@ -18,13 +19,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
 class BackOfficeController extends AbstractController
 {
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/users_management', name: 'app_users_management')]
-    public function userBackOffice( UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function userBackOffice(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $users = $userRepository->findAll();
 
@@ -36,18 +36,36 @@ class BackOfficeController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/city_management', name: 'app_city_management')]
-    public function cityBackOffice( CityRepository $cityRepository,  EntityManagerInterface $entityManager, Request $request): Response
+    public function cityBackOffice(CityRepository $cityRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $cities = $cityRepository->findAll();
+        $cityForms = [];
 
-        $city = new City();
-        $cityForm = $this->createForm(CityType::class, $city);
+        // Update existing cities
+        foreach ($cities as $currentCity) {
+            $currentCityForm = $this->createForm(CityUpdateType::class, $currentCity);
+            $currentCityForm->handleRequest($request);
 
-        $cityForm->handleRequest($request);
+            if ($currentCityForm->isSubmitted() && $currentCityForm->isValid()) {
+                // Handle form submission, update database, etc.
+                $entityManager->persist($currentCity);
+                $entityManager->flush();
 
-        if ($cityForm->isSubmitted() && $cityForm->isValid()){
+            }
 
-            $entityManager->persist($city);
+            $cityForms[] = [
+                'form' => $currentCityForm->createView(),
+                'cityId' => $currentCity->getId(), // Assuming getId() is the method to get the city ID
+            ];
+        }
+
+        $newCity = new City();
+        $newCityForm = $this->createForm(CityType::class, $newCity);
+
+        $newCityForm->handleRequest($request);
+
+        if ($newCityForm->isSubmitted() && $newCityForm->isValid()) {
+            $entityManager->persist($newCity);
             $entityManager->flush();
 
             $this->addFlash('success', 'Ville créée avec succès !');
@@ -56,8 +74,8 @@ class BackOfficeController extends AbstractController
         }
 
         return $this->render('backoffice/back_office_city.html.twig', [
-            'cityForm' => $cityForm ->createView(),
-            'cities' => $cities
+            'cityForm' => $newCityForm->createView(),
+            'citiesForms' => $cityForms,
         ]);
     }
 
@@ -93,7 +111,7 @@ class BackOfficeController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/location_management', name: 'app_location_management')]
-    public function locationBackOffice( LocationRepository $locationRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function locationBackOffice(LocationRepository $locationRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $locations = $locationRepository->findAll();
 
@@ -103,7 +121,7 @@ class BackOfficeController extends AbstractController
 
         $locationForm->handleRequest($request);
 
-        if ($locationForm->isSubmitted() && $locationForm->isValid()){
+        if ($locationForm->isSubmitted() && $locationForm->isValid()) {
 
             $entityManager->persist($location);
             $entityManager->flush();
@@ -114,13 +132,13 @@ class BackOfficeController extends AbstractController
         }
 
         return $this->render('backoffice/back_office_location.html.twig', [
-            'locationForm' => $locationForm ->createView(),
+            'locationForm' => $locationForm->createView(),
             'locations' => $locations
         ]);
     }
 
     #[IsGranted('ROLE_ADMIN')]
-    #[Route('/back_office/cities_location_delete/{id}', name: 'app_location_management_delete')]
+    #[Route('/back_office/location_management_delete/{id}', name: 'app_location_management_delete')]
     public function deleteLocation(BackOfficeServices $backOfficeServices, LocationRepository $locationRepository, int $id): Response
     {
         $location = $locationRepository->findOneById($id);
@@ -137,21 +155,16 @@ class BackOfficeController extends AbstractController
 //    }
 
 
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/back_office/cities_update/{id}', name: 'app_city_management_update')]
+    public function updateCity(EntityManagerInterface $entityManager, CityRepository $cityRepository, int $id): Response
+    {
+        $updatecity = new City();
+        $city = $cityRepository->findOneById($id);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $this->redirectToRoute('app_location_management');
+    }
 
 
 }

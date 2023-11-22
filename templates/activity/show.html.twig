@@ -63,7 +63,7 @@
 
 
         <div class="btn-end-form">
-        {% if activity.organizer.id  ==  app.user.id%}
+        {% if activity.organizer.id  ==  app.user.id  or is_granted('ROLE_ADMIN')%}
 
             <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
 
