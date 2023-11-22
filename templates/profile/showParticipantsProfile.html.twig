@@ -1,28 +1,55 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Profil de l'organisateur{{ parent() }}{% endblock %}
+
 {% block body %}
 
-    <h1>Profil {{ participant.pseudo }}</h1>
+    <div class="detail-profile-show container-form-and-show">
 
-    {% if participant %}
-        {% if participant.profilePicture %}
-            <img src="{{ asset('/images/' ~ participant.profilePicture) }}" alt="Photo de profil">
-        {% else %}
-            <p>Aucune photo de profil disponible</p>
-        {% endif %}
+        <center>
+            {% if participant %}
+            {% if participant.profilePicture %}
+                <img class="profile-picture-big" src="{{ asset('/images/' ~ participant.profilePicture) }}"
+                     alt="Photo de profil">
+            {% else %}
+                <img class="profile-picture-big" src="{{ asset('/images/defaultpicture.jpg') }}" alt="Photo de profil">
+                <br>
+                <p>{{ participant.pseudo }} n'a pas encore de photo.</p>
+            {% endif %}
 
-        <h2>Pseudo : {{ participant.pseudo }}</h2>
-        <p>Prénom : {{ participant.firstname }}</p>
-        <p>Nom : {{ participant.lastname }}</p>
-        <p>Téléphone : {{ participant.phone }}</p>
-        <p>Email : {{ participant.email }}</p>
-        <p>Ville de rattachement : {{ participant.campus }}</p>
+            <h2 class="title-show">Profil de {{ participant.pseudo }}</h2>
+            <h3>Son campus : {{ participant.campus }}</h3></center>
+
+
+        <div class="group-edit-second">
+            <div class="form_champ">
+                Prénom :<br> <span class="info-show">{{ participant.firstname }}</span>
+            </div>
+            <div class="form_champ">
+                Nom :<br> <span class="info-show">{{ participant.lastname }}</span>
+            </div>
+        </div>
+        <div class="group-edit-second">
+            <div class="form_champ">
+                Téléphone :<br> <span class="info-show">{{ participant.phone }}</span>
+            </div>
+            <div class="form_champ">
+                Email :<br> <span class="info-show">{{ participant.email }}</span>
+            </div>
+        </div>
 
         {# Mettre le lien de la page d'accueil #}
-        <a href="{{ path('app_activity_index') }}" class="btn btn-secondary">Retour</a>
+        <div class="btn-end-form">
+
+            <a href="{{ path('app_activity_index') }}" class="stop-action-btn">Retour</a>
+
+        </div>
         {# Ajouter le lien vers la page d'édition du profil de l'organisateur #}
 
-    {% else %}
-        <p>Participant non trouvé</p>
-    {% endif %}
+        {% else %}
+            <h2 class="title-show">Organisateur non trouvé</h2>
+        {% endif %}
+
+    </div>
 
 {% endblock %}

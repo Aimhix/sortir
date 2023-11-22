@@ -1,17 +1,20 @@
-
 {{ form_start(form, {'attr': {'class': 'activity-search-form'}}) }}
 
 {# recherche par campus #}
 <div class="form-group">
     <label for="{{ form.campus.vars.id }}">{{ 'Site'|trans }}</label>
-    {{ form_errors(form.campus) }}
+    {% if form_errors(form.campus)|length > 0 %}
+        <span class="required-info">{{ form_errors(form.campus) }}</span>
+    {% endif %}
     {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom du site'}}) }}
 </div>
 
 {# recherche par nom #}
 <div class="form-group">
     <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label>
-    {{ form_errors(form.search) }}
+    {% if form_errors(form.search)|length > 0 %}
+        <span class="required-info">{{ form_errors(form.search) }}</span>
+    {% endif %}
     {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Nature de la sortie'}}) }}
 </div>
 
@@ -22,6 +25,9 @@
     <span class="date-icon">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
+    {% if form_errors(form.dateStart)|length > 0 %}
+        <span class="required-info">{{ form_errors(form.dateStart) }}</span>
+    {% endif %}
 </div>
 
 {# date de fin #}
@@ -31,6 +37,9 @@
     <span class="date-icon-end">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
+    {% if form_errors(form.subLimitDate)|length > 0 %}
+        <span class="required-info">{{ form_errors(form.subLimitDate) }}</span>
+    {% endif %}
 </div>
 
 
@@ -39,22 +48,30 @@
     <div class="form-check">
         {{ form_widget(form.isOrganizer) }}
         <label for="{{ form.isOrganizer.vars.id }}">{{ 'Sorties que j\'organise'|trans }}</label>
-        {{ form_errors(form.isOrganizer) }}
+        {% if form_errors(form.isOrganizer)|length > 0 %}
+            <span class="required-info">{{ form_errors(form.isOrganizer) }}</span>
+        {% endif %}
     </div>
     <div class="form-check">
         {{ form_widget(form.isRegistered) }}
         <label for="{{ form.isRegistered.vars.id }}">{{ 'Sorties auxquelles je suis inscrit(e)'|trans }}</label>
-        {{ form_errors(form.isRegistered) }}
+        {% if form_errors(form.isRegistered)|length > 0 %}
+            <span class="required-info">{{ form_errors(form.isRegistered) }}</span>
+        {% endif %}
     </div>
     <div class="form-check">
         {{ form_widget(form.isNotRegistered) }}
         <label for="{{ form.isNotRegistered.vars.id }}">{{ 'Sorties auxquelles je ne suis pas inscrit(e)'|trans }}</label>
-        {{ form_errors(form.isNotRegistered) }}
+        {% if form_errors(form.isNotRegistered)|length > 0 %}
+            <span class="required-info">{{ form_errors(form.isNotRegistered) }}</span>
+        {% endif %}
     </div>
     <div class="form-check">
         {{ form_widget(form.isPast) }}
         <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
-        {{ form_errors(form.isPast) }}
+        {% if form_errors(form.isPast)|length > 0 %}
+            <span class="required-info">{{ form_errors(form.isPast) }}</span>
+        {% endif %}
     </div>
 </div>
 
