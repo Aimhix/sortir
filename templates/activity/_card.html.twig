@@ -8,7 +8,7 @@
                              style="background-image: url('{{ asset('/images/activity/' ~ activity.activityPicture) }}'); background-size: cover; background-position: center;">
                             <div class="tps">
                                 <div class="color-gradient">
-{#                                    Clos le <span class="fontweight">{{ activity.subLimitDate | date("d/m") }}</span>#}
+                                    {#                                    Clos le <span class="fontweight">{{ activity.subLimitDate | date("d/m") }}</span> #}
                                     {% include 'activity/_time_card.html.twig' %}
                                 </div>
                             </div>
@@ -17,7 +17,6 @@
                             <a href="{{ path('activity_show', {'id': activity.id}) }}">
                                 {{ activity.name }}</a>
                             <br>
-
                             <span class="fontweight">{{ activity.dateStart | date("d/m") }}</span>
                             à
                             <span class="fontweight">{{ activity.dateStart|format_datetime('none', 'short', locale='fr') }}</span>
