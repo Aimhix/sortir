@@ -1,0 +1,65 @@
+<span class="fontweight">
+        {% set now = date() %}
+        {% set server_now = now %}
+        {% set diff = activity.subLimitDate.diff(server_now) %}
+
+        {% set days = diff.days %}
+        {% set hours = diff.h %}
+        {% set minutes = diff.i %}
+
+<div id="countdown">
+  {% if days >= 2 %}
+          <span id="days">{{ days }}</span> j{{ days > 1 ? '' : '' }}
+  {% endif %}
+        {% if days >= 1 or hours >= 2 %}
+                <span id="hours">{{ hours }}</span> h{{ hours > 1 ? '' : '' }}
+        {% endif %}
+        {% if days >= 1 or hours >= 1 or minutes >= 1 %}
+                <span id="minutes">{{ minutes }}</span> mn{{ minutes > 1 ? '' : '' }}
+        {% endif %}
+</div>
+
+<script>
+function updateCountdown(countdownElement) {
+        var now = new Date();
+        var deadline = new Date(countdownElement.getAttribute('data-deadline'));
+        var diff = deadline - now;
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        if (days >= 2) {
+                document.getElementById("days").innerHTML = days + " j";
+        } else {
+                document.getElementById("days").style.display = "none";
+        }
+
+        if (days >= 1 || hours >= 2) {
+                document.getElementById("hours").innerHTML = hours + " h";
+        } else {
+                document.getElementById("hours").style.display = "none";
+        }
+
+        if (days >= 1 || hours >= 1 || minutes >= 1) {
+                document.getElementById("minutes").innerHTML = minutes + " mn";
+        } else {
+                document.getElementById("minutes").style.display = "none";
+        }
+
+        if (diff < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("expired-message").style.display = "block";
+        }
+}
+
+document.querySelectorAll('.countdown').forEach(function(countdown) {
+    setInterval(function() { updateCountdown(countdown); }, 1000);
+});
+</script>
+
+<p id="expired-message" class="expired" style="display: none;">Sortie terminée</p>
+
+
+</span>
