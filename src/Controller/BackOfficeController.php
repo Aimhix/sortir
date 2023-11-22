@@ -39,25 +39,6 @@ class BackOfficeController extends AbstractController
     public function cityBackOffice(CityRepository $cityRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $cities = $cityRepository->findAll();
-        $cityForms = [];
-
-        // Update existing cities
-        foreach ($cities as $currentCity) {
-            $currentCityForm = $this->createForm(CityUpdateType::class, $currentCity);
-            $currentCityForm->handleRequest($request);
-
-            if ($currentCityForm->isSubmitted() && $currentCityForm->isValid()) {
-                // Handle form submission, update database, etc.
-                $entityManager->persist($currentCity);
-                $entityManager->flush();
-
-            }
-
-            $cityForms[] = [
-                'form' => $currentCityForm->createView(),
-                'cityId' => $currentCity->getId(), // Assuming getId() is the method to get the city ID
-            ];
-        }
 
         $newCity = new City();
         $newCityForm = $this->createForm(CityType::class, $newCity);
@@ -75,7 +56,7 @@ class BackOfficeController extends AbstractController
 
         return $this->render('backoffice/back_office_city.html.twig', [
             'cityForm' => $newCityForm->createView(),
-            'citiesForms' => $cityForms,
+            'cities' => $cities,
         ]);
     }
 
@@ -149,14 +130,53 @@ class BackOfficeController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/cities_update/{id}', name: 'app_city_management_update')]
-    public function updateCity(EntityManagerInterface $entityManager, CityRepository $cityRepository, int $id): Response
+    public function updateCity(EntityManagerInterface $entityManager,CityRepository $cityRepository, int $id, Request $request): Response
     {
-        $updatecity = new City();
+
         $city = $cityRepository->findOneById($id);
+        $cityForm = $this->createForm(CityType::class, $city);
 
+        $cityForm->handleRequest($request);
 
-        return $this->redirectToRoute('app_location_management');
+        if ($cityForm->isSubmitted() && $cityForm->isValid()) {
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ville modifié avec succes !');
+
+            return $this->redirectToRoute('app_city_management');
+        }
+
+        return $this->render('backoffice/back_office_city_update.html.twig', [
+            'cityForm' => $cityForm->createView()
+        ]);
     }
 
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/back_office/locations_update/{id}', name: 'app_location_management_update')]
+    public function updateLocation(EntityManagerInterface $entityManager,LocationRepository $locationRepository, int $id, Request $request): Response
+    {
+
+        $location = $locationRepository->findOneById($id);
+        $locationForm = $this->createForm(LocationType::class, $location);
+
+        $locationForm->handleRequest($request);
+
+        if ($locationForm->isSubmitted() && $locationForm->isValid()) {
+
+            $entityManager->persist($location);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Lieu modifié avec succes !');
+
+            return $this->redirectToRoute('app_location_management');
+        }
+
+        return $this->render('backoffice/back_office_location_update.html.twig', [
+            'locationForm' => $locationForm->createView()
+        ]);
+    }
 
 }

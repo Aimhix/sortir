@@ -62,7 +62,7 @@
     <div class="detail-profile-show container-form-and-show">
 
         <span class="title-page-header title-show">Modifier un lieu</span>
-<br><br><br>
+        <br><br><br>
 
         {% for location in locations %}
             <div class="container-user">
@@ -71,8 +71,8 @@
                 <br>
                 <div class="btn-inner-container">
 
-                <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer</a>
-{#                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>#}
+                    <a class="call-action-btn" href="{{ path('app_location_management_update', {'id': location.id}) }}">Modifier</a>
+                    <a class="stop-action-btn" href="{{ path('app_location_management_delete', {'id': location.id}) }}">Supprimer</a>
                 </div>
             </div>
         {% endfor %}
