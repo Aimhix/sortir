@@ -3,13 +3,20 @@
 {% block title %}BackOfficeCity {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% for city in cities %}
-        <br>
-        <p>{{ city.name }}</p>
-        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
+    {% for citiesForm in citiesForms %}
+        {% set formView = citiesForm.form %}
+        {% set cityId = citiesForm.cityId %}
+
+        {{ form_start(formView) }}
+        {{ form_widget(formView) }}
+
+        <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': cityId}) }}"
            onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">Supprimer</a>
+
+        {{ form_end(formView) }}
     {% endfor %}
-    <br><br>
+
+
     <br><br>
     <br><br>
     <br><br>
