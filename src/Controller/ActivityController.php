@@ -82,7 +82,7 @@ class ActivityController extends AbstractController
 
             $this->addFlash('success', 'Lieu créée avec succès !');
 
-            return $this->redirectToRoute('app_activity_index');
+            return $this->redirectToRoute('app_activity_create');
         }
 
         return $this->render('activity/create_location.html.twig', [
