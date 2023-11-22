@@ -7,6 +7,11 @@
     {{ form_start(locationForm) }}
     {{ form_widget(locationForm) }}
     <button type="submit" class="call-action-btn create-activity-publication">Ajouter un lieu</button>
+
+    {% if form_errors(locationForm)|length > 0 %}
+        <span class="required-info">{{ form_errors(locationForm) }}</span>
+    {% endif %}
+
     {{ form_end(locationForm) }}
     <a class="stop-action-btn" href="{{ path('app_activity_create') }}">Retour</a>
 

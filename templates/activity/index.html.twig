@@ -34,7 +34,9 @@
             {# recherche par nom #}
             <div class="form-group">
                 {#        <label for="{{ form.search.vars.id }}">{{ 'Nom de la sortie'|trans }}</label> #}
-                {{ form_errors(form.search) }}
+                {% if form_errors(form.search)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.search) }}</span>
+                {% endif %}
                 {{ form_widget(form.search, {'attr': {'class': 'form-control', 'placeholder': 'Que cherches-tu ?'}}) }}
             </div>
 
@@ -42,6 +44,9 @@
             <div class="form-group date-picker">Du
                 {#        {{ form_label(form.dateStart) }} #}
                 {{ form_widget(form.dateStart) }}
+                {% if form_errors(form.dateStart)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.dateStart) }}</span>
+                {% endif %}
                 <span class="date-icon">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
@@ -51,6 +56,9 @@
             <div class="form-group date-picker">Au
                 {#        {{ form_label(form.subLimitDate) }} #}
                 {{ form_widget(form.subLimitDate) }}
+                {% if form_errors(form.subLimitDate)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.subLimitDate) }}</span>
+                {% endif %}
                 <span class="date-icon-end">
         <i class="fa fa-calendar" aria-hidden="true"></i>
     </span>
@@ -59,7 +67,9 @@
             {# recherche par campus #}
             <div class="form-group">
                 <label for="{{ form.campus.vars.id }}"></label>
-                {{ form_errors(form.campus) }}
+                {% if form_errors(form.campus)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.campus) }}</span>
+                {% endif %}
                 {{ form_widget(form.campus, {'attr': {'class': 'form-control', 'placeholder': 'Campus'}}) }}
             </div>
 
@@ -80,22 +90,30 @@
 
                 <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
             </label>
-            {{ form_errors(form.organizer) }}
+            {% if form_errors(form.organizer)|length > 0 %}
+                <span class="required-info">{{ form_errors(form.organizer) }}</span>
+            {% endif %}
         </div>
         <div class="form-check">
             {{ form_widget(form.isRegistered) }}
             <label for="{{ form.isRegistered.vars.id }}">{{ 'Mes inscriptions'|trans }}</label>
-            {{ form_errors(form.isRegistered) }}
+            {% if form_errors(form.isRegistered)|length > 0 %}
+                <span class="required-info">{{ form_errors(form.isRegistered) }}</span>
+            {% endif %}
         </div>
         <div class="form-check">
             {{ form_widget(form.isNotRegistered) }}
             <label for="{{ form.isNotRegistered.vars.id }}">{{ 'Sans inscription'|trans }}</label>
-            {{ form_errors(form.isNotRegistered) }}
+            {% if form_errors(form.isNotRegistered)|length > 0 %}
+                <span class="required-info">{{ form_errors(form.isNotRegistered) }}</span>
+            {% endif %}
         </div>
         <div class="form-check">
             {{ form_widget(form.isPast) }}
             <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
-            {{ form_errors(form.isPast) }}
+            {% if form_errors(form.isPast)|length > 0 %}
+                <span class="required-info">{{ form_errors(form.isPast) }}</span>
+            {% endif %}
         </div>
 
 
@@ -107,9 +125,11 @@
     <div class="show-activity-card">
         <h2 class="color-gradient" style="margin:50px 0 50px">Sorties à venir</h2>
         <div class="btn-pref-activity">
-            <button id="switch-to-list-view"><img class="btn-pref-activity" src="{{ asset('/images/list.png') }}" alt="list"></button>
-{#            <i class="icon-list"></i><i class="icon-card"></i>#}
-            <button id="switch-to-card-view"><img class="btn-pref-activity" src="{{ asset('/images/card.png') }}" alt="card"></button>
+            <button id="switch-to-list-view"><img class="btn-pref-activity" src="{{ asset('/images/list.png') }}"
+                                                  alt="list"></button>
+            {#            <i class="icon-list"></i><i class="icon-card"></i> #}
+            <button id="switch-to-card-view"><img class="btn-pref-activity" src="{{ asset('/images/card.png') }}"
+                                                  alt="card"></button>
         </div>
         <section>
             <div class="show-activity-card">
@@ -119,11 +139,11 @@
             </div>
 
 
-{#            {% include 'activity/_activityList.html.twig' %}#}
+            {#            {% include 'activity/_activityList.html.twig' %} #}
 
-{#            {% for activity in activities %}#}
-{#                {% include 'activity/_card.html.twig' %}#}
-{#            {% endfor %}#}
+            {#            {% for activity in activities %} #}
+            {#                {% include 'activity/_card.html.twig' %} #}
+            {#            {% endfor %} #}
         </section>
 
     </div>
