@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier Ville {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="detail-profile-show container-form-and-show">
+
+        <span class="title-page-header title-show">Modifier une ville</span>
+
+        <br>
+        <br><br>
+
+        {{ form_start(cityForm) }}
+        <div class="form_champ">
+            {{ form_label(cityForm.name) }}
+            {{ form_widget(cityForm.name) }}
+            {{ form_errors(cityForm.name) }}
+        </div>
+        <div class="form_champ">
+            {{ form_label(cityForm.postcode) }}
+            {{ form_widget(cityForm.postcode) }}
+            {{ form_errors(cityForm.postcode) }}
+        </div>
+
+
+        <div class="btn-end-form">
+            {#    <a class="call-action-btn" href="{{ path('app_cities_management_new') }}">Ajouter une ville</a> #}
+            <a class="stop-action-btn" href="{{ path('app_city_management') }}">Retour</a>
+            <button type="submit" class="call-action-btn">Valider</button>
+        </div>
+
+        {{ form_end(cityForm) }}
+
+    </div>
+{% endblock %}
+
+

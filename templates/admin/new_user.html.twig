@@ -4,19 +4,12 @@
 
 {% block body %}
 
-    <h1>Page Admin inscription</h1>
+<div class="container-form-and-show">
+
+    <span class="title-page-header title-show">Ajouter un utilisateur</span>
+    <br><br><br>
 
 
-
-
-
-    {#    <label for="inputEmail">Email : </label> #}
-    {#    <input type="email"  name="email" id="inputEmail" class="form-control" #}
-    {#           autocomplete="email" required autofocus> #}
-
-
-
-    {# Afficher les messages flash s'il y en a #}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
@@ -29,87 +22,103 @@
         </div>
     {% endfor %}
 
-    Afficher le formulaire
     {{ form_start(registrationForm) }}
+<div class="form_champ">
+    {{ form_label(registrationForm.firstname) }}
+    {{ form_widget(registrationForm.firstname) }}
+    {% if form_errors(registrationForm.firstname)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.firstname) }}</span>
+    {% endif %}
+</div>
 
-    <div>
-        {{ form_label(registrationForm.firstname) }}
-        {{ form_widget(registrationForm.firstname) }}
-        {% if form_errors(registrationForm.firstname)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.firstname) }}</span>
-        {% endif %}
+<div class="form_champ">
+    {{ form_label(registrationForm.lastname) }}
+    {{ form_widget(registrationForm.lastname) }}
+    {% if form_errors(registrationForm.lastname)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.lastname) }}</span>
+    {% endif %}
 
+</div>
+
+<div class="form_champ">
+    {{ form_label(registrationForm.phone) }}
+    {{ form_widget(registrationForm.phone) }}
+    {% if form_errors(registrationForm.phone)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.phone) }}</span>
+    {% endif %}
+</div>
+
+<div class="form_champ">
+    {{ form_label(registrationForm.email) }}
+    {{ form_widget(registrationForm.email) }}
+    {% if form_errors(registrationForm.email)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.email) }}</span>
+    {% endif %}
+
+</div>
+
+<div class="form_champ">
+    {{ form_label(registrationForm.password) }}
+    {{ form_widget(registrationForm.password) }}
+    {% if form_errors(registrationForm.password)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.password) }}</span>
+    {% endif %}
+</div>
+
+<div class="form_champ">
+    {{ form_label(registrationForm.confirmpassword) }}
+    {{ form_widget(registrationForm.confirmpassword) }}
+    {% if form_errors(registrationForm.confirmpassword)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.confirmpassword) }}</span>
+    {% endif %}
+</div>
+
+<div class="form_champ">
+    {{ form_label(registrationForm.campus) }}
+    {{ form_widget(registrationForm.campus) }}
+    {% if form_errors(registrationForm.campus)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.campus) }}</span>
+    {% endif %}
+</div>
+
+<div class="form_champ">
+     {{ form_label(registrationForm.profilePicture) }}
+     {{ form_widget(registrationForm.profilePicture) }}
+    {% if form_errors(registrationForm.profilePicture)|length > 0 %}
+        <span class="required-info">{{ form_errors(registrationForm.profilePicture) }}</span>
+    {% endif %}
+
+</div>
+
+    <div class="btn-end-form">
+
+    <a class="stop-action-btn" href="{{ path('admin_new_user') }}">Annuler</a>
+        <button class="call-action-btn" type="submit">Enregistrer</button>
     </div>
 
-    <div>
-        {{ form_label(registrationForm.lastname) }}
-        {{ form_widget(registrationForm.lastname) }}
-        {% if form_errors(registrationForm.lastname)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.lastname) }}</span>
-        {% endif %}
 
-    </div>
+{{ form_end(registrationForm) }}
+</div>
 
-    <div>
-        {{ form_label(registrationForm.phone) }}
-        {{ form_widget(registrationForm.phone) }}
-        {% if form_errors(registrationForm.phone)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.phone) }}</span>
-        {% endif %}
-    </div>
+    <div class="container-form-and-show">
 
-    <div>
-        {{ form_label(registrationForm.email) }}
-        {{ form_widget(registrationForm.email) }}
-        {% if form_errors(registrationForm.email)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.email) }}</span>
-        {% endif %}
+        <span class="title-page-header title-show">Ajouter via CSV</span>
 
-    </div>
+    <br><br><br>
 
-    <div>
-        {{ form_label(registrationForm.password) }}
-        {{ form_widget(registrationForm.password) }}
-        {% if form_errors(registrationForm.password)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.password) }}</span>
-        {% endif %}
-    </div>
+{{ form_start(csvForm) }}
+        <div class="form_champ create-activity-location">
+            {{ form_label(csvForm.file) }}
+            {{ form_widget(csvForm.file) }}
+            {{ form_errors(csvForm.file) }}
+        </div>
 
-    <div>
-        {{ form_label(registrationForm.confirmpassword) }}
-        {{ form_widget(registrationForm.confirmpassword) }}
-        {% if form_errors(registrationForm.confirmpassword)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.confirmpassword) }}</span>
-        {% endif %}
-    </div>
+        <div class="btn-end-form">
 
-    <div>
-        {{ form_label(registrationForm.campus) }}
-        {{ form_widget(registrationForm.campus) }}
-        {% if form_errors(registrationForm.campus)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.campus) }}</span>
-        {% endif %}
-    </div>
+        <button class="call-action-btn" type="submit">Upload CSV</button>
+{{ form_end(csvForm) }}
 
-    <div>
-        {{ form_label(registrationForm.profilePicture) }}
-        {{ form_widget(registrationForm.profilePicture) }}
-        {% if form_errors(registrationForm.profilePicture)|length > 0 %}
-            <span class="required-info">{{ form_errors(registrationForm.profilePicture) }}</span>
-        {% endif %}
+        </div>
 
-    </div>
-
-    <button type="submit">Enregistrer</button>
-    <button>
-        <a href="{{ path('admin_new_user') }}">Annuler</a>
-    </button>
-
-    {{ form_end(registrationForm) }}
-
-    {{ form_start(csvForm) }}
-    {{ form_row(csvForm.file) }}
-    <button type="submit">Upload CSV</button>
-    {{ form_end(csvForm) }}
-
+</div>
 {% endblock %}
