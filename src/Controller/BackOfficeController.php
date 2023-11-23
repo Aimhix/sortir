@@ -9,6 +9,7 @@ use App\Form\CityUpdateType;
 use App\Form\LocationType;
 use App\Repository\CityRepository;
 use App\Repository\LocationRepository;
+use App\Repository\StatusRepository;
 use App\Repository\UserRepository;
 use App\Services\BackOfficeServices;
 use Doctrine\ORM\EntityManagerInterface;
@@ -63,10 +64,10 @@ class BackOfficeController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/back_office/users_management_soft_delete/{id}', name: 'app_users_management_soft_delete')]
-    public function softDeleteUser(BackOfficeServices $backOfficeServices, UserRepository $userRepository, int $id, EntityManagerInterface $entityManager): Response
+    public function softDeleteUser(BackOfficeServices $backOfficeServices, UserRepository $userRepository, int $id, EntityManagerInterface $entityManager, StatusRepository $statusRepository): Response
     {
         $user = $userRepository->findOneById($id);
-        $backOfficeServices->softDeleteUser($user, $entityManager);
+        $backOfficeServices->softDeleteUser($user, $statusRepository, $entityManager);
         return $this->redirectToRoute('app_users_management');
     }
 

@@ -17,7 +17,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function showProfile(): Response
+    public function showProfile(EntityManagerInterface $entityManager): Response
     {
         //Récupérer user
         $user = $this->getUser();

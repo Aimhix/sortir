@@ -123,7 +123,7 @@ class ActivityController extends AbstractController
         }
 
         $activityService->unsubscribeFromActivity($user, $activity);
-        $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+        $this->addFlash('success', 'Vous êtes désinscris à cette sortie.');
 
         return $this->redirectToRoute('activity_show', ['id' => $activityId]);
     }
@@ -244,6 +244,38 @@ class ActivityController extends AbstractController
 
         return $this->redirectToRoute('activity_show', ['id' => $activityId]);
     }
+
+    #[Route('/activity/edit/{id}', name: 'activity_edit')]
+    public function editActivity(Request $request, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $activity = $activityRepository->find($id);
+        if (!$activity) {
+            throw $this->createNotFoundException('Activité non trouvée.');
+        }
+
+        // Vérifiez si l'utilisateur est l'organisateur ou a le rôle ADMIN
+        if ($activity->getOrganizer()->getId() !== $this->getUser()->getId() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous n\'avez pas le droit d\'éditer cette activité.');
+        }
+
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Vous pouvez ajouter une logique supplémentaire si nécessaire
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Activité mise à jour avec succès.');
+
+            return $this->redirectToRoute('activity_show', ['id' => $id]);
+        }
+
+        return $this->render('activity/edit.html.twig', [
+            'activityForm' => $form->createView(),
+            'activity' => $activity,
+        ]);
+    }
+
 
 
 }
