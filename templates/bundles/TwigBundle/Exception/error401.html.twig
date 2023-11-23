@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="detail-activity-show container-error container-form-and-show-min">
+        <h2 class="title-show">Authentification requise</h2><br><br><br>
+
+        <span class="info-show">
+                Vous devez être connecté pour accéder à cette page. Veuillez vous <a href="{{ path('login') }}">connecter</a> ou <a href="{{ path('app_activity_index') }}">retourner à la page d'accueil</a>.
+    </span>
+    </div>
+{% endblock %}

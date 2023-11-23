@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="detail-activity-show container-error container-form-and-show-min">
+        <h2 class="title-show">Service temporairement indisponible</h2><br><br><br>
+
+        <span class="info-show">
+    Nous effectuons une maintenance ou rencontrons un problème technique. Veuillez réessayer plus tard ou <a href="{{ path('homepage') }}">retournez à la page d'accueil</a>.
+        </span>
+    </div>
+{% endblock %}
