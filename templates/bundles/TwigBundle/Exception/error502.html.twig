@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="detail-activity-show container-error container-form-and-show-min">
+        <h2 class="title-show">Mauvaise passerelle</h2><br><br><br>
+
+        <span class="info-show">
+    Le serveur a reçu une réponse invalide d'un serveur en amont. Veuillez réessayer plus tard ou <a href="{{ path('app_activity_index') }}">retournez à la page d'accueil</a>.
+        </span>
+    </div>
+{% endblock %}

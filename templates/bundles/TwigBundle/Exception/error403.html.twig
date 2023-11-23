@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="detail-activity-show container-error container-form-and-show-min">
+        <h2 class="title-show">Accés refusé</h2>
+
+        <span class="info-show">Vous n'avez pas les autorisations nécessaires pour accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter l'administrateur. Sinon, vous pouvez <a style="color:#ff3c66; text-decoration: none" href="{{ path('app_activity_index') }}">retourner à la page d'accueil</a>.
+    </span>
+    </div>
+{% endblock %}

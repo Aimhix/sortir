@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="detail-activity-show container-error container-form-and-show-min">
+        <h2 class="title-show">Requête invalide</h2><br><br><br>
+
+        <span class="info-show">
+    La requête envoyée au serveur était invalide. Veuillez vérifier vos données et réessayer. Si le problème persiste, <a href="{{ path('app_activity_index') }}">retournez à la page d'accueil</a> et contactez l'assistance.
+        </span>
+    </div>
+{% endblock %}
