@@ -32,8 +32,9 @@ class Activity
     private $dateStart;
 
     /**
-     * @Assert\NotNull(message="Ce champ est obligatoire !")
-     * @Assert\GreaterThan(0, message="La durée doit etre supérieur à 0.")
+     * @Assert\NotNull(message="Ce champ est obligatoire.")
+     * @Assert\LessThanOrEqual("today", message="240 minutes (4h) maximum.")
+     * @Assert\GreaterThan(0, message="10 minutes minimum.")
      */
     #[ORM\Column(type: 'integer')]
     private $duration;
@@ -47,8 +48,9 @@ class Activity
     private $subLimitDate;
 
     /**
-     * @Assert\NotNull(message="Ce champ est obligatoire !")
-     * @Assert\GreaterThan(0, message="Le nomre maximum de participant doit etre supérieur à 0.")
+     * @Assert\NotNull(message="Ce champ est obligatoire.")
+     * @Assert\LessThanOrEqual(200, message="200 participants maximum.")
+     * @Assert\GreaterThan(0, message="1 participant minimum.")
      */
     #[ORM\Column(type: 'integer')]
     private $subMax;
@@ -392,5 +394,10 @@ public function setActivityPicture(string $activityPicture): static
 
     return $this;
 }
+
+    public function getRemainingPlaces(): int
+    {
+        return $this->subMax - count($this->users);
+    }
 }
 

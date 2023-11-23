@@ -20,7 +20,7 @@
 </div>
 
 <script>
-function updateCountdown(countdownElement) {
+function updateCountdownActivity(countdownElement) {
         var now = new Date();
         var deadline = new Date(countdownElement.getAttribute('data-deadline'));
         var diff = deadline - now;
@@ -55,7 +55,7 @@ function updateCountdown(countdownElement) {
 }
 
 document.querySelectorAll('.countdown').forEach(function(countdown) {
-    setInterval(function() { updateCountdown(countdown); }, 1000);
+    setInterval(function() { updateCountdownActivity(countdown); }, 1000);
 });
 </script>
 

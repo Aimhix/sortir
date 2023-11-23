@@ -1,7 +1,7 @@
 <footer>
-Copyright 2023
+    Copyright 2023
 </footer>
-<script>document.getElementById('theme-toggle').addEventListener('click', function() {
+<script>document.getElementById('theme-toggle').addEventListener('click', function () {
         var isNightTheme = document.body.classList.toggle('night-theme');
         localStorage.setItem('themePreference', isNightTheme ? 'night' : 'day');
         updateThemeIcon(isNightTheme);
@@ -26,4 +26,16 @@ Copyright 2023
         }
         updateThemeIcon(isNightTheme);
     });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var startDateField = document.getElementById('dateStart');
+        var endDateField = document.getElementById('subLimitDate');
+
+        startDateField.addEventListener('change', function () {
+            endDateField.min = startDateField.value;
+        });
+    });
+
+
 </script>

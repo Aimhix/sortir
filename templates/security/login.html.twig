@@ -46,5 +46,14 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const element = document.querySelector('a[href="/login"]');
+            if (element /* et votre condition ici */) {
+                element.style.display = 'none';
+            }
+        });
+    </script>
 
 {% endblock %}
+

@@ -49,10 +49,10 @@
 
                 <br><br><br>
                 <div class="btn-inner-container">
-                    <a class="stop-action-btn" href="{{ path('app_city_management_update', {'id': city.id}) }}">Modifier</a>
                     <a class="stop-action-btn" href="{{ path('app_cities_management_delete', {'id': city.id}) }}"
                        onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">Supprimer</a>
-                    {#            <a class="call-action-btn" href="{{ path('app_cities_management_update', {'id': city.id}) }}">Modifier</a> #}
+                    <a class="call-action-btn" href="{{ path('app_city_management_update', {'id': city.id}) }}">Modifier</a>
+
                 </div>
             </div>
         {% endfor %}

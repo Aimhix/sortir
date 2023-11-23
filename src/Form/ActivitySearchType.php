@@ -30,11 +30,11 @@ class ActivitySearchType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
                 // 'format' => 'yyyy-MM-dd', // format par défaut, à rétablir si ça foire
-//                'data' => new \DateTime(),
+                'data' => new \DateTime(),
                 'attr' => [
                     'class' => 'form-control',
+                    'id' => 'dateStart',
 //                    'min' => (new \DateTime())->format('Y-m-d'), // J'empêche la sélection de dates antérieures à aujourd'hui
-                    'placeholder' => 'Date de début', // Si c'est possible, on affiche un placeholder (pas compatible avec tous les navigateurs)
                 ],
             ])
             ->add('subLimitDate', DateType::class, [
@@ -45,7 +45,8 @@ class ActivitySearchType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'min' => (new \DateTime())->format('Y-m-d'),
-                    'placeholder' => 'Date de fin',
+//                    'placeholder' => 'Date de fin',
+                    'id' => 'subLimitDate',
                 ],
             ])
             ->add('campus', EntityType::class, [

@@ -80,14 +80,23 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('userId', $user->getId());
         }
 
+//        // les sorties où l'utilisateur est inscrit
+//        if (!empty($searchCriteria->isRegistered)) {
+//            $query->andWhere(':user MEMBER OF a.users')
+//                ->setParameter('user', $user);
+//        }
         // les sorties où l'utilisateur est inscrit
-        if (!empty($searchCriteria->isRegistered)) {
+        if (!empty($searchCriteria->isRegistered) && empty($searchCriteria->isNotRegistered)) {
             $query->andWhere(':user MEMBER OF a.users')
                 ->setParameter('user', $user);
         }
 
+//        if (!empty($searchCriteria->isNotRegistered)) {
+//            $query->andWhere(':user NOT MEMBER OF a.users')
+//                ->setParameter('user', $user);
+//        }
         // les sorties où l'utilisateur n'est pas inscrit
-        if (!empty($searchCriteria->isNotRegistered)) {
+        if (!empty($searchCriteria->isNotRegistered) && empty($searchCriteria->isRegistered)) {
             $query->andWhere(':user NOT MEMBER OF a.users')
                 ->setParameter('user', $user);
         }
