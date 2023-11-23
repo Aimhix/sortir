@@ -237,6 +237,20 @@ class AppFixtures extends Fixture
         $manager->persist($user4);
         $manager->flush();
 
+        $user5 = new User();
+        $user5->setPseudo('Ben le banni');
+        $user5->setEmail('Ben@gmail.com');
+        $user5->setActiveStatus(true);
+        $user5->setFirstname('Ben');
+        $user5->setLastname('Ben');
+        $user5->setPhone('0682929200');
+        $user5->setCampus($campus4);
+        $user5->setProfilePicture("ben.jpg");
+        $user5->setPassword($this->hasher->hashPassword($user5, '0000'));
+
+        $manager->persist($user5);
+        $manager->flush();
+
 
         //        Fixtures des Activitées
 
@@ -356,7 +370,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
         $activities7 = new Activity();
         $activities7->setName('Saut en parachute');
         $activities7->setCampus($campus1);
@@ -374,6 +387,56 @@ class AppFixtures extends Fixture
         $manager->persist($activities7);
         $manager->flush();
 
+        $activities8 = new Activity();
+        $activities8->setName('Séance de Cinéma');
+        $activities8->setCampus($campus1);
+        $activities8->setLocation($location2);
+        $activities8->setOrganizer($user4);
+        $activities8->setIsPublished(true);
+        $activities8->setStatus($status2);
+        $activities8->setDuration(120);
+        $activities8->setSubMax(30);
+        $activities8->setDateStart(new \DateTime('2024-01-01T08:30:01+00:00'));
+        $activities8->setSubLimitDate(new \DateTime('2023-12-15T08:30:01+00:00'));
+        $activities8->setInfoActivity('Fais le plein de Pop-Corn et viens voir le film Bubble Attack');
+        $activities8->setActivityPicture("cinema.jpg");
+
+        $manager->persist($activities8);
+        $manager->flush();
+
+        $activities9 = new Activity();
+        $activities9->setName('Bowling');
+        $activities9->setCampus($campus3);
+        $activities9->setLocation($location1);
+        $activities9->setOrganizer($user1);
+        $activities9->setIsPublished(true);
+        $activities9->setStatus($status2);
+        $activities9->setDuration(120);
+        $activities9->setSubMax(20);
+        $activities9->setDateStart(new \DateTime('2024-02-01T08:30:01+00:00'));
+        $activities9->setSubLimitDate(new \DateTime('2023-12-31T08:30:01+00:00'));
+        $activities9->setInfoActivity('Sort de ta bulle et viens faire un Strike');
+        $activities9->setActivityPicture("bowling.jpg");
+
+        $manager->persist($activities9);
+        $manager->flush();
+
+        $activities10 = new Activity();
+        $activities10->setName('Concert');
+        $activities10->setCampus($campus4);
+        $activities10->setLocation($location4);
+        $activities10->setOrganizer($user3);
+        $activities10->setIsPublished(true);
+        $activities10->setStatus($status5);
+        $activities10->setDuration(180);
+        $activities10->setSubMax(50);
+        $activities10->setDateStart(new \DateTime('2022-02-01T08:30:01+00:00'));
+        $activities10->setSubLimitDate(new \DateTime('2021-12-31T08:30:01+00:00'));
+        $activities10->setInfoActivity('Lady Bubulle est en tournée, prends ta place');
+        $activities10->setActivityPicture("concert.jpg");
+
+        $manager->persist($activities10);
+        $manager->flush();
 
     }
 }
