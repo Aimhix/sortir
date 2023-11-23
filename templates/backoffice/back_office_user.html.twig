@@ -29,14 +29,14 @@
                 <div class="btn-inner-container">
                     {% if user.activeStatus == 1 %}
                         <a class="call-action-btn"
-                           href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}">Desactiver</a>
+                           href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}">Désactiver</a>
                     {% else %}
                         <a class="call-action-btn"
                            href="{{ path('app_users_management_soft_delete', {'id': user.id}) }}">Réactiver</a>
                     {% endif %}
 
                     <a class="stop-action-btn" href="{{ path('app_users_management_delete', {'id': user.id}) }}"
-                       onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'éffondrer après cette action, êtes vous sur de VOUS ?')">
+                       onclick="return confirm('Ceci est IRREVERSIBLE, le MONDE pourrait s\'effondrer après cette action, êtes vous sur de VOUS ?')">
                         Supprimer définitivement</a>
                 </div>
             </div>

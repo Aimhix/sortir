@@ -123,7 +123,7 @@ class ActivityController extends AbstractController
         }
 
         $activityService->unsubscribeFromActivity($user, $activity);
-        $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+        $this->addFlash('success', 'Vous êtes désinscris à cette sortie.');
 
         return $this->redirectToRoute('activity_show', ['id' => $activityId]);
     }
@@ -173,6 +173,8 @@ class ActivityController extends AbstractController
     #[Route('/activity/{id}', name: 'activity_show')]
     public function showList(Activity $activity): Response
     {
+        
+
         $participant = $activity->getUsers();
 
         return $this->render('activity/show.html.twig', [
@@ -275,7 +277,6 @@ class ActivityController extends AbstractController
             'activity' => $activity,
         ]);
     }
-
 
 
 }
