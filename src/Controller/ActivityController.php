@@ -54,7 +54,7 @@ class ActivityController extends AbstractController
             $entityManager->persist($activity);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Activitée créée avec succès !');
+            $this->addFlash('success', 'Activité créée avec succès !');
 
             return $this->redirectToRoute('app_activity_index');
         }
