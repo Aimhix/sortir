@@ -173,6 +173,8 @@ class ActivityController extends AbstractController
     #[Route('/activity/{id}', name: 'activity_show')]
     public function showList(Activity $activity): Response
     {
+        
+
         $participant = $activity->getUsers();
 
         return $this->render('activity/show.html.twig', [
@@ -275,7 +277,6 @@ class ActivityController extends AbstractController
             'activity' => $activity,
         ]);
     }
-
 
 
 }

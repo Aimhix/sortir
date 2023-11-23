@@ -46,7 +46,8 @@
                 Places restantes :<br> <span class="info-show">{{ remainingPlaces }}</span>
             </div>
             <div class="form_champ activity-sublimitdate-show">
-                Date limite d'inscription : <br><span class="info-show">{{ activity.subLimitDate | date ('d/m/Y H:i') }}</span>
+                Date limite d'inscription : <br><span
+                        class="info-show">{{ activity.subLimitDate | date ('d/m/Y H:i') }}</span>
             </div>
 
         </div>
@@ -107,25 +108,29 @@
                 <a class="call-action-btn" href="{{ path('activity_edit', {'id': activity.id}) }}">Modifier</a>
             {% endif %}
 
-            {% if not activity.isPublished %}
-                <a class="call-action-btn"
-                   href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
-            {% endif %}
-
             {% if activity.organizer.id == app.user.id or is_granted('ROLE_ADMIN') %}
-                <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
-            {% else %}
-                {% if activity.status.id == 2 %} {# Vérifier si l'activité est ouverte #}
-                    {% if app.user and app.user in activity.users %}
-                        <p>Vous êtes inscrit à cette sortie</p>
-                        <a class="stop-action-btn"
-                           href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
-                    {% else %}
-                        {% if activity.users|length < activity.subMax %}
-                            <a class="call-action-btn"
-                               href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                {% if not activity.isPublished %}
+
+                    <a class="call-action-btn"
+                       href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
+                {% endif %}
+
+                {% if activity.organizer.id == app.user.id or is_granted('ROLE_ADMIN') %}
+                    <a class="stop-action-btn"
+                       href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>
+                {% else %}
+                    {% if activity.status.id == 2 %} {# Vérifier si l'activité est ouverte #}
+                        {% if app.user and app.user in activity.users %}
+                            <p>Vous êtes inscrit à cette sortie</p>
+                            <a class="stop-action-btn"
+                               href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>
                         {% else %}
-                            <p>Complet</p>
+                            {% if activity.users|length < activity.subMax %}
+                                <a class="call-action-btn"
+                                   href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>
+                            {% else %}
+                                <p>Complet</p>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 {% endif %}
