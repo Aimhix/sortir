@@ -14,9 +14,9 @@
         <div style="background-image:url('{{ asset('/images/' ~ activity.activityPicture)  }}');"
              class="card-image-show"><div class="card-gradient-show"></div></div>
 
-        <div style="margin-top:-100px;" class="group-edit-zero">
+        <div style="margin-top:-100px;text-align: center" class="group-edit-zero">
             <h2 class="title-show color-gradient">{{ activity.name }}</h2>
-            <center><h3>Début : {{ activity.dateStart | date }}</h3></center>
+            <h3>Débute le {{ activity.dateStart | date('d M Y') }} à {{ activity.dateStart | date('H') }}h{{ activity.dateStart | date('i') }}</h3>
         </div>
 
 
@@ -44,7 +44,7 @@
                 Places restantes :<br> <span class="info-show">{{ remainingPlaces }}</span>
             </div>
             <div class="form_champ activity-sublimitdate-show">
-                Date limite d'inscription : <br><span class="info-show">{{ activity.subLimitDate | date }}</span>
+                Date limite d'inscription : <br><span class="info-show">{{ activity.subLimitDate | date('d M Y') }}</span>
             </div>
 
         </div>

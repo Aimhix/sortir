@@ -122,7 +122,7 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('notPublished', false);
         }
 
-//
+
 //        $query->andWhere('(
 //        a.isPublished = :published
 //        OR (a.organizer = :organizer AND a.isPublished = :notPublished)
@@ -130,8 +130,8 @@ class ActivityRepository extends ServiceEntityRepository
 //            ->setParameter('published', true)
 //            ->setParameter('organizer', $user)
 //            ->setParameter('notPublished', false);
-//
-//        return $query->getQuery()->getResult();
+
+        return $query->getQuery()->getResult();
     }
 
 // méthode pour afficher des sorties sans faire recherche
