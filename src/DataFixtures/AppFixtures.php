@@ -129,8 +129,8 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $location3 = new Location();
-        $location3->setName('Les pommiers');
-        $location3->setStreetName('7 rue des test3');
+        $location3->setName('Crozon');
+        $location3->setStreetName('7 avenue des plages');
         $location3->setLatitude(48.08332);
         $location3->setLongitude(-1.68333);
         $location3->setCities($city3);
@@ -139,8 +139,8 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $location4 = new Location();
-        $location4->setName('Les chênes');
-        $location4->setStreetName('32 rue des test4');
+        $location4->setName('Chez Maxime !');
+        $location4->setStreetName('32 rue let\'s go dude');
         $location4->setLatitude(48.08332);
         $location4->setLongitude(-1.68333);
         $location4->setCities($city4);
@@ -152,25 +152,25 @@ class AppFixtures extends Fixture
         //        Fixtures des campus
 
         $campus1 = new Campus();
-        $campus1->setName('Rennes');
+        $campus1->setName('Nantes');
 
         $manager->persist($campus1);
         $manager->flush();
 
         $campus2 = new Campus();
-        $campus2->setName('Rouen');
+        $campus2->setName('Brest');
 
         $manager->persist($campus2);
         $manager->flush();
 
         $campus3 = new Campus();
-        $campus3->setName('Nantes');
+        $campus3->setName('Rennes');
 
         $manager->persist($campus3);
         $manager->flush();
 
         $campus4 = new Campus();
-        $campus4->setName('Brest');
+        $campus4->setName('Rouen');
 
         $manager->persist($campus4);
         $manager->flush();
@@ -188,7 +188,7 @@ class AppFixtures extends Fixture
         $user1->setLastname('Boba');
         $user1->setPhone('0682929200');
         $user1->setCampus($campus1);
-        $user1->setProfilePicture("/public/images/Olaf.jpg");
+        $user1->setProfilePicture("telechargement-655f1df83934a.jpg");
         $user1->setPassword($this->hasher->hashPassword($user1, '0000'));
 
 
@@ -196,14 +196,14 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $user2 = new User();
-        $user2->setPseudo('Max le banni');
+        $user2->setPseudo('Max');
         $user2->setEmail('max@gmail.com');
-        $user2->setActiveStatus(false);
+        $user2->setActiveStatus(true);
         $user2->setFirstname('Maxime');
         $user2->setLastname('Roche');
         $user2->setPhone('0682929200');
         $user2->setCampus($campus2);
-        $user2->setProfilePicture("/public/images/Olaf.jpg");
+        $user2->setProfilePicture("max.jpg");
         $user2->setPassword($this->hasher->hashPassword($user2, '0000'));
 
         $manager->persist($user2);
@@ -217,7 +217,7 @@ class AppFixtures extends Fixture
         $user3->setLastname('Bru');
         $user3->setPhone('0682929200');
         $user3->setCampus($campus3);
-        $user3->setProfilePicture("/public/images/Olaf.jpg");
+        $user3->setProfilePicture("cass.jpg");
         $user3->setPassword($this->hasher->hashPassword($user3, '0000'));
 
         $manager->persist($user3);
@@ -231,7 +231,7 @@ class AppFixtures extends Fixture
         $user4->setLastname('Lebeau');
         $user4->setPhone('0682929200');
         $user4->setCampus($campus4);
-        $user4->setProfilePicture("/public/images/Olaf.jpg");
+        $user4->setProfilePicture("Quentin.jpg");
         $user4->setPassword($this->hasher->hashPassword($user4, '0000'));
 
         $manager->persist($user4);
@@ -253,13 +253,13 @@ class AppFixtures extends Fixture
         $activities1->setLocation($location1);
         $activities1->setOrganizer($user1);
         $activities1->setIsPublished(true);
-        $activities1->setStatus($status5);
-        $activities1->setDuration(30);
-        $activities1->setSubMax(3);
-        $activities1->setDateStart(new \DateTime('2023-11-16T12:30:01+00:00'));
-        $activities1->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
-        $activities1->setInfoActivity('Activité début le 16/11 et donc status : passée // sub limite à 3');
-        $activities1->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities1->setStatus($status2);
+        $activities1->setDuration(60);
+        $activities1->setSubMax(12);
+        $activities1->setDateStart(new \DateTime('2023-12-15T12:30:01+00:00'));
+        $activities1->setSubLimitDate(new \DateTime('2023-12-12T12:30:01+00:00'));
+        $activities1->setInfoActivity('J\'organise une sortie char a voile, venez nombreux <3');
+        $activities1->setActivityPicture("CharAVoile.jpg");
 
 
         $manager->persist($activities1);
@@ -267,92 +267,111 @@ class AppFixtures extends Fixture
 
 
         $activities2 = new Activity();
-        $activities2->setName('Escalade (acti en cours)');
+        $activities2->setName('Escalade');
         $activities2->setCampus($campus2);
         $activities2->setLocation($location2);
         $activities2->setOrganizer($user2);
-        $activities2->setIsPublished(true);
-        $activities2->setStatus($status4);
-        $activities2->setDuration(20160);
+        $activities2->setIsPublished(false);
+        $activities2->setStatus($status1);
+        $activities2->setDuration(120);
         $activities2->setSubMax(10);
-        $activities2->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
-        $activities2->setSubLimitDate($subLimitDate1);
-        $activities2->setInfoActivity('Activité en cours');
-        $activities2->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities2->setDateStart(new \DateTime('2024-02-13T08:30:01+00:00'));
+        $activities2->setSubLimitDate(new \DateTime('2024-02-10T00:00:01+00:00'));
+        $activities2->setInfoActivity('Escalade en pleine nature, sur les magnifiques cotes de la presqu\'ile de Crozon');
+        $activities2->setActivityPicture("escalade.jpg");
 
         $manager->persist($activities2);
         $manager->flush();
 
 
         $activities3 = new Activity();
-        $activities3->setName('Piscine (Activitée créée mais non publiée) ');
+        $activities3->setName('Pool party');
         $activities3->setCampus($campus3);
         $activities3->setLocation($location3);
         $activities3->setOrganizer($user3);
-        $activities3->setIsPublished(false);
-        $activities3->setStatus($status1);
-        $activities3->setDuration(30);
-        $activities3->setSubMax(10);
-        $activities3->setDateStart(new \DateTime('2023-12-10T08:30:01+00:00'));
-        $activities3->setSubLimitDate(new \DateTime('2023-12-05T08:30:01+00:00'));
-        $activities3->setInfoActivity('Activité juste créée');
-        $activities3->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities3->setIsPublished(true);
+        $activities3->setStatus($status6);
+        $activities3->setDuration(240);
+        $activities3->setSubMax(35);
+        $activities3->setDateStart(new \DateTime('2023-12-10T19:30:01+00:00'));
+        $activities3->setSubLimitDate(new \DateTime('2023-12-05T12:30:01+00:00'));
+        $activities3->setInfoActivity('Soirée entre étudiant autour d\'une piscine, cocktail, musique ! Let\'s go !');
+        $activities3->setActivityPicture("poolParty.jpg");
 
         $manager->persist($activities3);
         $manager->flush();
 
 
         $activities4 = new Activity();
-        $activities4->setName('Boire des coups( activitée annulée)');
-        $activities4->setCampus($campus4);
+        $activities4->setName('Bar en trans');
+        $activities4->setCampus($campus3);
         $activities4->setLocation($location4);
         $activities4->setOrganizer($user4);
         $activities4->setIsPublished(true);
-        $activities4->setStatus($status6);
-        $activities4->setDuration(30);
-        $activities4->setSubMax(10);
+        $activities4->setStatus($status3);
+        $activities4->setDuration(120);
+        $activities4->setSubMax(8);
         $activities4->setDateStart(new \DateTime('2023-11-16T08:30:01+00:00'));
         $activities4->setSubLimitDate(new \DateTime('2023-11-10T08:30:01+00:00'));
-        $activities4->setInfoActivity('L\'acti est annulée');
-        $activities4->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities4->setInfoActivity('Petit tour des bar à Rennes pour profiter de l\'évènement');
+        $activities4->setActivityPicture("barTrans.jpg");
 
         $manager->persist($activities4);
         $manager->flush();
 
 
         $activities5 = new Activity();
-        $activities5->setName('Karaoke (sortie créée inscription fermée)');
+        $activities5->setName('Karaoke');
         $activities5->setCampus($campus3);
         $activities5->setLocation($location3);
         $activities5->setOrganizer($user1);
         $activities5->setIsPublished(true);
-        $activities5->setStatus($status3);
-        $activities5->setDuration(30);
-        $activities5->setSubMax(10);
-        $activities5->setDateStart(new \DateTime('2023-12-16T08:30:01+00:00'));
-        $activities5->setSubLimitDate(new \DateTime('2023-11-16T08:30:01+00:00'));
-        $activities5->setInfoActivity('Acti clotuée');
-        $activities5->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities5->setStatus($status4);
+        $activities5->setDuration(60);
+        $activities5->setSubMax(40);
+        $activities5->setDateStart(new \DateTime('2023-11-24T12:30:01+00:00'));
+        $activities5->setSubLimitDate(new \DateTime('2023-11-22T08:30:01+00:00'));
+        $activities5->setInfoActivity('Une soirée karaoke intense en compagnie du groupe \'Plaisir Coupable\'');
+        $activities5->setActivityPicture("karaoke.webp");
 
         $manager->persist($activities5);
         $manager->flush();
 
 
         $activities6 = new Activity();
-        $activities6->setName('Coder ensemble(activitée ouverte)');
+        $activities6->setName('Coder ensemble');
         $activities6->setCampus($campus2);
         $activities6->setLocation($location1);
         $activities6->setOrganizer($user3);
         $activities6->setIsPublished(true);
-        $activities6->setStatus($status2);
-        $activities6->setDuration(30);
+        $activities6->setStatus($status5);
+        $activities6->setDuration(720);
         $activities6->setSubMax(10);
-        $activities6->setDateStart(new \DateTime('2023-11-28T08:30:01+00:00'));
+        $activities6->setDateStart(new \DateTime('2023-11-22T08:30:01+00:00'));
         $activities6->setSubLimitDate(new \DateTime('2023-11-15T08:30:01+00:00'));
-        $activities6->setInfoActivity('acti ouverte');
-        $activities6->setActivityPicture("../../public/images/Olaf.jpg");
+        $activities6->setInfoActivity('12h pour coder un site internet, qui sera le meilleur ?');
+        $activities6->setActivityPicture("code.jpg");
 
         $manager->persist($activities6);
+        $manager->flush();
+
+
+
+        $activities7 = new Activity();
+        $activities7->setName('Saut en parachute');
+        $activities7->setCampus($campus1);
+        $activities7->setLocation($location1);
+        $activities7->setOrganizer($user1);
+        $activities7->setIsPublished(true);
+        $activities7->setStatus($status7);
+        $activities7->setDuration(60);
+        $activities7->setSubMax(3);
+        $activities7->setDateStart(new \DateTime('2023-10-22T08:30:01+00:00'));
+        $activities7->setSubLimitDate(new \DateTime('2023-10-15T08:30:01+00:00'));
+        $activities7->setInfoActivity('Opportunité de saut, prix : 100€');
+        $activities7->setActivityPicture("parachute.jpeg");
+
+        $manager->persist($activities7);
         $manager->flush();
 
 
