@@ -32,8 +32,10 @@
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <li><a style="padding-right:30px" href="{{ path('app_users_management') }}">Modifier Membres
                                                     <a class="mini-link-nav" href="{{ path('admin_new_user') }}">+</a></a></li>
-                                            <li><a href="{{ path('app_location_management') }}">Modifier Lieux</a></li>
-                                            <li><a href="{{ path('app_city_management') }}">Modifier Villes</a></li>
+                                            <li><a href="{{ path('app_location_management') }}">Modifier Lieux
+                                                    <a class="mini-link-nav" href="#">+</a></a></li>
+                                            <li><a href="{{ path('app_city_management') }}">Modifier Villes
+                                                    <a class="mini-link-nav" href="#">+</a></a></li>
                                         {% endif %}
                                         <li><a class="sub-menu-deroulant"
                                                href="{{ path('app_logout') }}">Déconnexion</a></li>

@@ -1180,10 +1180,10 @@ body.night-theme .card-gradient-show{
     border-radius: 8px;
     padding: 5px 10px;
 }
-.sub-menu:hover .mini-link-nav {background-color:#DEE3E6}
+.sub-menu li:hover .mini-link-nav {background-color:#DEE3E6}
 
 body.night-theme .mini-link-nav{background-color: rgba(0, 0, 0, 0.08);}
-body.night-theme .sub-menu:hover .mini-link-nav {background-color:#51535a}
+body.night-theme .sub-menu li:hover .mini-link-nav {background-color:#51535a}
 
 
 @media screen and (max-width: 600px) {
