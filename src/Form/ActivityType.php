@@ -23,12 +23,14 @@ class ActivityType extends AbstractType
                 'label' => 'Nature de la sortie : ',
             ])
             ->add('dateStart', null, [
+                'widget' => 'single_text',
                 'label' => 'Date et heure de début de la sortie : ',
             ])
             ->add('duration', null, [
                 'label' => 'Durée de la sortie (en minutes) : ',
             ])
             ->add('subLimitDate', null, [
+                'widget' => 'single_text',
                 'label' => 'Date et heure limite d\'inscription : ',
             ])
             ->add('subMax', null, [

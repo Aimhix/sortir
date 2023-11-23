@@ -188,7 +188,7 @@ class AppFixtures extends Fixture
         $user1->setLastname('Boba');
         $user1->setPhone('0682929200');
         $user1->setCampus($campus1);
-        $user1->setProfilePicture("../../public/images/Olaf.jpg");
+        $user1->setProfilePicture("/public/images/Olaf.jpg");
         $user1->setPassword($this->hasher->hashPassword($user1, '0000'));
 
 
@@ -196,14 +196,14 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $user2 = new User();
-        $user2->setPseudo('Max le banni( false en Active status )');
+        $user2->setPseudo('Max le banni');
         $user2->setEmail('max@gmail.com');
         $user2->setActiveStatus(false);
         $user2->setFirstname('Maxime');
         $user2->setLastname('Roche');
         $user2->setPhone('0682929200');
         $user2->setCampus($campus2);
-        $user2->setProfilePicture("../../public/images/Olaf.jpg");
+        $user2->setProfilePicture("/public/images/Olaf.jpg");
         $user2->setPassword($this->hasher->hashPassword($user2, '0000'));
 
         $manager->persist($user2);
@@ -217,7 +217,7 @@ class AppFixtures extends Fixture
         $user3->setLastname('Bru');
         $user3->setPhone('0682929200');
         $user3->setCampus($campus3);
-        $user3->setProfilePicture("../../public/images/Olaf.jpg");
+        $user3->setProfilePicture("/public/images/Olaf.jpg");
         $user3->setPassword($this->hasher->hashPassword($user3, '0000'));
 
         $manager->persist($user3);
@@ -231,7 +231,7 @@ class AppFixtures extends Fixture
         $user4->setLastname('Lebeau');
         $user4->setPhone('0682929200');
         $user4->setCampus($campus4);
-        $user4->setProfilePicture("../../public/images/Olaf.jpg");
+        $user4->setProfilePicture("/public/images/Olaf.jpg");
         $user4->setPassword($this->hasher->hashPassword($user4, '0000'));
 
         $manager->persist($user4);
@@ -248,7 +248,7 @@ class AppFixtures extends Fixture
         $subLimitDate3 = new \DateTime('2024-01-19T15:52:01+00:00');
 
         $activities1 = new Activity();
-        $activities1->setName('Char à voile (Acti passée) ');
+        $activities1->setName('Char à voile');
         $activities1->setCampus($campus1);
         $activities1->setLocation($location1);
         $activities1->setOrganizer($user1);
