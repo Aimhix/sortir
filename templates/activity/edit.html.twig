@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'activité{% endblock %}
+
+{% block body %}
+
+    <div class="form-create-activity container-form-and-show">
+
+        <span class="title-page-header title-show">Modifier ma sortie</span>
+        <h3>Campus affilié : {{ activity.campus }}</h3><br><br>
+        {{ form_start(activityForm) }}
+
+        <div class="group-edit-second">
+
+            <div class="form_champ create-activity-name">
+                {{ form_label(activityForm.name) }}<br>
+                {{ form_widget(activityForm.name) }}<br>
+                {% if form_errors(activityForm.name)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.name) }}</span>
+                {% endif %}
+            </div>
+            <div class="form_champ create-activity-location">
+                {{ form_label(activityForm.location) }}<br>
+                {{ form_widget(activityForm.location) }}<br>
+                {% if form_errors(activityForm.location)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.location) }}</span>
+                {% endif %}
+                <a id="create-activity-add-location" href="{{ path('app_activity_create_location') }}">Ajouter un
+                    nouveau lieu</a>
+            </div>
+        </div>
+
+        <div class="group-edit-second">
+
+            <div class="form_champ create-activity-dateStart">
+                {{ form_label(activityForm.dateStart) }}<br>
+                {{ form_widget(activityForm.dateStart) }}<br>
+                {% if form_errors(activityForm.dateStart)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.dateStart) }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form_champ create-activity-duration">
+                {{ form_label(activityForm.duration) }}<br>
+                {{ form_widget(activityForm.duration) }}<br>
+                {% if form_errors(activityForm.duration)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.duration) }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="group-edit-second">
+
+            <div class="form_champ create-activity-subMax">
+                {{ form_label(activityForm.subMax) }}<br>
+                {{ form_widget(activityForm.subMax) }}<br>
+                {% if form_errors(activityForm.subMax)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.subMax) }}</span>
+                {% endif %}
+            </div>
+            <div class="form_champ create-activity-subLimitDate">
+                {{ form_label(activityForm.subLimitDate) }}<br>
+                {{ form_widget(activityForm.subLimitDate) }}
+                {% if form_errors(activityForm.subLimitDate)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.subLimitDate) }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="group-edit-second">
+
+            <div style="display:inline-block;vertical-align: middle;" class="thumbnail-container">
+
+                {{ form_widget(activityForm.activityPicture, { 'attr': {'onchange': 'previewImage(this)'} }) }}
+
+                <div id="image-container" style="width: 200px; height: 200px; overflow: hidden;">
+                    {% if activityForm.activityPicture.vars.value is not null %}
+                        <img id="image-preview"
+                             src="{{ asset('images/activity/' ~ activityForm.activityPicture.vars.value) }}"
+                             alt=" " style="width: 100%; height: 100%;">
+                    {% else %}
+                        <img id="image-preview" alt="" style="width: 100%; height: 100%;">
+                    {% endif %}
+                </div>
+                {{ form_label(activityForm.activityPicture) }}<br>
+
+                {% if form_errors(activityForm.activityPicture)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.activityPicture) }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form_champ">
+                {{ form_label(activityForm.infoActivity) }}
+                {{ form_widget(activityForm.infoActivity) }}
+                {% if form_errors(activityForm.infoActivity)|length > 0 %}
+                    <span class="required-info">{{ form_errors(activityForm.infoActivity) }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="btn-end-form create-activity-action">
+            {{ form_widget(activityForm.isPublished) }}
+            {{ form_label(activityForm.isPublished) }}
+            {% if form_errors(activityForm.isPublished)|length > 0 %}
+                <span class="required-info">{{ form_errors(activityForm.isPublished) }}</span>
+            {% endif %}
+
+            {# Bouton pour sauvegarder les modifications sans publier #}
+            <button type="submit" class="call-action-btn">Créer ma sortie</button>
+
+{#            {% if not activity.isPublished %}#}
+{#                <a class="call-action-btn" href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>#}
+{#            {% endif %}#}
+
+            <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Supprimer</a>
+            <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
+
+        </div>
+        {{ form_end(activityForm) }}
+
+    </div>
+
+
+    <script src="{{ asset('assets/previewImageActivity.js') }}"></script>
+
+{% endblock %}
