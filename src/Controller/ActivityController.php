@@ -47,7 +47,7 @@ class ActivityController extends AbstractController
             $imageFile = $activityForm['activityPicture']->getData();
 
             if ($imageFile) {
-                $newFilename = $fileUploader->upload($imageFile, $this->getParameter('kernel.project_dir') . '/public/images/activity');
+                $newFilename = $fileUploader->upload($imageFile, $this->getParameter('kernel.project_dir') . '/public/images/');
                 $activity->setActivityPicture($newFilename);
             }
 

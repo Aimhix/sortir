@@ -106,25 +106,63 @@ class ActivityRepository extends ServiceEntityRepository
             $query->andWhere('a.dateStart < CURRENT_DATE()');
         }
 
-        $query->andWhere('(
-        a.isPublished = :published
-        OR (a.organizer = :organizer AND a.isPublished = :notPublished)
-    )')
-            ->setParameter('published', true)
-            ->setParameter('organizer', $user)
-            ->setParameter('notPublished', false);
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            // Si l'utilisateur est admin, pas besoin de restreindre l'accès aux activités non publiées
+            $query->andWhere('a.isPublished = :published OR a.isPublished = :notPublished')
+                ->setParameter('published', true)
+                ->setParameter('notPublished', false);
+        } else {
+            // Si l'utilisateur n'est pas admin, restreindre l'accès aux activités non publiées qu'il organise
+            $query->andWhere('(
+            a.isPublished = :published
+            OR (a.organizer = :organizer AND a.isPublished = :notPublished)
+        )')
+                ->setParameter('published', true)
+                ->setParameter('organizer', $user)
+                ->setParameter('notPublished', false);
+        }
 
+//
+//        $query->andWhere('(
+//        a.isPublished = :published
+//        OR (a.organizer = :organizer AND a.isPublished = :notPublished)
+//    )')
+//            ->setParameter('published', true)
+//            ->setParameter('organizer', $user)
+//            ->setParameter('notPublished', false);
+//
+//        return $query->getQuery()->getResult();
+    }
+
+// méthode pour afficher des sorties sans faire recherche
+//    public function findLatestActivities(int $limit)
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->orderBy('a.subLimitDate', 'DESC')
+//            ->setMaxResults($limit)
+//            ->getQuery()
+//            ->getResult();
+//
+//    }
+    public function findLatestActivities(int $limit, User $user)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->orderBy('a.subLimitDate', 'DESC')
+            ->setMaxResults($limit);
+
+        // Vérifiez si l'utilisateur a le role d'administrateur
+        if (!in_array('ROLE_ADMIN', $user->getRoles())) {
+            $query->andWhere('(
+            a.isPublished = :published
+            OR (a.organizer = :organizer AND a.isPublished = :notPublished)
+        )')
+                ->setParameter('published', true)
+                ->setParameter('organizer', $user)
+                ->setParameter('notPublished', false);
+        }
 
         return $query->getQuery()->getResult();
     }
 
-// méthode pour afficher des sorties sans faire recherche
-    public function findLatestActivities(int $limit)
-    {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.subLimitDate', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
-    }
+
 }
