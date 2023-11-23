@@ -383,17 +383,17 @@ class Activity
 //        }
 //    }
 
-public function getActivityPicture(): ?string
-{
-    return $this->activityPicture;
-}
+    public function getActivityPicture(): ?string
+    {
+        return $this->activityPicture;
+    }
 
-public function setActivityPicture(string $activityPicture): static
-{
-    $this->activityPicture = $activityPicture;
+    public function setActivityPicture(string $activityPicture): static
+    {
+        $this->activityPicture = $activityPicture;
 
-    return $this;
-}
+        return $this;
+    }
 
     public function getRemainingPlaces(): int
     {

@@ -123,7 +123,7 @@ class ActivityController extends AbstractController
         }
 
         $activityService->unsubscribeFromActivity($user, $activity);
-        $this->addFlash('success', 'Vous êtes inscris à cette sortie.');
+        $this->addFlash('success', 'Vous êtes désinscris à cette sortie.');
 
         return $this->redirectToRoute('activity_show', ['id' => $activityId]);
     }
