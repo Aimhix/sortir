@@ -100,14 +100,45 @@
 {#            <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>#}
 {#        </div>#}
 
+{#        <div class="btn-end-form">#}
+{#            {% if not activity.isPublished and activity.organizer.id == app.user.id %}#}
+{#                <a class="call-action-btn" href="{{ path('activity_edit', {'id': activity.id}) }}">Modifier</a>#}
+{#            {% endif %}#}
+
+{#            {% if not activity.isPublished %}#}
+{#                <a class="call-action-btn"#}
+{#                   href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>#}
+{#            {% endif %}#}
+
+{#            {% if activity.organizer.id == app.user.id or is_granted('ROLE_ADMIN') %}#}
+{#                <a class="stop-action-btn" href="{{ path('activity_cancel', {'activityId': activity.id}) }}">Annuler</a>#}
+{#            {% else %}#}
+{#                {% if activity.status.id == 2 %} #}{# Vérifier si l'activité est ouverte #}
+{#                    {% if app.user and app.user in activity.users %}#}
+{#                        <p>Vous êtes inscrit à cette sortie</p>#}
+{#                        <a class="stop-action-btn" href="{{ path('activity_unsubscribe', {'activityId': activity.id}) }}">Se désinscrire</a>#}
+{#                    {% else %}#}
+{#                        {% if activity.users|length < activity.subMax %}#}
+{#                            <a class="call-action-btn" href="{{ path('activity_subscribe', {'activityId': activity.id}) }}">Rejoindre</a>#}
+{#                        {% else %}#}
+{#                            <p>Complet</p>#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{#            {% endif %}#}
+
+{#            <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>#}
+{#        </div>#}
+
         <div class="btn-end-form">
-            {% if not activity.isPublished and activity.organizer.id == app.user.id %}
-                <a class="call-action-btn" href="{{ path('activity_edit', {'id': activity.id}) }}">Modifier</a>
+            {% if not activity.isPublished %}
+                {% if activity.organizer.id == app.user.id or is_granted('ROLE_ADMIN') %}
+                    <a class="call-action-btn" href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
+                {% endif %}
             {% endif %}
 
-            {% if not activity.isPublished %}
-                <a class="call-action-btn"
-                   href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
+            {% if not activity.isPublished and activity.organizer.id == app.user.id %}
+                <a class="call-action-btn" href="{{ path('activity_edit', {'id': activity.id}) }}">Modifier</a>
             {% endif %}
 
             {% if activity.organizer.id == app.user.id or is_granted('ROLE_ADMIN') %}
@@ -129,7 +160,6 @@
 
             <a class="stop-action-btn" href="{{ path('app_activity_index') }}">Retour</a>
         </div>
-
 
 
     </div>
