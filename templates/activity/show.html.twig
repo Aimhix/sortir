@@ -63,7 +63,8 @@
 
         <div class="btn-end-form">
             {% if not activity.isPublished %}
-                <a class="call-action-btn" href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
+                <a class="call-action-btn"
+                   href="{{ path('activity_publish', {'activityId': activity.id}) }}">Publier</a>
             {% endif %}
 
             {% if activity.organizer.id  ==  app.user.id  or is_granted('ROLE_ADMIN') %}
