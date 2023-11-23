@@ -30,8 +30,10 @@
                                         <li><a class="sub-menu-deroulant" href="{{ path('app_editprofile') }}">Modifier
                                                 Compte</a></li>
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <li><a style="padding-right:30px" href="{{ path('app_users_management') }}">Modifier Membres
-                                                    <a class="mini-link-nav" href="{{ path('admin_new_user') }}">+</a></a></li>
+                                            <li><a style="padding-right:30px" href="{{ path('app_users_management') }}">Modifier
+                                                    Membres
+                                                    <a class="mini-link-nav"
+                                                       href="{{ path('admin_new_user') }}">+</a></a></li>
                                             <li><a href="{{ path('app_location_management') }}">Modifier Lieux
                                                     <a class="mini-link-nav" href="#">+</a></a></li>
                                             <li><a href="{{ path('app_city_management') }}">Modifier Villes
@@ -97,7 +99,7 @@
 
     {# Afficher les messages flash s'il y en a #}
     {% for message in app.flashes('success') %}
-        <div class="alert-success active-status">
+        <div class="alert-success active-status container-fixed">
             {{ message }}
         </div>
     {% endfor %}
@@ -107,7 +109,6 @@
             {{ message }}
         </div>
     {% endfor %}
-
 
 
 </header>
