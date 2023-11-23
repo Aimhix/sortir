@@ -237,6 +237,20 @@ class AppFixtures extends Fixture
         $manager->persist($user4);
         $manager->flush();
 
+        $user5 = new User();
+        $user5->setPseudo('Ben le banni');
+        $user5->setEmail('Ben@gmail.com');
+        $user5->setActiveStatus(true);
+        $user5->setFirstname('Ben');
+        $user5->setLastname('Ben');
+        $user5->setPhone('0682929200');
+        $user5->setCampus($campus4);
+        $user5->setProfilePicture("ben.jpg");
+        $user5->setPassword($this->hasher->hashPassword($user5, '0000'));
+
+        $manager->persist($user5);
+        $manager->flush();
+
 
         //        Fixtures des Activitées
 

@@ -14,7 +14,7 @@
         {% for user in users %}
             <div class="container-user">
                 <div>
-                    <span class="form-info-inner"><img class="profile-picture-icon-inner" src="{{ asset('/images/defaultpicture.jpg') }}" alt="photo">
+                    <span class="form-info-inner"><img class="profile-picture-icon-inner" src="{{ asset('/images/' ~ user.profilePicture)  }}" alt="photo">
                         {{ user.pseudo }}</span>
 
                     {% if user.activeStatus == 1 %}
