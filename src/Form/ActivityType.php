@@ -53,7 +53,6 @@ class ActivityType extends AbstractType
             ])
             ->add('activityPicture', FileType::class,
                 ['label' => 'Sélectionnez une image 📷',
-                    'required' => false,
                     'mapped' => false,
                 ])
             ->add("save", SubmitType::class, ["label" => "Valider"]);
