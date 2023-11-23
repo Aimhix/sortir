@@ -48,7 +48,8 @@ class ActivityRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a')
             ->leftJoin('a.campus', 'c')
             ->leftJoin('a.users', 'u')
-            ->leftJoin('a.organizer', 'o');
+            ->leftJoin('a.organizer', 'o')
+            ->leftJoin('a.status', 's');
         // créer jointure pour voir si publié
 
         // par campus
@@ -61,7 +62,7 @@ class ActivityRepository extends ServiceEntityRepository
         // par termes (nature de la sortie)
         if (!empty($searchCriteria->search)) {
             $query->andWhere('a.name LIKE :search')
-                ->setParameter('search', '%'.$searchCriteria->search.'%');
+                ->setParameter('search', '%' . $searchCriteria->search . '%');
         }
         // par date de début
         if (!empty($searchCriteria->dateStart)) {
@@ -74,6 +75,7 @@ class ActivityRepository extends ServiceEntityRepository
             $query->andWhere('a.dateStart <= :subLimitDate')
                 ->setParameter('subLimitDate', $searchCriteria->subLimitDate);
         }
+
         // les sorties que l'utilisateur a organisé
         if (!empty($searchCriteria->organizer)) {
             $query->andWhere('o.id = :userId')
@@ -106,13 +108,21 @@ class ActivityRepository extends ServiceEntityRepository
             $query->andWhere('a.dateStart < CURRENT_DATE()');
         }
 
+        //retrait des sorties archivées et ajout des annulées
+        $query->andWhere('(
+                s.wording = :cancelledWording OR 
+        (s.wording != :archivedWording OR (s.wording = :archivedWording AND a.subLimitDate > :archivedLimitDate))
+    )')
+            ->setParameter('cancelledWording', 'Annulée')
+            ->setParameter('archivedWording', 'Archivée')
+            ->setParameter('archivedLimitDate', new \DateTime('-30 days'));
+
+// accès aux sorties non publiées
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            // Si l'utilisateur est admin, pas besoin de restreindre l'accès aux activités non publiées
             $query->andWhere('a.isPublished = :published OR a.isPublished = :notPublished')
                 ->setParameter('published', true)
                 ->setParameter('notPublished', false);
         } else {
-            // Si l'utilisateur n'est pas admin, restreindre l'accès aux activités non publiées qu'il organise
             $query->andWhere('(
             a.isPublished = :published
             OR (a.organizer = :organizer AND a.isPublished = :notPublished)
@@ -147,10 +157,11 @@ class ActivityRepository extends ServiceEntityRepository
     public function findLatestActivities(int $limit, User $user)
     {
         $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.status', 's')
             ->orderBy('a.subLimitDate', 'DESC')
             ->setMaxResults($limit);
 
-        // Vérifiez si l'utilisateur a le role d'administrateur
+        // Vérifiez si l'utilisateur a le role administrateur
         if (!in_array('ROLE_ADMIN', $user->getRoles())) {
             $query->andWhere('(
             a.isPublished = :published
@@ -160,6 +171,15 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('organizer', $user)
                 ->setParameter('notPublished', false);
         }
+
+        //retrait des sorties archivées et ajout des sorties annulées
+        $query->andWhere('(
+        s.wording = :cancelledWording OR 
+        s.wording != :archivedWording OR (s.wording = :archivedWording AND a.subLimitDate > :archivedLimitDate)
+    )')
+            ->setParameter('cancelledWording', 'Annulée')
+            ->setParameter('archivedWording', 'Archivée')
+            ->setParameter('archivedLimitDate', new \DateTime('-30 days'));
 
         return $query->getQuery()->getResult();
     }

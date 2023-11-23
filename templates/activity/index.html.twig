@@ -17,11 +17,11 @@
 
     {% block headerBig %}
         <div class="header-content">
-            <h1 class="site-title">
+            <h1 style="text-shadow: #00000082 1px 0 10px" class="site-title">
                 Bubble<span class="com">Out</span>
             </h1>
             <br>
-            <h2><span class="sub-title">Sorties entre étudiants</span></h2>
+            <h2><span style="text-shadow: #00000082 1px 0 10px" class="sub-title">Sorties entre étudiants</span></h2>
         </div>
     {% endblock %}
 
@@ -81,55 +81,72 @@
     </div>
 
     {# Cases à cocher détaillées avec placeholders #}
-    <div class="checkbox-group">
-        <div class="form-check">
-            <label class="add-checkbox">
-                {{ form_widget(form.organizer) }}
-                <span class="checkmark"></span>
+<br>
+{#    <div class="param-search-affichage">#}
+{#        <div id="filterButton" class="filter-button">Filtrer les sorties</div>#}
 
-                <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
-            </label>
-            {% if form_errors(form.organizer)|length > 0 %}
-                <span class="required-info">{{ form_errors(form.organizer) }}</span>
-            {% endif %}
-        </div>
-        <div class="form-check">
-            {{ form_widget(form.isRegistered) }}
-            <label for="{{ form.isRegistered.vars.id }}">{{ 'Mes inscriptions'|trans }}</label>
-            {% if form_errors(form.isRegistered)|length > 0 %}
-                <span class="required-info">{{ form_errors(form.isRegistered) }}</span>
-            {% endif %}
-        </div>
-        <div class="form-check">
-            {{ form_widget(form.isNotRegistered) }}
-            <label for="{{ form.isNotRegistered.vars.id }}">{{ 'Sans inscription'|trans }}</label>
-            {% if form_errors(form.isNotRegistered)|length > 0 %}
-                <span class="required-info">{{ form_errors(form.isNotRegistered) }}</span>
-            {% endif %}
-        </div>
-        <div class="form-check">
-            {{ form_widget(form.isPast) }}
-            <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
-            {% if form_errors(form.isPast)|length > 0 %}
-                <span class="required-info">{{ form_errors(form.isPast) }}</span>
-            {% endif %}
-        </div>
+{#        <div class="btn-pref-activity">#}
+{#            <div id="switch-to-list-view"><img class="btn-pref-activity" src="{{ asset('/images/card.png') }}"#}
+{#                                               alt="list"></div>#}
+{#            #}{#            <i class="icon-list"></i><i class="icon-card"></i> #}
+{#            <div id="switch-to-card-view"><img class="btn-pref-activity" src="{{ asset('/images/list.png') }}"#}
+{#                                               alt="card"></div>#}
+{#        </div>#}
+{#    </div>#}
 
+{#    <div class="param-search-affichage">#}
+        <div id="filterButton" class="filter-button">Filtrer les sorties</div>
 
+        <div class="btn-param-activity">
+            <div id="switch-view" class="switch-view" style="height:0">
+                <img id="view-icon" class="btn-pref-activity" src="{{ asset('/images/icon/list.png') }}" alt="view">
+            </div>
+        </div>
+{#    </div>#}
+
+    <div id="checkboxhidden" class="checkboxhidden">
+        <div id="checkboxGroup" class="checkbox-group">
+            <div class="form-check">
+                <label class="add-checkbox">
+                    {{ form_widget(form.organizer) }}
+                    <span class="checkmark"></span>
+
+                    <label for="{{ form.organizer.vars.id }}">{{ 'Mes Sorties'|trans }}</label>
+                </label>
+                {% if form_errors(form.organizer)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.organizer) }}</span>
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.isRegistered) }}
+                <label for="{{ form.isRegistered.vars.id }}">{{ 'Mes inscriptions'|trans }}</label>
+                {% if form_errors(form.isRegistered)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.isRegistered) }}</span>
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.isNotRegistered) }}
+                <label for="{{ form.isNotRegistered.vars.id }}">{{ 'Sans inscription'|trans }}</label>
+                {% if form_errors(form.isNotRegistered)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.isNotRegistered) }}</span>
+                {% endif %}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.isPast) }}
+                <label for="{{ form.isPast.vars.id }}">{{ 'Sorties passées'|trans }}</label>
+                {% if form_errors(form.isPast)|length > 0 %}
+                    <span class="required-info">{{ form_errors(form.isPast) }}</span>
+                {% endif %}
+            </div>
+
+        </div>
     </div>
 
     {{ form_end(form) }}
 
 
     <div class="show-activity-card">
-        <h2 class="color-gradient" style="margin:50px 0 50px">Liste des sorties</h2>
-        <div class="btn-pref-activity">
-            <button id="switch-to-list-view"><img class="btn-pref-activity" src="{{ asset('/images/list.png') }}"
-                                                  alt="list"></button>
-            {#            <i class="icon-list"></i><i class="icon-card"></i> #}
-            <button id="switch-to-card-view"><img class="btn-pref-activity" src="{{ asset('/images/card.png') }}"
-                                                  alt="card"></button>
-        </div>
+        {#        <h2 class="color-gradient" style="margin:50px 0 50px">Liste des sorties</h2> #}
 
         <section>
             <div class="show-activity-card">
@@ -149,7 +166,7 @@
     </div>
 
 
-    {# J'exécute le script AJAX :') #}
+    {#     J'exécute le script AJAX :') #}
     <script>
         document.getElementById('activity-search-form').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -189,28 +206,73 @@
         //     document.querySelector('.cards-container').classList.add('list-view');
         //     document.querySelector('.cards-container').classList.remove('card-view');
         // });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //
+        //     var viewPreference = localStorage.getItem('viewPreference');
+        //
+        //     if (viewPreference === 'list') {
+        //         document.querySelector('.cards-container').classList.add('list-view');
+        //         document.querySelector('.cards-container').classList.remove('card-view');
+        //     } else {
+        //         document.querySelector('.cards-container').classList.add('card-view');
+        //         document.querySelector('.cards-container').classList.remove('list-view');
+        //     }
+        //
+        //     document.getElementById('switch-to-list-view').addEventListener('click', function () {
+        //         localStorage.setItem('viewPreference', 'list');
+        //         document.querySelector('.cards-container').classList.add('list-view');
+        //         document.querySelector('.cards-container').classList.remove('card-view');
+        //     });
+        //
+        //     document.getElementById('switch-to-card-view').addEventListener('click', function () {
+        //         localStorage.setItem('viewPreference', 'card');
+        //         document.querySelector('.cards-container').classList.add('card-view');
+        //         document.querySelector('.cards-container').classList.remove('list-view');
+        //     });
+        // });
+
         document.addEventListener('DOMContentLoaded', function () {
-
             var viewPreference = localStorage.getItem('viewPreference');
+            var switchViewButton = document.getElementById('switch-view');
+            var viewIcon = document.getElementById('view-icon');
+            var cardsContainer = document.querySelector('.cards-container');
 
-            if (viewPreference === 'list') {
-                document.querySelector('.cards-container').classList.add('list-view');
-                document.querySelector('.cards-container').classList.remove('card-view');
-            } else {
-                document.querySelector('.cards-container').classList.add('card-view');
-                document.querySelector('.cards-container').classList.remove('list-view');
+            function updateView(preference) {
+                if (preference === 'list') {
+                    cardsContainer.classList.add('list-view');
+                    cardsContainer.classList.remove('card-view');
+                    viewIcon.src = '{{ asset('/images/icon/card.png') }}';
+                } else {
+                    cardsContainer.classList.add('card-view');
+                    cardsContainer.classList.remove('list-view');
+                    viewIcon.src = '{{ asset('/images/icon/list.png') }}';
+                }
+                localStorage.setItem('viewPreference', preference);
             }
 
-            document.getElementById('switch-to-list-view').addEventListener('click', function () {
-                localStorage.setItem('viewPreference', 'list');
-                document.querySelector('.cards-container').classList.add('list-view');
-                document.querySelector('.cards-container').classList.remove('card-view');
-            });
+            // Initialiser la vue selon la préférence enregistrée
+            updateView(viewPreference || 'list');
 
-            document.getElementById('switch-to-card-view').addEventListener('click', function () {
-                localStorage.setItem('viewPreference', 'card');
-                document.querySelector('.cards-container').classList.add('card-view');
-                document.querySelector('.cards-container').classList.remove('list-view');
+            switchViewButton.addEventListener('click', function () {
+                var newPreference = viewPreference === 'list' ? 'card' : 'list';
+                updateView(newPreference);
+                viewPreference = newPreference;
+            });
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var filterToggle = document.getElementById('filterButton');
+            var checkboxhidden = document.getElementById('checkboxhidden');
+
+            filterToggle.addEventListener('click', function () {
+                // Vérifie si la div des filtres est actuellement affichée
+                checkboxhidden.classList.toggle('visible');
+
+                // Basculer la visibilité de la div des filtres
+                checkboxhidden.style.display = isDisplayed ? 'none' : 'block';
+                filterToggle.classList.toggle('active', !isDisplayed);
             });
         });
 

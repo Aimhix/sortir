@@ -173,6 +173,9 @@ nav a:hover {
     max-width: 600px;
     margin: 20px auto 20px;
     color: #f3299c;
+    background-color: #fff;
+    padding: 15px 0 20px 15px;
+    border-radius: 15px;
 }
 
 .form-check {
@@ -647,7 +650,7 @@ span.info-show-mini {
 }
 
 .show-activity-card {
-    margin: 50px 0 80px
+    margin: 50px 0 80px;
 }
 
 
@@ -784,6 +787,8 @@ body::after {
     border-radius: 6px;
     margin: 20px;
     background-color: #fff;
+    z-index: 2;
+    position: relative;
 }
 
 .color-gradient {
@@ -940,11 +945,15 @@ body::after {
 .thumbnail-container > label:nth-child(3){
     color: #f3299c;
     cursor: pointer;
-    padding: 139px 0 43px 31px;
+    padding: 139px 0 43px 48px;
     font-weight: 700;
     top: -200px;
     position: relative;
     display:block;
+    background-image: url("../images/icon/backgroundActivity.png");
+    background-repeat: no-repeat;
+    background-position: center 60px;
+    background-size: 65px;
 }
 
 .thumbnail-container{
@@ -980,7 +989,7 @@ body::after {
 .alert-success {
     background-color: rgba(151, 196, 133, 0.52);
     border-radius: 15px;
-    padding: 10px 12px;
+    padding: 20px 25px !important;
     color: #60162e;
     text-align: center;
     width: 300px;
@@ -988,9 +997,92 @@ body::after {
     line-height: 1.8em;
     font-weight: bold;
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 20px;
+    right: 20px;
 }
+
+.card-view .bottom-container-gradient, .card-view .bottom-container-picture{display:none;}
+
+.bottom-container-gradient{
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(to left, #ffffff00 0%, 30%, #fff 90%, #fff 100%),
+    linear-gradient(to left bottom, #ffffff2b 0%, 70%, #fff 100%);
+    position: absolute;
+    right: 0;
+    border-radius: 0 24px 24px 0;
+    top: 0;
+    z-index: 1;
+}
+
+.bottom-container-picture{
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    right: 0;
+    border-radius: 0 24px 24px 0;
+    top: 0;
+    z-index: 1;
+}
+
+.btn-param-activity{width:50px;margin:auto}
+.btn-param-activity img{
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    top: -36px;
+    position: relative;
+    right: -132px;
+    background-color: #ddd;
+}
+
+.param-search-affichage{width:300px;margin:auto;}
+
+.filter-button {
+    color: #f3299c;
+    padding: 8px 40px 8px 0px;
+    text-align: center;
+    font-weight: 700;
+    background-image: url("../images/icon/bottom.png");
+    cursor: pointer;
+    background-color: #ddd;
+    width: 156px;
+    margin: auto;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: 158px 8px;
+    background-size: 20px;
+}
+
+.filter-button.active {
+    background-image: url("../images/icon/top.png"); /* Couleur de fond lorsqu'il est actif */
+    /* Autres modifications de style si nécessaire... */
+}
+
+.checkboxhidden {
+    /* Cachez initialement la div en utilisant opacity et visibility */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Transition pour opacity et visibility */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.checkboxhidden.visible {
+    /* Quand la classe 'visible' est ajoutée, la div devient visible */
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+body.night-theme .bottom-container-gradient{background:linear-gradient(to left, #51535a1c 0%, 30%, #51535A 90%, #51535A 100%),
+linear-gradient(to left bottom, #51535a1c 0%, 70%, #51535A 100%);}
+
+
 
 
 /*Thème nuit*/
@@ -1010,6 +1102,8 @@ body.night-theme .btn-end-form, body.night-theme .tps {
 }
 
 /*cas particuliers*/
+body.night-theme .checkbox-group{background-color: #202124;}
+
 body.night-theme .form-group select {
     border-right: 15px solid #202124;
 }
@@ -1022,6 +1116,18 @@ body.night-theme .container-user{
     background-color: #7d818c29;
 }
 
+.no-activities-message{
+    width: 390px;
+    margin: auto;
+    font-size: 1.8em;
+    color: #8e92a16b;
+    text-align: center;
+}
+
+.title-alt-night{color:#121215;}
+
+body.night-theme .title-alt-night{color: #fff
+}
 
 body.night-theme #activity_location, body.night-theme #edit_profile_campus,
 body.night-theme #location_cities, body.night-theme #user_registration_form_campus,
@@ -1041,7 +1147,8 @@ body.night-theme #activity_subLimitDate_date, body.night-theme #activity_subLimi
 /*clair*/
 body.night-theme .bottom,
 body.night-theme .sub-menu,
-body.night-theme .container-form-and-show, body.night-theme .btn-pref-activity {
+body.night-theme .container-form-and-show, body.night-theme .btn-pref-activity, body.night-theme .btn-param-activity img,
+body.night-theme .filter-button{
     background-color: #51535a
 }
 
@@ -1184,6 +1291,8 @@ body.night-theme .card-gradient-show{
 
 body.night-theme .mini-link-nav{background-color: rgba(0, 0, 0, 0.08);}
 body.night-theme .sub-menu li:hover .mini-link-nav {background-color:#51535a}
+
+
 
 
 @media screen and (max-width: 600px) {
