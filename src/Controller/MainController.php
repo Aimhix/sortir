@@ -31,7 +31,7 @@ class MainController extends AbstractController
             $form = $this->createForm(ActivitySearchType::class, $searchDTO);
             $form->handleRequest($request);
 
-            $activities = $activityRepository->findLatestActivities(9); // Récupération des 9 dernières sorties
+            $activities = $activityRepository->findLatestActivities(9, $user); // Récupération des 9 dernières sorties
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // Recherche basée sur les critères fournis

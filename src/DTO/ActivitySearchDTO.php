@@ -4,6 +4,7 @@ namespace App\DTO;
 
 class ActivitySearchDTO
 {
+    public $user;
     public $campus;
     public $search;
     public $dateStart;
